@@ -1,29 +1,27 @@
 ---
-draft_file: drafts/2026-09-02-you-cannot-screen-read-a-video-of-a-button.md
+draft_file: drafts/2026-09-08-agents-that-skipped-the-skill-file-wrote-better.md
 style: sketch-on-white
-hook_overlay: YOU CANNOT SCREEN-READ A VIDEO OF A BUTTON
+hook_overlay: AGENTS THAT SKIPPED THE SKILL FILE WROTE BETTER CODE
 metaphor: >-
-  A cartoon narrator in a recording booth strains to read a page aloud, but the
-  page is blank and the only thing on the screen in front of them is a strip of
-  film frames.
+  Two cartoon engineers race down the same lane, the leader running light with
+  one sheet of paper while the one behind buckles under a doorstep-thick binder
+  marked SKILL.md, pages tearing loose behind him.
 size: square
 size_pixels: 1200x1200
-generated_at: 2026-09-02T11:18:16.000Z
-selected_variant: 2
-post_url: 'https://www.linkedin.com/feed/update/urn:li:activity:7501262859826458624/'
-post_path: >-
-  posts/2026/09-03-you-cannot-screen-read-a-video-of-a-button-runway-s-solaris.md
+generated_at: 2026-09-08T12:20:00.000Z
+selected_variant: 1
 ---
+
 Minimalist hand-drawn sketch: confident single-weight black ink lines on a solid
 pure-white background, no color or fill, like a black marker on paper. One clear focal
 subject with a strong silhouette and generous negative space. Reads in milliseconds.
 All characters original. Hook hand-lettered in black across the upper third.
 
-Subject: A cartoon narrator seen three-quarter-front, seated at a desk in a small recording booth, both hands gripping the edges of a completely blank sheet of paper held up at chest height, elbows bent. A microphone on a short stand sits in front of them. Their eyes are squeezed shut and their mouth is open mid-shout, brow furrowed, with three or four small sweat droplets flying off the forehead. On a screen beside the desk, a horizontal strip of identical film frames runs across, each frame showing the same small rounded button. Simple booth outline, generous white space.
+Subject: two cartoon engineers running side by side in a three-quarter-front view, both facing the viewer. The leader is light on his feet, arms swinging, holding one small sheet of paper stamped PASS, speed lines trailing him and a wide grin. The trailing engineer is buckling at the knees, both arms wrapped around a doorstep-thick ring binder labeled SKILL.md on its cover, the binder pressed to his chest so both hands reach it with bent elbows, loose pages tearing free and fluttering behind him, sweat drops flying off his brow, mouth open in a strained grimace. Loose ink line work, no floor detail, generous white space around both figures.
 
 Render this exact hook text IN-IMAGE, verbatim and unparaphrased, every word spelled
 exactly as written, nothing added, dropped, reordered, or reworded:
-YOU CANNOT SCREEN-READ A VIDEO OF A BUTTON
+AGENTS THAT SKIPPED THE SKILL FILE WROTE BETTER CODE
 Hand-lettered black marker capitals, slightly uneven, same line weight as the drawing.
 All caps, large, high-contrast, readable at a glance. One line, or two or three centered
 lines if needed.

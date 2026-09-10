@@ -1,29 +1,27 @@
 ---
-draft_file: drafts/2026-09-02-you-cannot-screen-read-a-video-of-a-button.md
+draft_file: drafts/2026-09-09-the-dashboards-will-eat-your-evening-before-the.md
 style: sketch-on-white
-hook_overlay: YOU CANNOT SCREEN-READ A VIDEO OF A BUTTON
+hook_overlay: THE DASHBOARDS WILL EAT YOUR EVENING BEFORE THE CODE DOES
 metaphor: >-
-  A cartoon narrator in a recording booth strains to read a page aloud, but the
-  page is blank and the only thing on the screen in front of them is a strip of
-  film frames.
+  A cartoon engineer at a night desk braces with both arms up as a toppling
+  stack of seventeen identical store-listing browser windows slides off the
+  monitor toward them, sliders and dropdown menus spilling out of the frames.
 size: square
 size_pixels: 1200x1200
-generated_at: 2026-09-02T11:18:16.000Z
-selected_variant: 2
-post_url: 'https://www.linkedin.com/feed/update/urn:li:activity:7501262859826458624/'
-post_path: >-
-  posts/2026/09-03-you-cannot-screen-read-a-video-of-a-button-runway-s-solaris.md
+generated_at: 2026-09-09T11:06:04.000Z
+selected_variant: 1
 ---
+
 Minimalist hand-drawn sketch: confident single-weight black ink lines on a solid
 pure-white background, no color or fill, like a black marker on paper. One clear focal
 subject with a strong silhouette and generous negative space. Reads in milliseconds.
 All characters original. Hook hand-lettered in black across the upper third.
 
-Subject: A cartoon narrator seen three-quarter-front, seated at a desk in a small recording booth, both hands gripping the edges of a completely blank sheet of paper held up at chest height, elbows bent. A microphone on a short stand sits in front of them. Their eyes are squeezed shut and their mouth is open mid-shout, brow furrowed, with three or four small sweat droplets flying off the forehead. On a screen beside the desk, a horizontal strip of identical film frames runs across, each frame showing the same small rounded button. Simple booth outline, generous white space.
+Subject: A cartoon engineer seated three-quarter-front at a desk, both arms raised in front of the chest, elbows bent, face wide-eyed. A tall leaning stack of seventeen identical browser windows, each drawn as a plain rectangle with a title bar, a text field and a dropdown arrow, tips off the monitor toward the viewer. Loose sliders, checkboxes and dropdown menus spill out of the tilting frames and scatter across the desk. Speed lines under the falling stack. A small wall clock behind the desk with both hands near the top. Keep both hands in front of the body with bent elbows and no cross-body reach.
 
 Render this exact hook text IN-IMAGE, verbatim and unparaphrased, every word spelled
 exactly as written, nothing added, dropped, reordered, or reworded:
-YOU CANNOT SCREEN-READ A VIDEO OF A BUTTON
+THE DASHBOARDS WILL EAT YOUR EVENING BEFORE THE CODE DOES
 Hand-lettered black marker capitals, slightly uneven, same line weight as the drawing.
 All caps, large, high-contrast, readable at a glance. One line, or two or three centered
 lines if needed.

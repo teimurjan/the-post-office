@@ -2,11 +2,11 @@
 urn: 'urn:li:activity:7499081990344695808'
 url: 'https://www.linkedin.com/feed/update/urn:li:activity:7499081990344695808/'
 posted_at: '2026-08-28T12:34:32.704Z'
-impressions: 143
+impressions: 170
 likes: 2
 comments: null
 shares: null
-scraped_at: '2026-09-01T10:41:38.895Z'
+scraped_at: '2026-09-09T10:47:45.639Z'
 lane: experience
 ---
 I shipped an image differ. The speed was the easy part.

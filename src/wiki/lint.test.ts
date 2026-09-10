@@ -248,6 +248,18 @@ describe("wiki lint", () => {
     expect(checks(findings)).not.toContain("dangling-wiki-path");
   });
 
+  test("does not flag a wiki path nested inside a vendored repo path", () => {
+    const findings = lint([makePage("audience", VALID)], {
+      skillFiles: new Map([
+        [
+          ".agents/skills/post-writer/SKILL.md",
+          "read .vendor/teimurjan-llm-wiki/wiki/facts/proof.md for the numbers",
+        ],
+      ]),
+    });
+    expect(checks(findings)).not.toContain("dangling-wiki-path");
+  });
+
   test("flags a body number with no frontmatter twin", () => {
     const findings = lint([
       makePage("audience", VALID, "The family median is 4711 impressions."),

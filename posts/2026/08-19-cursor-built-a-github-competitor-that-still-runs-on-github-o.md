@@ -2,12 +2,13 @@
 urn: 'urn:li:activity:7495827006744489984'
 url: 'https://www.linkedin.com/feed/update/urn:li:activity:7495827006744489984/'
 posted_at: '2026-08-19T13:00:24.139Z'
-impressions: 100588
+impressions: 100618
 likes: 57
 comments: 29
 shares: null
-scraped_at: '2026-09-01T10:41:25.368Z'
+scraped_at: '2026-09-09T10:47:42.102Z'
 concept_path: concepts/2026-08-19-cursor-built-a-github-competitor-that-still-runs/prompt.md
+lane: news
 ---
 Cursor built a GitHub competitor that still runs on GitHub.
 
@@ -52,14 +53,6 @@ So Origin is not about hosting. Cursor put your code, your PRs, and your agents 
 
 >> Charlie Punchatz Fair on the distinction, native repos with Origin as the source of truth is a real thing and I was loose there. Still, mirroring is the path Cursor recommends because the PRs, identity and integrations already live on github.com, which is the gravity you land on at the end.
 
-**Michael Cochran 🦀**
-
-> Gitlab ce is an option too. Self hosted if you want it air gapped.
-
-↳ **Teimur Gasanov**
-
->> Michael Cochran 🦀 Yeah, GitLab's the one that ships the whole network and not just the git. Air-gapped is the real case for it.
-
 **Steffen Rudkjøbing**
 
 > If you want a European alternative to github or.. origin, you can try gitoro.com
@@ -71,6 +64,14 @@ So Origin is not about hosting. Cursor put your code, your PRs, and your agents 
 >> Remo K. Thats fair. Codeberg is for open source projects only, I think. 
 >> 
 >> Gitoro was initially written by me in python, but now it is rewritten in go mainly with the help of ai. That is how things are built now, love it or hate it. That said, the landing page could use a human touch! (I am just terrible at marketing).
+
+**Michael Cochran 🦀**
+
+> Gitlab ce is an option too. Self hosted if you want it air gapped.
+
+↳ **Teimur Gasanov**
+
+>> Michael Cochran 🦀 Yeah, GitLab's the one that ships the whole network and not just the git. Air-gapped is the real case for it.
 
 **Matthew Adams**
 

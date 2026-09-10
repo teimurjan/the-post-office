@@ -1,6 +1,6 @@
 ---
 name: post-flowchart
-description: 'Generate the image-generation prompt for a `format: decision-tree` LinkedIn post — a single clean flowchart in the one fixed style (a black sketch on white) that routes the reader from a root question to a recommendation across 3 to 5 labelled branches, with the question rendered as the in-image title. Always square, single render, no variants. Use when a decision-tree draft is approved, the user says "flowchart image", "decision tree image", or "render the tree". Saves the prompt to `concepts/<date>-<slug>/prompt.md`, updates the draft''s `concept_path`, then calls OpenAI (`gpt-image-2`, if `OPENAI_API_KEY` is set) to render it to `images/<date>-<slug>/prompt.png`, and prints the prompt either way so the user can paste it into another image tool. Trigger phrases: "post-flowchart", "flowchart image", "decision tree image".'
+description: 'Generate the image-generation prompt for a `format: decision-tree` LinkedIn post — a single clean flowchart in the one fixed style (a black sketch on white) that routes the reader from a root question to a recommendation across 3 to 5 labelled branches, with the question rendered as the in-image title. Always square, single render, no variants. Use when a decision-tree draft is approved, the user says "flowchart image", "decision tree image", or "render the tree". Saves the prompt to `concepts/<date>-<slug>/prompt.md`, updates the draft''s `concept_path`, then calls OpenAI (`gpt-image-2.5-sunburst`, if `OPENAI_API_KEY` is set) to render it to `images/<date>-<slug>/prompt.png`, and prints the prompt either way so the user can paste it into another image tool. Trigger phrases: "post-flowchart", "flowchart image", "decision tree image".'
 ---
 
 # post-flowchart
@@ -9,7 +9,7 @@ Build one ready-to-paste image-generation prompt that renders a LinkedIn **decis
 
 This is the **one deliberate exception** to `post-image`'s "draw a metaphor, never a chart" rule. A decision tree *is* a diagram — the flowchart is the literal content, not a lazy stand-in. So this skill does not pick a metaphor or stage a subject in tension; it renders a clean black-on-white diagram that a reader can follow in seconds.
 
-This skill writes a prompt to disk, updates the draft to link to it, then renders it with OpenAI's `gpt-image-2` when `OPENAI_API_KEY` is set, saving the PNG into a gitignored `images/` folder that mirrors `concepts/`. If the key is not set (or generation fails), the prompt is still saved and printed for the user to paste into an image tool by hand.
+This skill writes a prompt to disk, updates the draft to link to it, then renders it with OpenAI's `gpt-image-2.5-sunburst` when `OPENAI_API_KEY` is set, saving the PNG into a gitignored `images/` folder that mirrors `concepts/`. If the key is not set (or generation fails), the prompt is still saved and printed for the user to paste into an image tool by hand.
 
 **Use this only for `format: decision-tree` drafts.** Text posts use `post-image`; carousels use `post-carousel`.
 
@@ -154,7 +154,7 @@ Once `prompt.md` is written, run:
 bun run generate-image concepts/<YYYY-MM-DD>-<slug>
 ```
 
-This calls OpenAI's `gpt-image-2` with the saved prompt, requesting a standard square image, and writes the finished PNG to `images/<YYYY-MM-DD>-<slug>/prompt.png`. No cropping or resizing — the model is only ever asked for square.
+This calls OpenAI's `gpt-image-2.5-sunburst` with the saved prompt, requesting a standard square image, and writes the finished PNG to `images/<YYYY-MM-DD>-<slug>/prompt.png`. No cropping or resizing — the model is only ever asked for square.
 
 - If `OPENAI_API_KEY` is not set, the command exits with `OPENAI_API_KEY is not set — skipped`. Expected, not a failure — record `skipped` and move on.
 - If it fails for any other reason, surface the one-line error and record `failed`. **Never stop the skill or fail the run** over a generation error — the prompt is already saved.

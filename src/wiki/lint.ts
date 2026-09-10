@@ -374,6 +374,10 @@ function checkLogFormat(logRaw: string | null): Finding[] {
 /**
  * A skill pointing at a wiki page that does not exist is a silent no-op: the
  * skill reads nothing and falls back to whatever it remembers.
+ *
+ * The lookbehind keeps `wiki/` from matching mid-path: a vendored repo at
+ * `.vendor/teimurjan-llm-wiki/wiki/facts/proof.md` is not a reference into this
+ * repo's own `wiki/`.
  */
 function checkDanglingWikiPaths(
   skillFiles: Map<string, string>,
@@ -383,7 +387,9 @@ function checkDanglingWikiPaths(
   const out: Finding[] = [];
   for (const [file, raw] of skillFiles) {
     const referenced = new Set(
-      [...raw.matchAll(/\bwiki\/[A-Za-z0-9._/-]*\.md\b/g)].map((m) => m[0]),
+      [...raw.matchAll(/(?<![A-Za-z0-9._/-])wiki\/[A-Za-z0-9._/-]*\.md\b/g)].map(
+        (m) => m[0],
+      ),
     );
     for (const ref of referenced) {
       if (!existing.has(ref)) {

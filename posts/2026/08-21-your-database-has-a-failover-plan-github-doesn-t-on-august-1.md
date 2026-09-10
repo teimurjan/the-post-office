@@ -2,12 +2,13 @@
 urn: 'urn:li:activity:7496551943868395521'
 url: 'https://www.linkedin.com/feed/update/urn:li:activity:7496551943868395521/'
 posted_at: '2026-08-21T13:01:02.618Z'
-impressions: 1895
+impressions: 1905
 likes: 14
 comments: 3
 shares: null
-scraped_at: '2026-09-01T10:41:29.571Z'
+scraped_at: '2026-09-09T10:47:34.284Z'
 concept_path: concepts/2026-08-21-your-database-has-a-failover-plan-github-doesnt/prompt.md
+lane: news
 ---
 Your database has a failover plan. GitHub doesn't.
 

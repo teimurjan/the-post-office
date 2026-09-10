@@ -26,13 +26,17 @@ Do not mix in unrelated material. The post is about the chosen idea brief or the
 
 ## Before drafting, read
 
-1. **`headcount-zero-positioning.md`** (repo root) — the brand dossier. It defines the owner: a ten-year senior engineer building agents for a living, running consumer apps with zero employees, nights and weekends, from Bishkek, learning the sell side in public. Read the four pillars, the voice rule (benchmarks and receipts — every claim gets a number), the Kill Test, and the LinkedIn notes (links in the body cut reach; carousels and dwell time win). This is context for both lanes: a news post is still written by that person, and an experience post is nothing without it.
+1. **The brand wiki** — run `bun run --silent --cwd .vendor/teimurjan-llm-wiki wiki view post-writing`. It prints one bundle: who the owner is (a ten-year senior engineer building agents for a living, running consumer apps with zero employees, nights and weekends, from Bishkek, learning the sell side in public), the **Headcount Zero** positioning and its Kill Test, the voice rule (benchmarks and receipts — every claim gets a number), the four pillars with their slugs, the platform notes (links in the body cut reach; carousels and dwell time win), and the citable numbers. This is context for both lanes: a news post is still written by that person, and an experience post is nothing without it.
+
+   The bundle is the owner of this material — there is no brand file at this repo's root any more. For a single page rather than the whole bundle, read the vendor path directly (`.vendor/teimurjan-llm-wiki/wiki/facts/proof.md`). **If the command fails or `.vendor/teimurjan-llm-wiki/` is empty, stop and tell the owner** (an empty vendor dir means `git submodule update --init` has not been run). Do not draft from memory and do not reconstruct the positioning from old posts; that is how a brand drifts silently.
+
+   Prefer a number from the bundle's `proof` page over a number you remember. If `proof` has no company-of-one operating numbers yet, an experience post in the `numbers-from-a-company-of-one` pillar cannot be written honestly — say so rather than reaching for a career metric.
 2. **`tone-samples/*.md`** (highest priority for voice): pieces the owner wrote in their own hand. Samples 1 to 4 are unpolished drafts — model the *shape* (sentence rhythm, opener type, closer style) and the *register* (direct, opinionated, conversational), never the typos. Sample 5 is a published post, the founder update that opened the Headcount Zero lane; it is the canonical register for `lane: experience` — short declaratives, a real number, a plain admission, no performance. If a tone sample and the archive disagree about voice, prefer the tone sample.
 3. **Recent posts of the same lane.** `grep -l '^lane: experience' posts/<current-year>/*.md` for the experience lane; every other post is news. Skim the last 5 to 10 to absorb recurring framings and vocabulary. The archive is the secondary voice reference — it shows polished output but the polish layer can mute the owner's natural register.
 4. **`bun run post-patterns --lane <lane>`**. Use it to avoid bottom-quartile shapes and to match the winning range for hook length and specificity. Never read the other lane's report for this draft: a news post's reach says nothing about an experience post's, and the experience cohort is small enough that its `too few to cite` marker will fire — respect it.
 5. If the input is an idea brief with a source URL, fetch the source to ground specifics (numbers, names, quotes). Don't speculate beyond what the source says.
 
-Do not fabricate personal experience for the owner. There is no `cv.md`. The dossier names what the owner runs (Interviewium, Wait Professor, the day job on Growth at Speechify) — that is context, not a license to invent a story about any of it. The only firsthand material that goes in a post is what the owner tells you in the loop below.
+Do not fabricate personal experience for the owner. There is no `cv.md`. The wiki's `assets` and `identity` pages name what the owner runs (Interviewium, Wait Professor, the day job at Speechify) — that is context, not a license to invent a story about any of it. The only firsthand material that goes in a post is what the owner tells you in the loop below.
 
 ## Human in the loop (two mandatory stops)
 
@@ -371,7 +375,7 @@ If three or more boxes are unchecked, rewrite the draft before saving. Do not sh
 ## Workflow recap
 
 1. Read the input and fix the lane (idea brief → news; raw thought → experience).
-2. Read `headcount-zero-positioning.md`, `tone-samples/*.md`, and the last 5 to 10 posts of the same lane.
+2. Read the brand bundle (`bun run --silent --cwd .vendor/teimurjan-llm-wiki wiki view post-writing`), `tone-samples/*.md`, and the last 5 to 10 posts of the same lane.
 3. Run `bun run post-patterns --lane <lane>`.
 4. If a source URL is provided, fetch it for specifics.
 5. **Stop 1:** three hook candidates on the same wedge → the owner picks (`AskUserQuestion`).

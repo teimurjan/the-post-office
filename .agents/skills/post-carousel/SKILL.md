@@ -1,13 +1,13 @@
 ---
 name: post-carousel
-description: 'Generate the image-generation prompts for a multi-slide LinkedIn carousel from a `format: carousel` draft — one paste-ready prompt per slide, all in the one fixed style (a black sketch on white) tied together by a consistent visual system, with each tool''s pros/cons rendered in-image and a reserved blank band for the product logo. Always square, single render per slide, no variants. Use when a carousel draft is approved, the user says "carousel image", "slide prompts for this", or "generate the carousel". Writes an index `concepts/<date>-<slug>/prompt.md` plus `slide-NN.md` files, updates the draft''s `concept_path`, then calls OpenAI (`gpt-image-2`, if `OPENAI_API_KEY` is set) to render every slide to `images/<date>-<slug>/slide-NN.png`, and prints each slide prompt either way so the user can paste it into another image tool. Trigger phrases: "post-carousel", "carousel image", "slide prompts".'
+description: 'Generate the image-generation prompts for a multi-slide LinkedIn carousel from a `format: carousel` draft — one paste-ready prompt per slide, all in the one fixed style (a black sketch on white) tied together by a consistent visual system, with each tool''s pros/cons rendered in-image and a reserved blank band for the product logo. Always square, single render per slide, no variants. Use when a carousel draft is approved, the user says "carousel image", "slide prompts for this", or "generate the carousel". Writes an index `concepts/<date>-<slug>/prompt.md` plus `slide-NN.md` files, updates the draft''s `concept_path`, then calls OpenAI (`gpt-image-2.5-sunburst`, if `OPENAI_API_KEY` is set) to render every slide to `images/<date>-<slug>/slide-NN.png`, and prints each slide prompt either way so the user can paste it into another image tool. Trigger phrases: "post-carousel", "carousel image", "slide prompts".'
 ---
 
 # post-carousel
 
 Build the complete set of ready-to-paste image-generation prompts for one LinkedIn **carousel** — a multi-slide comparison post (intro slide, one slide per tool/option, closing slide). It is the carousel sibling of `post-image`: same metaphor discipline, same banned-cliché list, the same black sketch on white that pattern-interrupts a templated feed — but it emits **N prompts**, one per slide, tied together by a single consistent visual system, with each tool's **pros and cons rendered in-image** and a reserved blank band where the user drops the product logo afterward.
 
-This skill writes prompts to disk, updates the draft to link to them, then renders every slide with OpenAI's `gpt-image-2` when `OPENAI_API_KEY` is set, saving each PNG into a gitignored `images/` folder that mirrors `concepts/`. Generation only produces the raw slide art — the logo band still has to be filled in by hand, and the slides still need combining into one PDF (see the closing line below), so this never fully replaces the manual finishing step. If the key is not set (or a slide fails to generate), its prompt is still saved and printed — the user pastes it into their image tool instead.
+This skill writes prompts to disk, updates the draft to link to them, then renders every slide with OpenAI's `gpt-image-2.5-sunburst` when `OPENAI_API_KEY` is set, saving each PNG into a gitignored `images/` folder that mirrors `concepts/`. Generation only produces the raw slide art — the logo band still has to be filled in by hand, and the slides still need combining into one PDF (see the closing line below), so this never fully replaces the manual finishing step. If the key is not set (or a slide fails to generate), its prompt is still saved and printed — the user pastes it into their image tool instead.
 
 **Use this only for `format: carousel` drafts.** For a normal text post, use `post-image`.
 
@@ -21,7 +21,7 @@ This is the **illustrator** stage (the carousel branch of it) — emit `end` onc
 
 The style is fixed: **sketch-on-white**, a black single-weight ink drawing on pure white. There is no style flag and no other look; do not offer one. The variable that matters for a carousel is the visual system below, not the rendering.
 
-Size is **forced to square 1080×1080** (the LinkedIn carousel/document format — see [linkedin-image-specs](../linkedin-image-specs.md)). There is no size flag; carousels are always square, all slides identical size.
+Size is **forced to square 1200×1200** (the LinkedIn carousel/document format — see [linkedin-image-specs](../linkedin-image-specs.md)). There is no size flag; carousels are always square, all slides identical size.
 
 The skill does not accept `posts/...` paths. Concept art is for new drafts only.
 
@@ -37,7 +37,7 @@ Every per-slide prompt repeats the visual-system sentence so the slides render c
 
 ## The logo region
 
-Every slide reserves a **blank band for the product logo**: bottom-center, roughly 1080×180px, kept completely empty — no text, no art, no border decoration inside it. The user drops the real product logo there after generation (the image model must never attempt a real or trademarked logo). Record the band in the index frontmatter (`logo_region`) and repeat the "keep this band empty" instruction in every slide prompt.
+Every slide reserves a **blank band for the product logo**: bottom-center, roughly 1200×200px, kept completely empty — no text, no art, no border decoration inside it. The user drops the real product logo there after generation (the image model must never attempt a real or trademarked logo). Record the band in the index frontmatter (`logo_region`) and repeat the "keep this band empty" instruction in every slide prompt.
 
 ## Per-slide content
 
@@ -95,14 +95,14 @@ Render the slide title IN-IMAGE as hand-lettered capitals across the top, large,
 high-contrast, readable at a glance. On tool slides, render the pros under a "+" column
 on the left and the cons under a "–" column on the right, each as 2 to 3 short
 hand-lettered lines, evenly spaced and legible at square size. Keep the bottom band
-(about 1080x180) completely empty — no text, no art — reserved for a product logo added
+(about 1200x200) completely empty — no text, no art — reserved for a product logo added
 later. Keep the same frame, margins, and line weight as the other slides in the set.
 ```
 
 ## Aspect ratio suffix (append last)
 
 ```
-Aspect ratio 1:1, 1080x1080, square; title across the top, the comparison
+Aspect ratio 1:1, 1200x1200, square; title across the top, the comparison
 filling the middle, the empty logo band across the bottom.
 ```
 
@@ -133,11 +133,11 @@ draft_file: drafts/<YYYY-MM-DD>-<slug>.md
 format: carousel
 style: sketch-on-white
 size: square
-size_pixels: 1080x1080
+size_pixels: 1200x1200
 slide_count: <N>
 hook_overlay: <SLIDE 1 HOOK IN ALL CAPS>
 visual_system: <one sentence: the recurring frame, palette, and motif tying the slides together>
-logo_region: bottom-center reserved band ~1080x180px, kept empty on every slide
+logo_region: bottom-center reserved band ~1200x200px, kept empty on every slide
 slides:
   - slide-01.md
   - slide-02.md
@@ -199,7 +199,7 @@ Print the index summary, then each slide prompt in order, each clearly delimited
 
 ```
 Style: sketch-on-white
-Size: square — 1080 x 1080 (1:1)
+Size: square — 1200 x 1200 (1:1)
 Slides: <N>
 Visual system: <one-sentence recurring frame/palette/motif>
 Saved to: concepts/<YYYY-MM-DD>-<slug>/ (index prompt.md + N slide files)
@@ -221,7 +221,7 @@ Linked from: drafts/<YYYY-MM-DD>-<slug>.md
 <full slide-NN prompt body>
 ```
 
-End with one line: add each product logo into the empty bottom band, then combine the slides in order into a single PDF (square 1080×1080) and upload it to LinkedIn as a document post. No other preamble or explanation.
+End with one line: add each product logo into the empty bottom band, then combine the slides in order into a single PDF (square 1200×1200) and upload it to LinkedIn as a document post. No other preamble or explanation.
 
 ## Image generation
 
@@ -231,7 +231,7 @@ Once the index and every `slide-NN.md` are written, run:
 bun run generate-image concepts/<YYYY-MM-DD>-<slug>
 ```
 
-This reads the index's `format: carousel` and iterates every `slide-NN.md`, calling OpenAI's `gpt-image-2` once per slide, requesting a standard square image each time, and writing each PNG to `images/<YYYY-MM-DD>-<slug>/slide-NN.png`. No cropping or resizing.
+This reads the index's `format: carousel` and iterates every `slide-NN.md`, calling OpenAI's `gpt-image-2.5-sunburst` once per slide, requesting a standard square image each time, and writing each PNG to `images/<YYYY-MM-DD>-<slug>/slide-NN.png`. No cropping or resizing.
 
 - If `OPENAI_API_KEY` is not set, the command exits immediately with `OPENAI_API_KEY is not set — skipped` before generating any slide. Record `skipped` and move on — this is expected, not a failure.
 - If it fails partway (one slide errors), the slides already written stay on disk; report how many generated versus failed. **Never stop the skill or fail the run** over a generation error — the prompts are already saved and pasteable by hand.
@@ -253,7 +253,7 @@ This reads the index's `format: carousel` and iterates every `slide-NN.md`, call
 
 - Only for `format: carousel` drafts. Send text posts to `post-image`.
 - The index file is always named `prompt.md` and `concept_path` always points at it. Never rename it or point the draft at a slide file.
-- Always square 1080×1080. There is no size flag.
+- Always square 1200×1200. There is no size flag.
 - Include the full style spine and negative prompt block verbatim in the index and in every slide file. There is one style; never offer or invent another.
 - Every slide reserves the same empty logo band. Never render a real or trademarked product logo — the user adds it later, even on a generated slide.
 - Pros/cons must come from the draft. Never invent claims, version numbers, benchmarks, or incidents the draft does not contain.

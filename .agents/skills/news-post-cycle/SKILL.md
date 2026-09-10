@@ -125,7 +125,7 @@ If `top-posts` or `post-patterns` fails, surface the error and stop — the idea
 
 Invoke the `post-ideator` skill. It will:
 
-- Read the latest briefing and `headcount-zero-positioning.md`.
+- Read the latest briefing and the brand bundle (`bun run --silent --cwd .vendor/teimurjan-llm-wiki wiki view post-writing`).
 - Use the news-lane `post-patterns` and `top-posts` context already gathered.
 - Dedup against recent drafts and published posts.
 - Emit 3 to 5 scored idea briefs, each with a one-line `gist`, and write shortlisted entries into `ideas/$(date +%Y-%m-%d).md` with `lane: news`.
@@ -172,7 +172,7 @@ If the critic rejects, stop here. Do not generate a concept image for a draft th
 Read the approved draft's `format` and branch to the matching visual skill. Every visual is a black sketch on white; there is no style or size to pick.
 
 - **`format: text` (or absent)** → `post-image`. It builds **three** metaphor variants and asks the owner to pick one with `AskUserQuestion`, before rendering anything. The pick is promoted to `concepts/<date>-<slug>/prompt.md` via `bun run select-variant` (which deletes the losing variants) and rendered to `images/<date>-<slug>/prompt.png` when `OPENAI_API_KEY` is set. Wait for the pick; never choose for the owner.
-- **`format: carousel`** → `post-carousel`. Always square 1080×1080, one render per slide, no variants. Writes an index `concepts/<date>-<slug>/prompt.md` plus `slide-NN.md` files.
+- **`format: carousel`** → `post-carousel`. Always square 1200×1200, one render per slide, no variants. Writes an index `concepts/<date>-<slug>/prompt.md` plus `slide-NN.md` files.
 - **`format: decision-tree`** → `post-flowchart`. Always square, one render, no variants. Writes a single `concepts/<date>-<slug>/prompt.md`.
 
 Whichever runs will update the draft frontmatter with `concept_path: concepts/<…>/prompt.md` and print the prompt(s) so the user can paste them into an image tool if generation was skipped.

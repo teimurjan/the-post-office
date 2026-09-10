@@ -16,7 +16,7 @@ This is the **critic** stage — emit `end` once the review is done, per [office
 Every draft carries `lane: news | experience` in its frontmatter. A draft with no `lane` is `news`. The lane decides which brief, which archive, and which rules apply:
 
 - **`news`** — the post reacts to an external event. Its brief is the approved idea in `ideas/YYYY-MM-DD.md`. Its room is `wiki/audience.md`. If no approved brief matches the draft and the user did not hand it over as a raw thought, stop and ask for the missing brief.
-- **`experience`** — the post is about the owner's own work. Its brief is the draft's own frontmatter (`pitch_angle`, `pillar`, `experience_hook`) read against `headcount-zero-positioning.md`, the brand dossier at the repo root. Read the dossier's pillars and voice rule before scoring; they are the bar. `wiki/audience.md` was calibrated on news posts and does not bind here. The lane's own judgment page is the wiki page with slug `experience` (a sibling of `audience`, created by `wiki-curator` once the first experience-lane retro is ingested); read it when it exists and say so when it does not.
+- **`experience`** — the post is about the owner's own work. Its brief is the draft's own frontmatter (`pitch_angle`, `pillar`, `experience_hook`) read against the brand bundle: `bun run --silent --cwd .vendor/teimurjan-llm-wiki wiki view post-writing`. Read its pillars and voice rule before scoring; they are the bar. `wiki/audience.md` was calibrated on news posts and does not bind here. The lane's own judgment page is the wiki page with slug `experience` (a sibling of `audience`, created by `wiki-curator` once the first experience-lane retro is ingested); read it when it exists and say so when it does not.
 
 Never read the other lane's numbers for this draft. An experience post compared against the news median is being judged in the wrong room.
 
@@ -27,7 +27,7 @@ Read these before scoring:
 1. The brief for the lane (above).
 2. `bun run top-posts --n 10 --lane <lane>` — read the impressions and bottom sections. Skip the "Top by engagement" leaderboard: likes, comments, and shares are missing on most posts and missing values count as zero, so it partly ranks which posts scraped cleanly.
 3. `bun run post-patterns --lane <lane>` (includes both the success retros and the postmortem-derived failure modes for that lane). Bucket sections cover only the quartiles and print their sample size — respect the `too few to cite` marker, and treat `topic_family` as bookkeeping rather than signal. The experience cohort is small; when its marker fires, say so in the verdict rather than citing a median.
-3.5. `wiki/audience.md` (news lane) for the subject-tier check below; `headcount-zero-positioning.md` (experience lane) for the pillar and receipts checks.
+3.5. `wiki/audience.md` (news lane) for the subject-tier check below; the brand bundle (experience lane) for the pillar and receipts checks.
 4. The draft file in `drafts/`
 5. The concept at the path in the draft's `concept_path` frontmatter, if non-null. `prompt.md` exists only after the owner has picked one of the three image variants; if the concept folder holds only `variant-N.md` files, score the visual axis on the best of the three metaphors and note that the pick is pending. If there is no concept folder at all, score the axis against the draft's metaphor potential only and note that no concept exists yet.
 

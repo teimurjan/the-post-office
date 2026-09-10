@@ -7,7 +7,7 @@ description: Turn one thought the owner typed about their own work into a finish
 
 Orchestrates the **experience lane** end-to-end. The input is a thought the owner wrote; the output is that thought, polished: a front-loaded hook, a body in the owner's own register, a critic verdict, and a cover image. You are the conductor. The underlying skills (`post-retro`, `wiki-curator`, `post-writer`, `post-critic`, `post-image`) own their logic and each runs standalone. Do not duplicate their rules. Do not skip them.
 
-**What an experience post is.** A post whose subject is the owner's own operation: an app they run, a number they measured, a function they built instead of hiring for, a lesson the sell side taught them, the nights-and-weekends constraint. `headcount-zero-positioning.md` at the repo root is the brand dossier that defines this lane — its four pillars, its voice (benchmarks and receipts), and what it is not (indie-dev generic, "agentic" slogans, retired labels). Read it before anything else in this cycle. It is the reason this lane exists.
+**What an experience post is.** A post whose subject is the owner's own operation: an app they run, a number they measured, a function they built instead of hiring for, a lesson the sell side taught them, the nights-and-weekends constraint. The brand wiki in `.vendor/teimurjan-llm-wiki/` defines this lane — its four pillars, its voice (benchmarks and receipts), and what it is not (indie-dev generic, "agentic" slogans, retired labels). Read it before anything else in this cycle with `bun run --silent --cwd .vendor/teimurjan-llm-wiki wiki view post-writing`. It is the reason this lane exists.
 
 **What it is not.** A take on someone else's news. If the thought is really "here is what I think about X that just shipped", stop and point the user at `news-post-cycle`. A thought that is about the owner's *posting* (metrics, streaks, this pipeline) fails the critic's navel-gazing rule in either lane — say so before drafting.
 
@@ -32,7 +32,7 @@ Never answer any of these for the owner. The whole point of this lane is that th
 
 ### 0. Read the dossier
 
-Read `headcount-zero-positioning.md` in full. Carry into the writer and critic: the four pillars (`replaced-a-hire`, `numbers-from-a-company-of-one`, `didnt-teach-me`, `nights-and-weekends`), the voice rule (every claim gets a number), the platform notes (links in the body cut reach — they go in the first comment), and the Kill Test (if a competitor could say the same sentence, it is not ownable).
+Read the brand bundle in full: `bun run --silent --cwd .vendor/teimurjan-llm-wiki wiki view post-writing`. If it fails, stop and tell the owner rather than drafting from memory. Carry into the writer and critic: the four pillars (`replaced-a-hire`, `numbers-from-a-company-of-one`, `didnt-teach-me`, `nights-and-weekends`), the voice rule (every claim gets a number), the platform notes (links in the body cut reach — they go in the first comment), and the Kill Test (if a competitor could say the same sentence, it is not ownable).
 
 ### 1. Retro sweep (experience drafts, last 3 months)
 

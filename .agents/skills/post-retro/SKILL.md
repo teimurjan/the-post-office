@@ -20,7 +20,7 @@ This is the **analyst** stage — emit `end` once the retro file is written, per
    ```
    If the draft has no `lane`, fall back to the post's `lane` frontmatter, then to `news`.
 3. `bun run post-patterns --lane <lane>` — for the scrape-age cohort, the validated anti-patterns, and the family distribution **of this lane only**. A news post's cohort says nothing about an experience post's reach, and the experience cohort is small enough that its `too few to cite` marker may fire; when it does, name the cohort size instead of a median and say the comparison is thin.
-4. `wiki/audience.md` — for the subject tier, **news lane only**. For the experience lane, the tier model does not apply; the room is the owner's own following, and the relevant frame is the pillar in the draft's frontmatter and `headcount-zero-positioning.md`.
+4. `wiki/audience.md` — for the subject tier, **news lane only**. For the experience lane, the tier model does not apply; the room is the owner's own following, and the relevant frame is the pillar in the draft's frontmatter and the brand bundle (`bun run --silent --cwd .vendor/teimurjan-llm-wiki wiki view post-writing`).
 5. Any comment summary or performance notes the user provides
 
 ## Preconditions

@@ -85,7 +85,7 @@ observed:
 
 The experience lane is the owner's own operation: an app they run, a number they
 measured, a function they built instead of hiring, a lesson the sell side taught them.
-It is defined by `headcount-zero-positioning.md` and drafted by `experience-post-cycle`.
+It is defined by the brand wiki (`bun run --silent --cwd .vendor/teimurjan-llm-wiki wiki view post-writing`) and drafted by `experience-post-cycle`.
 
 This page exists because [[audience]] was calibrated on news posts and had five
 experience posts cited in its tiers. Those five were moved here on 2026-09-02. The
@@ -142,7 +142,7 @@ commit-log post. That is the same underlying post, so it is agreement, not confi
 
 ## What this page cannot say yet
 
-- **Nothing about pillars.** `headcount-zero-positioning.md` defines four
+- **Nothing about pillars.** The brand wiki defines four
   (`replaced-a-hire`, `numbers-from-a-company-of-one`, `didnt-teach-me`,
   `nights-and-weekends`). None of these five posts was drafted against a pillar — they
   predate the axis and were labelled post-hoc. Mapping them now would be inventing

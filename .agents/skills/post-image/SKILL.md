@@ -1,6 +1,6 @@
 ---
 name: post-image
-description: 'Generate the cover image for a LinkedIn post as a black sketch on white — the only style — with the post''s hook rendered into the image as overlaid text. Builds three metaphor variants from the post''s own materials and asks the user to pick one from the metaphor sentences before anything is rendered. `bun run select-variant` promotes the pick to `concepts/<date>-<slug>/prompt.md` and deletes the losing variants, then `bun run generate-image` renders that one prompt with OpenAI (`gpt-image-2`, if `OPENAI_API_KEY` is set) to `images/<date>-<slug>/prompt.png` and shrinks it with pngquant, and the draft''s `concept_path` is set. Always square. Every variant stages a subject in tension, never a generic stand-in or inert prop. Use when the user says "image for this post", "make a cover image", "generate the post image", "draw an image for X", or picks a draft to illustrate. Trigger phrases: "post-image", "cover image", "draw the post".'
+description: 'Generate the cover image for a LinkedIn post as a black sketch on white — the only style — with the post''s hook rendered into the image as overlaid text. Builds three metaphor variants from the post''s own materials and asks the user to pick one from the metaphor sentences before anything is rendered. `bun run select-variant` promotes the pick to `concepts/<date>-<slug>/prompt.md` and deletes the losing variants, then `bun run generate-image` renders that one prompt with OpenAI (`gpt-image-2.5-sunburst`, if `OPENAI_API_KEY` is set) to `images/<date>-<slug>/prompt.png` and shrinks it with pngquant, and the draft''s `concept_path` is set. Always square. Every variant stages a subject in tension, never a generic stand-in or inert prop. Use when the user says "image for this post", "make a cover image", "generate the post image", "draw an image for X", or picks a draft to illustrate. Trigger phrases: "post-image", "cover image", "draw the post".'
 ---
 
 # post-image
@@ -247,7 +247,7 @@ Then render that one concept:
 bun run generate-image concepts/<YYYY-MM-DD>-<slug>
 ```
 
-It renders `prompt.md` with OpenAI's `gpt-image-2` to `images/<YYYY-MM-DD>-<slug>/prompt.png` (a gitignored folder that mirrors `concepts/`), then shrinks the PNG in place with `pngquant`.
+It renders `prompt.md` with OpenAI's `gpt-image-2.5-sunburst` to `images/<YYYY-MM-DD>-<slug>/prompt.png` (a gitignored folder that mirrors `concepts/`), then shrinks the PNG in place with `pngquant`.
 
 - If `OPENAI_API_KEY` is not set, the command exits with `OPENAI_API_KEY is not set — skipped`. This is expected, not a failure — record `skipped`. The prompt is on disk; the owner pastes it into an image tool by hand.
 - Only report the image as `generated` when the command printed `saved images/.../prompt.png` for it.

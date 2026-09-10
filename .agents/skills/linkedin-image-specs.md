@@ -4,10 +4,11 @@ The accepted image sizes for LinkedIn. LinkedIn crops or downscales anything off
 so an arbitrary aspect ratio from the image tool gets mangled in the feed.
 
 **This project standardizes on `square` for every visual skill** (`post-image`,
-`post-carousel`, `post-flowchart`) — one size, no per-post choice, and it maps cleanly to
-`gpt-image-2`'s standard output with no cropping. The `portrait`/`landscape` rows below
-are kept for reference (LinkedIn does accept them) but none of the skills currently offer
-them; do not reintroduce a size flag without updating all three skills together.
+`post-carousel`, `post-flowchart`) — one size, no per-post choice. Every render is
+1200 x 1200, asked of `gpt-image-2.5-sunburst` directly, so nothing is cropped or
+upscaled. The `portrait`/`landscape` rows below are kept for reference (LinkedIn does
+accept them) but none of the skills currently offer them; do not reintroduce a size flag
+without updating all three skills together.
 
 ## Feed single image (`post-image`, `post-flowchart`)
 
@@ -27,9 +28,10 @@ user uploads. Each slide (page) is one of:
 | `square` (only one in use) | 1080 x 1080 | 1:1 | even desktop/mobile |
 | `portrait` | 1080 x 1350 | 4:5 | most mobile space |
 
-All slides in one carousel must share the same size. `post-carousel` forces `square`
-(1080 x 1080). After generating the slide images, the user combines them into one PDF in
-slide order and uploads that as a document post.
+All slides in one carousel must share the same size. `post-carousel` forces `square`,
+rendered at 1200 x 1200 — the same 1:1 page as the 1080 recommendation above, one grid up,
+so slides match the single-image renders. After generating the slide images, the user
+combines them into one PDF in slide order and uploads that as a document post.
 
 ## File rules
 

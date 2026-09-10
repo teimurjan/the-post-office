@@ -2,11 +2,11 @@
 urn: 'urn:li:activity:7500538144811933697'
 url: 'https://www.linkedin.com/feed/update/urn:li:activity:7500538144811933697/'
 posted_at: '2026-09-01T13:00:46.983Z'
-impressions: 329
-likes: 11
+impressions: 742
+likes: 15
 comments: null
 shares: null
-scraped_at: '2026-09-02T07:14:29.264Z'
+scraped_at: '2026-09-09T10:47:48.367Z'
 lane: experience
 ---
 10 years as an engineer. 0 years as a founder.
@@ -21,3 +21,12 @@ Today I'm happy to share that one of those apps, https://waitprofessor.com/, has
 One user. But it's the difference between an idea and a business.
 
 From here on I'm shifting my posting angle a bit: how I run apps with zero headcount. Every function that would normally be a hire, built instead.
+
+---
+
+## Comments
+
+**Rahul Raj**
+
+> Looks Amazing! All the best Tim 🚀
+

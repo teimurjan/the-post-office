@@ -13,8 +13,8 @@ The loop runs in two **lanes**. `news` posts react to an external event and go t
 briefing and an ideator. `experience` posts are about the owner's own operation (apps,
 numbers, functions built instead of hired, lessons from the sell side) and start from a
 sentence the owner wrote. The lanes are analyzed separately — `--lane news|experience` on
-every report — and the brand dossier, `headcount-zero-positioning.md`, defines the second
-lane and the voice of both.
+every report — and the brand wiki in `.vendor/teimurjan-llm-wiki/` defines the second lane and the voice
+of both, read with `bun run --silent --cwd .vendor/teimurjan-llm-wiki wiki view post-writing`.
 
 https://github.com/user-attachments/assets/f478ba31-8091-411e-b672-80c22c7735ee
 
@@ -22,6 +22,7 @@ https://github.com/user-attachments/assets/f478ba31-8091-411e-b672-80c22c7735ee
 
 ```sh
 bun install
+git submodule update --init      # brand wiki (private repo, .vendor/)
 ```
 
 CloakBrowser (stealth Chromium under Playwright) downloads on first scrape (~200 MB, cached).
@@ -38,7 +39,7 @@ sit between the sources and the consumer. Three layers:
 | Raw sources | `posts/`, `briefings/`, `concepts/` | scraper and fetchers, immutable afterward |
 | Derived counts | `bun run post-patterns --lane <lane>`, `bun run top-posts --lane <lane>` | recomputed every run, never stored |
 | The wiki | `wiki/` | `wiki-curator` skill, nothing else |
-| The dossier | `headcount-zero-positioning.md` | the owner, by hand |
+| The brand context | `.vendor/teimurjan-llm-wiki/` (`wiki view post-writing`) | a pinned submodule; read here, never copied |
 | The schema | `AGENTS.md` (`CLAUDE.md` symlinks to it) | co-evolved by hand |
 
 **The CLI owns counts, the wiki owns causes.** `post-patterns` recomputes arithmetic from
@@ -144,7 +145,7 @@ own firsthand layer, and the image step stops for the owner's pick of three vari
 | 3 | `post-ideator` | News lane. Reads the newest briefing, the patterns report, `wiki/audience.md`, and the dossier. Scores each angle 0-2 on `heat`, `specificity`, `differentiation`, `builder_fit`, `reach_ceiling`, `discussion_potential`. Pitches only `>= 8/12`, each with a one-line plain-language `gist` the owner sees first when picking. `reach_ceiling` is looked up in the wiki, not guessed. Ends at the ledger. | `ideas/YYYY-MM-DD.md` |
 | 4 | `post-writer` | Both lanes. Drafts from one approved brief (news) or one raw thought (experience), grounded in the dossier, `tone-samples/`, the lane's patterns report, and recent posts of the same lane. Stops twice for the owner: pick one of three hooks, then supply the firsthand layer in their own words. Never drafts without them. Tags experience drafts with a `pillar`; moves body links to a `Comment link:` line. | `drafts/YYYY-MM-DD-<slug>.md` |
 | 5 | `post-critic` | Both lanes. Reads the lane first, then the brief (the idea for news, the draft's own frontmatter plus the dossier for experience), `top-posts` and `post-patterns` for that lane, the draft, and the concept. Scores hook, specificity, novelty, readability, builder relevance, discussion potential, visual fit. Approves at `>= 10/14` with no zero category. Five hard-zero rules; an experience post with no number is a zero on specificity. | verdict (gate) |
-| 6 | `post-image` | One style, a black sketch on white. Builds three metaphor variants and the owner picks one from the metaphor sentences, before any render; `select-variant` promotes it to `prompt.md` and deletes the rest, then that one prompt is rendered via OpenAI `gpt-image-2` when `OPENAI_API_KEY` is set and shrunk with `pngquant`. `post-carousel` and `post-flowchart` cover the other two formats, same style, single render. | `concepts/<date>-<slug>/`, `images/<date>-<slug>/` |
+| 6 | `post-image` | One style, a black sketch on white. Builds three metaphor variants and the owner picks one from the metaphor sentences, before any render; `select-variant` promotes it to `prompt.md` and deletes the rest, then that one prompt is rendered via OpenAI `gpt-image-2.5-sunburst` when `OPENAI_API_KEY` is set and shrunk with `pngquant`. `post-carousel` and `post-flowchart` cover the other two formats, same style, single render. | `concepts/<date>-<slug>/`, `images/<date>-<slug>/` |
 | 7 | `post-retro` | Run 72h after publishing. Requires one metric, `impressions`, read from the scraped post; compares against the lane's scrape-age cohort and emits the lesson as one falsifiable `wiki_candidate` claim routed to the lane's page. | `retros/YYYY-MM-DD-<slug>.md` |
 | 8 | `wiki-curator` | Absorbs unabsorbed `wiki_candidate` lessons into wiki pages one at a time (`ingest`), keeps the lanes on separate pages, answers questions against the wiki (`query`), and health-checks it (`lint`). | `wiki/` |
 
@@ -267,7 +268,7 @@ ideas/YYYY-MM-DD.md                # shortlisted idea briefs (gitignored)
 drafts/YYYY-MM-DD-<slug>.md        # local working drafts (gitignored)
 concepts/YYYY-MM-DD-<slug>/        # image prompts per draft: variant-N.md until the pick, then prompt.md alone
 images/YYYY-MM-DD-<slug>/          # rendered PNGs, mirrors concepts/ 1:1 (gitignored)
-headcount-zero-positioning.md      # the brand dossier: Headcount Zero, four pillars, voice
+.vendor/teimurjan-llm-wiki/        # git submodule: the private brand wiki, pinned to a commit
 retros/YYYY-MM-DD-<slug>.md        # 72-hour reviews
 retros/postmortems/                # same shape for the worst performers, kind: postmortem
 .office/state.json                 # live pipeline state for the dashboard (gitignored)

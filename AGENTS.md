@@ -13,9 +13,47 @@ Every post, draft, idea, and retro carries `lane: news | experience`.
 
 The two lanes are **analyzed separately**. `bun run post-patterns --lane <lane>` and `bun run top-posts --lane <lane>` scope every number to one lane; the unscoped report adds a `## Lanes` table so both cohorts stay visible. A news post's reach says nothing about an experience post's, and `wiki/audience.md` (the standing-audience tier model) was calibrated on news posts only. Never compare a post against the other lane. Posts without a `lane` in their frontmatter predate the axis and count as `news`.
 
-## Brand dossier — `headcount-zero-positioning.md`
+## Brand context — the personal wiki (`.vendor/teimurjan-llm-wiki`)
 
-The positioning document at the repo root. It defines the owner (a ten-year senior engineer building agents for a living, running consumer apps with zero employees, nights and weekends, from Bishkek), the **Headcount Zero** framing, its four pillars (`replaced-a-hire`, `numbers-from-a-company-of-one`, `didnt-teach-me`, `nights-and-weekends`), the voice rule (benchmarks and receipts — every claim gets a number), the Kill Test, and the LinkedIn platform notes (links in the body cut reach; AI-generic text is suppressed). `post-writer`, `post-critic`, `post-ideator`, and `experience-post-cycle` read it. It is context for both lanes and the definition of the experience lane. Never invent experience from it: it names what the owner runs, not stories about any of it.
+**This repo does not own the brand positioning.** It lives in the personal wiki, vendored here as the `.vendor/teimurjan-llm-wiki/` submodule, and is read with:
+
+```bash
+bun run --silent --cwd .vendor/teimurjan-llm-wiki wiki view post-writing
+```
+
+That bundle defines the owner (a ten-year senior engineer building agents for a living, running consumer apps with zero employees, nights and weekends, from Bishkek), the **Headcount Zero** framing, its four pillars (`replaced-a-hire`, `numbers-from-a-company-of-one`, `didnt-teach-me`, `nights-and-weekends`), the voice rule (benchmarks and receipts — every claim gets a number), the Kill Test, the LinkedIn platform notes (links in the body cut reach; AI-generic text is suppressed), and the citable numbers. `post-writer`, `post-critic`, `post-ideator`, and `experience-post-cycle` read it. It is context for both lanes and the definition of the experience lane.
+
+Never invent experience from it: it names what the owner runs, not stories about any of it. **If the command fails, stop and tell the owner** — a cycle without brand context should not run, and reconstructing positioning from old posts is how a brand drifts.
+
+### Layout
+
+| Path | What it is |
+|---|---|
+| `.vendor/teimurjan-llm-wiki/` | git submodule of the private brand wiki, tracking its `main`. `.vendor/` is where vendored repos live, named `<owner>-<repo>`. |
+| `.vendor/teimurjan-llm-wiki/wiki/index.md` | the wiki's router — page list with each page's kind, freshness and which view reads it |
+| `.vendor/teimurjan-llm-wiki/wiki/facts/`, `claims/`, `decisions/` | the pages themselves, e.g. `.vendor/teimurjan-llm-wiki/wiki/facts/proof.md` for the citable numbers |
+
+**There is no brand file at this repo's root any more.** The dossier that used to live at `headcount-zero-positioning.md` is gone; read the bundle command above, or the vendor path directly. Links inside the router are relative to the wiki directory, so resolve them against `.vendor/teimurjan-llm-wiki/wiki/`.
+
+### Keeping it current
+
+```bash
+git submodule update --init                            # after cloning
+git submodule update --remote .vendor/teimurjan-llm-wiki   # pull brand changes
+```
+
+**The submodule is pinned to a commit, so it lags the wiki by design.** Editing a page in the brand wiki changes nothing here until that change is pushed there and pulled with the command above, then committed here. If a number in the bundle looks out of date, run that before assuming the wiki is wrong.
+
+That repo is private and this one is public. A public clone gets a submodule it cannot fetch and two dangling symlinks; that is expected, and no part of the positioning is stored in this repo.
+
+### Which repo owns what
+
+| Subject | Owner | The other repo |
+|---|---|---|
+| Brand positioning, voice, pillars, the owner's numbers | `.vendor/teimurjan-llm-wiki/` | reads it, never copies it |
+| Audience findings, tier model, lane behaviour | **this repo** (`wiki/audience.md`, `wiki/experience.md`) | points at it, never copies it |
+
+The direction does not reverse. Never mirror audience numbers into the personal wiki, and never mirror brand positioning into this one. A number with two owners drifts silently in both.
 
 ## Human in the loop
 
@@ -61,7 +99,7 @@ launches, build logs, experiments, and founder updates are `experience`; every
 post about an external event is `news`.
 
 Each concept's prompt(s) are rendered into an actual image via
-`bun run generate-image concepts/<date>-<slug>` (OpenAI `gpt-image-2`, gated
+`bun run generate-image concepts/<date>-<slug>` (OpenAI `gpt-image-2.5-sunburst`, gated
 on `OPENAI_API_KEY`), saved to `images/<date>-<slug>/` — gitignored, mirrors
 `concepts/` 1:1, every render shrunk in place with `pngquant`. Every concept is
 square and every concept is a **black sketch on white**; there is no style or
@@ -89,7 +127,7 @@ News lane, conducted by `news-post-cycle`:
 
 Experience lane, conducted by `experience-post-cycle`:
 
-1. Read `headcount-zero-positioning.md`.
+1. Read the brand bundle: `bun run --silent --cwd .vendor/teimurjan-llm-wiki wiki view post-writing`.
 2. Sweep pending retros for experience drafts and ingest them.
 3. Run `bun run top-posts --lane experience` and `bun run post-patterns --lane experience`.
 4. `post-writer` polishes the owner's typed thought with the owner in the loop (hook pick, the one missing specific), tagging the draft with a `pillar`.
@@ -217,4 +255,4 @@ curator. Current pages: `audience.md` (the news-lane standing-audience tier mode
 - Only original posts are collected. Reshares, comments, and articles are out of scope.
 - There is no `cv.md` in this project. The dossier names what the owner runs; it is not a source of stories. Do not invent personal experience for the owner — the writer asks them.
 - `posts/` is scrape output. The only fields ever added to it after the fact are `concept_path` and `lane`. Draft lifecycle data belongs in `ideas/`, `drafts/`, and `retros/`; durable conclusions belong in `wiki/`.
-- `drafts/`, `ideas/`, `images/`, and `tone-samples/` are gitignored working files; `wiki/`, `retros/`, `posts/`, `briefings/`, `concepts/`, and `headcount-zero-positioning.md` are tracked.
+- `drafts/`, `ideas/`, `images/`, and `tone-samples/` are gitignored working files; `wiki/`, `retros/`, `posts/`, `briefings/`, and `concepts/` are tracked, as is the `.vendor/` submodule pointer.
