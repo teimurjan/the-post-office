@@ -30,7 +30,7 @@ Never invent experience from it: it names what the owner runs, not stories about
 | Path | What it is |
 |---|---|
 | `.vendor/teimurjan-llm-wiki/` | git submodule of the private brand wiki, tracking its `main`. `.vendor/` is where vendored repos live, named `<owner>-<repo>`. |
-| `.vendor/teimurjan-llm-wiki/wiki/index.md` | the wiki's router — page list with each page's kind, freshness and which view reads it |
+| `.vendor/teimurjan-llm-wiki/wiki/brand/index.md` | the wiki's router — page list with each page's kind, freshness and which view reads it |
 | `.vendor/teimurjan-llm-wiki/wiki/facts/`, `claims/`, `decisions/` | the pages themselves, e.g. `.vendor/teimurjan-llm-wiki/wiki/facts/proof.md` for the citable numbers |
 
 **There is no brand file at this repo's root any more.** The dossier that used to live at `headcount-zero-positioning.md` is gone; read the bundle command above, or the vendor path directly. Links inside the router are relative to the wiki directory, so resolve them against `.vendor/teimurjan-llm-wiki/wiki/`.
@@ -180,7 +180,7 @@ bun run top-posts --lane experience     # one lane
 bun run post-patterns --lane news       # classification and anti-pattern report, one lane
 bun run post-patterns --json            # programmatic, includes laneStats and postIndex
 bun run wiki lint                       # check every wiki page against the corpus
-bun run wiki index                      # regenerate the wiki/index.md catalog
+bun run wiki index                      # regenerate the wiki/brand/index.md catalog
 bun run post-lane <post> <lane>         # stamp a lane on a post published without a draft
 bun run select-variant <concept> <N>    # promote an image variant to prompt.md, drop the rest
 ```

@@ -59,12 +59,12 @@ async function runLint(): Promise<number> {
 
 async function runIndex(): Promise<number> {
   const pages = await loadWikiPages();
-  const indexPath = resolve(process.cwd(), "wiki/index.md");
+  const indexPath = resolve(process.cwd(), "wiki/brand/index.md");
   let raw: string;
   try {
     raw = await readFile(indexPath, "utf8");
   } catch {
-    process.stderr.write("wiki/index.md not found.\n");
+    process.stderr.write("wiki/brand/index.md not found.\n");
     return 1;
   }
 
@@ -72,7 +72,7 @@ async function runIndex(): Promise<number> {
   const end = raw.indexOf(CATALOG_END);
   if (start === -1 || end === -1 || end < start) {
     process.stderr.write(
-      `wiki/index.md is missing the ${CATALOG_BEGIN} / ${CATALOG_END} markers.\n`,
+      `wiki/brand/index.md is missing the ${CATALOG_BEGIN} / ${CATALOG_END} markers.\n`,
     );
     return 1;
   }
@@ -90,7 +90,7 @@ async function runIndex(): Promise<number> {
   const next = `${raw.slice(0, start + CATALOG_BEGIN.length)}\n${table}\n${raw.slice(end)}`;
   await writeFile(indexPath, next);
   process.stdout.write(
-    `Updated wiki/index.md catalog (${rows.length} page(s)).\n`,
+    `Updated wiki/brand/index.md catalog (${rows.length} page(s)).\n`,
   );
   return 0;
 }
@@ -115,7 +115,7 @@ function usage(): void {
       "",
       "  lint    Check every wiki page against the corpus and the skills.",
       "          Exits 1 on any error, 0 when only warnings remain.",
-      "  index   Regenerate the catalog table in wiki/index.md.",
+      "  index   Regenerate the catalog table in wiki/brand/index.md.",
       "",
     ].join("\n"),
   );

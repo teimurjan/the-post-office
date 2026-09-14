@@ -523,7 +523,7 @@ function checkOrphans(pages: WikiPage[]): Finding[] {
         check: "orphan",
         severity: "warning",
         page: page.repoPath,
-        message: "not listed in wiki/index.md",
+        message: "not listed in wiki/brand/index.md",
       });
     }
   }

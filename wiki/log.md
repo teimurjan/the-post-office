@@ -14,7 +14,7 @@ what it contradicted. The `contradicted:` line is required even when the answer 
 - trigger: manual — review of the post-generation skills against the LLM-wiki pattern
 - changed:
   - wiki/audience.md — created, `confidence: medium`, `evidence_n: 24`
-  - wiki/index.md — created
+  - wiki/brand/index.md — created
   - wiki/log.md — created
 - claim added: subject recognizability separates reach in this corpus; three
   non-overlapping bands across 24 posts (t0 max 236 < t1 min 1271, t1 max 3570 < t2
@@ -109,7 +109,7 @@ what it contradicted. The `contradicted:` line is required even when the answer 
 - changed:
   - wiki/audience.md — recomputed news-only, two new failure modes recorded, fingerprint refreshed
   - wiki/experience.md — created to hold the five experience-lane posts that were miscited on [[audience]]
-  - wiki/index.md — catalog regenerated, [[experience]] linked from the body
+  - wiki/brand/index.md — catalog regenerated, [[experience]] linked from the body
 - claim added: see the per-lesson entries that follow this one
 - contradicted: [[audience]]'s published tier bands, which were computed over a pool mixing both lanes. Details in the per-lesson entries below.
 
@@ -184,6 +184,6 @@ what it contradicted. The `contradicted:` line is required even when the answer 
   - wiki/audience.md — t1's "or the owner's own shipped work" clause removed; its only evidence was the Avatune post, now on [[experience]]
   - wiki/audience.md — fingerprint 53/569 -> 56/439, evidence_n 25 -> 21, `lane: news` added
   - wiki/experience.md — created, `status: provisional`, `confidence: low`, evidence_n 5, holding the relocated posts and the lane's own stats
-  - wiki/index.md — catalog regenerated, [[experience]] linked
+  - wiki/brand/index.md — catalog regenerated, [[experience]] linked
 - claim added: the experience lane's whole range (76–1271) sits below the news lane's t1 floor, and its five charted posts split into shipped software (1271) versus reports on the owner's own process (181–210)
 - contradicted: **yes.** [[audience]] presented t0's floor as 76 and t1's floor as 1271; both numbers came from experience-lane posts and were never valid for a news draft. The news-only t0 floor before windows-paint was 163. Every band this page has published since it was written was computed over a mixed pool.
