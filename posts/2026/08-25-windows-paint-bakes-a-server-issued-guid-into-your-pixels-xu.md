@@ -2,11 +2,11 @@
 urn: 'urn:li:activity:7498001328577851392'
 url: 'https://www.linkedin.com/feed/update/urn:li:activity:7498001328577851392/'
 posted_at: '2026-08-25T13:00:22.861Z'
-impressions: 76
+impressions: 78
 likes: null
 comments: null
 shares: null
-scraped_at: '2026-09-09T10:47:25.966Z'
+scraped_at: '2026-09-16T06:58:17.205Z'
 ---
 Windows Paint bakes a server-issued GUID into your pixels.
 

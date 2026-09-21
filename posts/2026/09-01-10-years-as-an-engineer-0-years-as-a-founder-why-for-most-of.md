@@ -2,11 +2,11 @@
 urn: 'urn:li:activity:7500538144811933697'
 url: 'https://www.linkedin.com/feed/update/urn:li:activity:7500538144811933697/'
 posted_at: '2026-09-01T13:00:46.983Z'
-impressions: 742
-likes: 15
+impressions: 943
+likes: null
 comments: null
 shares: null
-scraped_at: '2026-09-09T10:47:48.367Z'
+scraped_at: '2026-09-18T06:20:43.158Z'
 lane: experience
 ---
 10 years as an engineer. 0 years as a founder.

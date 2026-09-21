@@ -2,11 +2,11 @@
 urn: 'urn:li:activity:7503077970606014464'
 url: 'https://www.linkedin.com/feed/update/urn:li:activity:7503077970606014464/'
 posted_at: '2026-09-08T13:13:08.640Z'
-impressions: 89
+impressions: 147
 likes: null
 comments: null
 shares: null
-scraped_at: '2026-09-09T10:47:55.635Z'
+scraped_at: '2026-09-18T06:20:39.148Z'
 ---
 Agents that skipped the skill file wrote better code.
 

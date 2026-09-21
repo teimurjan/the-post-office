@@ -187,3 +187,38 @@ what it contradicted. The `contradicted:` line is required even when the answer 
   - wiki/brand/index.md — catalog regenerated, [[experience]] linked
 - claim added: the experience lane's whole range (76–1271) sits below the news lane's t1 floor, and its five charted posts split into shipped software (1271) versus reports on the owner's own process (181–210)
 - contradicted: **yes.** [[audience]] presented t0's floor as 76 and t1's floor as 1271; both numbers came from experience-lane posts and were never valid for a news draft. The news-only t0 floor before windows-paint was 163. Every band this page has published since it was written was computed over a mixed pool.
+
+## [2026-09-16] ingest | session summary — two retros absorbed
+
+- corpus: 60 posts, median 439 (news n=40 median 664, experience n=20 median 362)
+- trigger: two retro lessons carrying `wiki_ingested: false`, swept oldest first
+- changed:
+  - wiki/audience.md — t0 exemplars +1 (09-08 agents/skill-file), evidence_n 21 -> 22, windows-paint rescrape 72 -> 78, fingerprint refreshed
+  - wiki/experience.md — observed +1 (09-09 dashboards, first pillar post), evidence_n 5 -> 6, lane grew 18 -> 20, image-differ rescrape 143 -> 179, fingerprint refreshed
+- claim added: see the two per-lesson entries that follow this one
+- contradicted: none in either page. Noted for a later pass: the CLI now reports "news without firsthand signal" as discredited where [[audience]] still records it validated.
+
+## [2026-09-16] ingest | retro 2026-09-08 agents-skipped-skill-file
+
+- corpus: 60 posts, median 439
+- trigger: retros/2026-09-08-agents-that-skipped-the-skill-file-wrote-better.md (decision: modify)
+- changed:
+  - wiki/audience.md — t0 exemplars +1 (09-08 agents/skill-file 143, subject "one agent-testing study"), observed_n 9 -> 10, median unchanged at 185, evidence_n 21 -> 22
+  - wiki/audience.md — windows-paint impressions 72 -> 78 across t0 exemplar, observed_min, sub_band_watch, disputed, and body (rescrape drift; cleared the standing stale-numeric error)
+  - wiki/audience.md — firsthand-doesn't-promote-t0 negative half 2 -> 3 exemplars; the new post carried a process-level firsthand line and still landed inside the band
+  - wiki/audience.md — fingerprint 56/439 -> 60/439, "21 of 38" -> "22 of 40" tier-carrying posts
+- claim added: a process-level firsthand line does not promote a single-study (t0) subject out of the t0 band
+- contradicted: none. Reinforces `firsthand_promotion: unevidenced`. (Noted separately, not acted on here: the CLI now reports "news without firsthand signal" as discredited (0.99x) where this page still records it validated at 0.59x — a later ingest/lint call.)
+
+## [2026-09-16] ingest | retro 2026-09-09 dashboards-eat-your-evening
+
+- corpus: 60 posts, median 439
+- trigger: retros/2026-09-09-the-dashboards-will-eat-your-evening-before-the.md (decision: modify)
+- changed:
+  - wiki/experience.md — observed +1 (09-09 dashboards 138, shape "internal tooling automation", first pillar post replaced-a-hire, first with a receipt), evidence_n 5 -> 6
+  - wiki/experience.md — lane grew 18 -> 20: lane_stats n 18->20, p25 210->200, cohort_1to4w_n 6->8, above_400_n 8->9; bottom_five recomputed to 76/96/138/179/181
+  - wiki/experience.md — image-differ impressions 143 -> 179 (rescrape drift) across counter_evidence, bottom_five, and body
+  - wiki/experience.md — floor claim reframed from "four of five in bottom five" to "process/tooling-report cluster near half the lane median"; receipts open question gains its first data point (receipt necessary, not sufficient); pillars section notes the first replaced-a-hire post
+  - wiki/experience.md — fingerprint 56/439 -> 60/439
+- claim added: in the experience lane a concrete before/after receipt does not lift a report on the owner's own internal tooling out of the bottom (process-report) cluster
+- contradicted: none. Reinforces the process-report floor and begins answering the "Nothing about receipts" open question.

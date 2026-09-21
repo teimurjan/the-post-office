@@ -4,7 +4,7 @@ kind: audience
 title: Standing-audience tiers for scoring reach_ceiling
 status: active
 confidence: medium
-evidence_n: 21
+evidence_n: 22
 lane: news
 # The page's own predictive use has now failed twice out of five pre-scored posts.
 # Kept here, not buried in prose.
@@ -13,10 +13,10 @@ counter_posts:
   - posts/2026/08-17-stop-reporting-how-much-code-your-ai-writes-anthropic-let-cl.md
   - posts/2026/08-21-your-database-has-a-failover-plan-github-doesn-t-on-august-1.md
   - posts/2026/08-25-windows-paint-bakes-a-server-issued-guid-into-your-pixels-xu.md
-posts_covered: 56
+posts_covered: 60
 corpus_median_at_revision: 439
 patterns_generated_at: 2026-09-02
-last_revised: 2026-09-02
+last_revised: 2026-09-16
 revised_by: wiki-curator
 supersedes: []
 # Lane-scoped family medians quoted in the body, so they can be rechecked against
@@ -118,9 +118,9 @@ tiers:
   - id: t0-vendor-paper-or-self
     score: 0
     label: One vendor's product, one paper, one configuration nobody else is in
-    observed_n: 9
+    observed_n: 10
     observed_median: 185
-    observed_min: 72
+    observed_min: 78
     observed_max: 236
     exemplars:
       - post: posts/2026/05-22-google-is-sunsetting-gemini-cli-and-gemini-code-assist-on-ju.md
@@ -148,8 +148,11 @@ tiers:
         impressions: 163
         subject: one classifier result
         pre_scored: true
+      - post: posts/2026/09-08-agents-that-skipped-the-skill-file-wrote-better-code-dan-luu.md
+        impressions: 143
+        subject: one agent-testing study
       - post: posts/2026/08-25-windows-paint-bakes-a-server-issued-guid-into-your-pixels-xu.md
-        impressions: 72
+        impressions: 78
         subject: one consumer desktop app's internals
         pre_scored: true
 # One t0 post landed below the band rather than inside it. n=1, so this is recorded
@@ -158,7 +161,7 @@ sub_band_watch:
   confidence: anecdote
   evidence_n: 1
   t0_floor_before: 163
-  observed: 72
+  observed: 78
   post: posts/2026/08-25-windows-paint-bakes-a-server-issued-guid-into-your-pixels-xu.md
   # A second post under this number promotes the hypothesis to a sub-band.
   retest_threshold: 150
@@ -221,7 +224,7 @@ disputed:
     post: posts/2026/08-25-windows-paint-bakes-a-server-issued-guid-into-your-pixels-xu.md
     scored_at_ideation: 2
     outcome_tier: 0
-    published_impressions: 72
+    published_impressions: 78
     trigger: t2_miss_below
     status: resolved
     resolution: assignment error, and the first post to land below every band
@@ -273,7 +276,7 @@ Subject recognizability does separate them, and the bands do not overlap:
 |---|---|---|---|
 | t2 | 8 | 33509 | 5154 – 128280 |
 | t1 | 4 | 2637 | 1380 – 3570 |
-| t0 | 9 | 185 | 72 – 236 |
+| t0 | 10 | 185 | 78 – 236 |
 
 t0's ceiling (236) sits below t1's floor (1380). t1's ceiling (3570) sits below t2's
 floor (5154). The gaps are wide enough that the separation survived removing five
@@ -291,7 +294,7 @@ It is: **when you name the subject in five words, has the reader used the thing?
   SolidJS. Vercel Zero. A specific vendor's tool that a sub-community actually uses.
 - **t0** — one vendor's product nobody else is in, one paper, one benchmark result,
   one configuration. A sharp wedge does not rescue this. Every t0 post in the corpus
-  landed between 72 and 236 impressions, several of them with clean craft and a real
+  landed between 78 and 236 impressions, several of them with clean craft and a real
   argument.
 
 The two ways this assignment has gone wrong in practice both inflate a t0 into a t2.
@@ -303,7 +306,9 @@ A firsthand artifact is thought to promote t0 to t1 when the artifact is a real
 technical thing another builder could run. **That promotion is still unevidenced** —
 there is no post in the corpus where a runnable firsthand artifact lifted a t0
 subject out of the band. Only the negative half is evidenced: process-level firsthand
-lines do not promote.
+lines do not promote. The 09-08 agents/skill-file post is the third such exemplar —
+a t0 study subject carrying a process-level firsthand line ("I keep a repo of my own
+skills…") that landed at 143, inside the band.
 
 What the lane-scoped corpus does say is the reverse of what this page claimed before
 2026-09-02. Under `--lane news`, "news posts without firsthand signal" is a
@@ -341,7 +346,7 @@ changed from "a named artifact every working developer already knows" to "a name
 artifact the reader has used or fought with."
 
 The 08-25 Windows Paint post was pre-scored `reach_ceiling: 2`, `t2-universal`, and
-published at 72 — the lowest post in the news lane. The score was not a heat argument;
+published at 78 — the lowest post in the news lane. The score was not a heat argument;
 the brief's case was name recognition, and on that test it was correct. Every developer
 alive can name Microsoft Paint. None of them use it for work.
 
@@ -354,7 +359,7 @@ lost an afternoon to this."
 
 ### Below the band
 
-The Windows Paint post is also the first to land *below* every band: 72, against a
+The Windows Paint post is also the first to land *below* every band: 78, against a
 previous news-lane t0 floor of 163. `confidence: anecdote`, `evidence_n: 1` — one post
 establishes nothing, and it is recorded in `sub_band_watch` rather than made a rule.
 
@@ -464,7 +469,7 @@ objecting in advance, and both resolved. Resolved entries stay on the page: they
 evidence behind `promotion_review.pre_scored_missed`, and deleting them would leave that
 count unsupported.
 
-Only 21 of 38 news posts carry a tier: the unambiguous top and bottom. The middle is
+Only 22 of 40 news posts carry a tier: the unambiguous top and bottom. The middle is
 unassigned on purpose. Assigning it requires the same judgment call the tiers exist to
 make, and doing it in bulk from known outcomes would inflate `evidence_n` without adding
 evidence.
@@ -474,9 +479,9 @@ evidence.
 Things this page cannot yet answer, which the next retros should settle:
 
 - Does firsthand work promote a t0 subject to t1 at all? Still unshown in the positive
-  direction. The negative half has two exemplars: process-level firsthand lines that did
-  not promote. `firsthand_promotion` is marked `unevidenced` rather than `true`.
-- Is t0 one room or two? See "Below the band" — one post landed at 72 against a floor of
+  direction. The negative half has three exemplars: process-level firsthand lines that
+  did not promote. `firsthand_promotion` is marked `unevidenced` rather than `true`.
+- Is t0 one room or two? See "Below the band" — one post landed at 78 against a floor of
   163, on a subject the audience does not operate. One more would make it a sub-band.
 - Where does a t2 subject with a dull wedge land? Every t2 exemplar here also had a sharp
   take, so the tier's floor is untested.

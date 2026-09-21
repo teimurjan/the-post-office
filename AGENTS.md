@@ -146,7 +146,7 @@ Key directories:
 3. **`drafts/YYYY-MM-DD-<slug>.md`** (gitignored) — local working drafts written by `post-writer`. Every draft carries `lane`; experience drafts also carry `pillar`. Backward-compatible frontmatter is still accepted, but new drafts should also include `topic_family`, `source_type`, `hook_type`, `why_now`, `opinion_wedge`, `experience_hook`, and `status`. Published drafts later add `published_url`, `published_at`, `impressions_24h`, `impressions_72h`, `likes_72h`, `comments_72h`, and `shares_72h`.
 4. **`retros/YYYY-MM-DD-<slug>.md`** — one post-publish review per draft, written 72 hours after publishing. Retros carry `lane`, compare against the lane's scrape-age cohort, answer whether the post beat that cohort, validated the intended discussion angle, matched hook to body, and whether the pattern should be repeated, modified, or blocked. `retros/postmortems/` holds the same shape for the worst performers of one lane, marked `kind: postmortem`.
 5. **`wiki/`** — the accumulated judgment layer. See `## Wiki` below.
-6. **`tone-samples/`** (gitignored) — pieces the owner wrote by hand, the canonical voice reference. Samples 1 to 4 are rough drafts; sample 5 is the published founder post that opened the experience lane and is that lane's register.
+6. **`tone-samples/`** (gitignored) — pieces the owner wrote by hand, the canonical voice reference. Samples 1 to 4 are rough drafts; sample 5 is the published founder post that opened the experience lane and is that lane's register. `ru-N.md` are the owner's own Russian translations of their posts, the register for `post-telegram`; `ru-1.md` is the Meta-ads post.
 7. **Skills in `.agents/skills/`**. Each skill runs standalone and hands off through files, never by invoking another skill; only the two cycles compose them.
    - `news-post-cycle`, `experience-post-cycle` — the two conductors.
    - `topics-hn`, `topics-lobsters`, `topics-rss`, `topics-briefing` — source fetchers (news lane).
@@ -158,6 +158,7 @@ Key directories:
    - `posts-postmortem` — the same analysis for the bottom performers of one lane (`--lane`, default `news`).
    - `wiki-curator` — owns `wiki/`. Absorbs `wiki_candidate` lessons into pages (`ingest`), keeps the lanes apart (`audience` for news, `experience` for the experience lane, created on first ingest), answers questions (`query`), and health-checks (`lint`). Nothing else writes to `wiki/`.
    - `post-comments` — drafts replies to comments on a published post.
+   - `post-substack`, `post-telegram` — take one finished draft (or a published post) to another channel, per the brand wiki's `channels` decision. `post-substack` writes a Substack Note: tweet-length, the hook and one number, link last, concept image attached. `post-telegram` translates the post into Russian in the owner's own register, read from `tone-samples/ru-*.md`; nothing is added, and Russian typography applies (decimal comma, `42к`, тире only when unavoidable). Both save to `channels/<channel>/<date>-<slug>.md` (gitignored, not pruned by `cleanup`) and never touch `drafts/` or `posts/`.
 
 ### Housekeeping
 
@@ -255,4 +256,4 @@ curator. Current pages: `audience.md` (the news-lane standing-audience tier mode
 - Only original posts are collected. Reshares, comments, and articles are out of scope.
 - There is no `cv.md` in this project. The dossier names what the owner runs; it is not a source of stories. Do not invent personal experience for the owner — the writer asks them.
 - `posts/` is scrape output. The only fields ever added to it after the fact are `concept_path` and `lane`. Draft lifecycle data belongs in `ideas/`, `drafts/`, and `retros/`; durable conclusions belong in `wiki/`.
-- `drafts/`, `ideas/`, `images/`, and `tone-samples/` are gitignored working files; `wiki/`, `retros/`, `posts/`, `briefings/`, and `concepts/` are tracked, as is the `.vendor/` submodule pointer.
+- `drafts/`, `ideas/`, `images/`, `channels/`, and `tone-samples/` are gitignored working files; `wiki/`, `retros/`, `posts/`, `briefings/`, and `concepts/` are tracked, as is the `.vendor/` submodule pointer.

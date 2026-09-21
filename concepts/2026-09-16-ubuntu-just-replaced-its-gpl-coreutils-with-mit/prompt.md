@@ -1,30 +1,28 @@
 ---
-draft_file: drafts/2026-09-09-the-dashboards-will-eat-your-evening-before-the.md
+draft_file: drafts/2026-09-16-ubuntu-just-replaced-its-gpl-coreutils-with-mit.md
 style: sketch-on-white
-hook_overlay: THE DASHBOARDS WILL EAT YOUR EVENING BEFORE THE CODE DOES
+hook_overlay: UBUNTU REPLACED GPL COREUTILS WITH MIT RUST
 metaphor: >-
-  A cartoon engineer at a night desk braces with both arms up as a toppling
-  stack of seventeen identical store-listing browser windows slides off the
-  monitor toward them, sliders and dropdown menus spilling out of the frames.
+  A frazzled sysadmin swaps worn tool-blocks labeled cp mv rm for bright new
+  RUST blocks while a wax-sealed GPL document slides off the bench unnoticed.
 size: square
 size_pixels: 1200x1200
-generated_at: 2026-09-09T11:06:04.000Z
-selected_variant: 1
-post_url: 'https://www.linkedin.com/feed/update/urn:li:activity:7503437432105771008/'
+generated_at: 2026-09-16T00:00:00.000Z
+selected_variant: 2
+post_url: 'https://www.linkedin.com/feed/update/urn:li:activity:7505974022212382721/'
 post_path: >-
-  posts/2026/09-09-the-dashboards-will-eat-your-evening-before-the-code-does-up.md
+  posts/2026/09-16-ubuntu-just-replaced-its-gpl-coreutils-with-mit-licensed-rus.md
 ---
-
 Minimalist hand-drawn sketch: confident single-weight black ink lines on a solid
 pure-white background, no color or fill, like a black marker on paper. One clear focal
 subject with a strong silhouette and generous negative space. Reads in milliseconds.
 All characters original. Hook hand-lettered in black across the upper third.
 
-Subject: A cartoon engineer seated three-quarter-front at a desk, both arms raised in front of the chest, elbows bent, face wide-eyed. A tall leaning stack of seventeen identical browser windows, each drawn as a plain rectangle with a title bar, a text field and a dropdown arrow, tips off the monitor toward the viewer. Loose sliders, checkboxes and dropdown menus spill out of the tilting frames and scatter across the desk. Speed lines under the falling stack. A small wall clock behind the desk with both hands near the top. Keep both hands in front of the body with bent elbows and no cross-body reach.
+Subject: A frazzled cartoon sysadmin in a rumpled shirt standing front-on at a workbench, both hands jamming a bright new tool-block stamped RUST into an empty slot, a worn ink-stamped block labeled cp just pulled out and set down beside blocks labeled ls, mv, rm; a large wax-sealed document stamped GPL sliding off the far edge of the bench toward the floor, unnoticed; the admin's brow furrowed, motion lines around the pushing hands.
 
 Render this exact hook text IN-IMAGE, verbatim and unparaphrased, every word spelled
 exactly as written, nothing added, dropped, reordered, or reworded:
-THE DASHBOARDS WILL EAT YOUR EVENING BEFORE THE CODE DOES
+UBUNTU REPLACED GPL COREUTILS WITH MIT RUST
 Hand-lettered black marker capitals, slightly uneven, same line weight as the drawing.
 All caps, large, high-contrast, readable at a glance. One line, or two or three centered
 lines if needed.
