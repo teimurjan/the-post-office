@@ -2,11 +2,11 @@
 urn: 'urn:li:activity:7501262859826458624'
 url: 'https://www.linkedin.com/feed/update/urn:li:activity:7501262859826458624/'
 posted_at: '2026-09-03T13:00:32.507Z'
-impressions: 1135
+impressions: 1137
 likes: null
 comments: null
 shares: null
-scraped_at: '2026-09-18T06:20:39.346Z'
+scraped_at: '2026-09-25T08:25:10.419Z'
 concept_path: concepts/2026-09-02-you-cannot-screen-read-a-video-of-a-button/prompt.md
 lane: news
 ---

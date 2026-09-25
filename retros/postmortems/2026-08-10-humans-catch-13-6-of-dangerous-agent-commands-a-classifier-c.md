@@ -11,23 +11,23 @@ likes: null
 comments: null
 shares: null
 cohort: 1 to 4 weeks
-cohort_median_at_run: 750
+cohort_median_at_run: 597
 beat_median: false
 likely_failure_modes:
   - news posts without firsthand signal
   - reach_ceiling scored from topical heat rather than standing-audience size
   - the one firsthand line is an assertion with no number behind it
 decision: modify
-summary: A vendor's own classifier benchmark was pre-scored a t2 on how loudly the topic was being discussed, landed at 163 against a 750 cohort median, and is the case that put the heat-is-not-size rule into the tier model.
+summary: A vendor's own classifier benchmark was pre-scored a t2 on how loudly the topic was being discussed, landed at 163 against a 597 cohort median, and is the case that put the heat-is-not-size rule into the tier model.
 wiki_candidate: A firsthand line without a number does not lift a post out of the news-without-firsthand-signal band.
 wiki_pages: [audience]
 wiki_ingested: true
-generated_at: 2026-09-02T10:20:34.000Z
+generated_at: 2026-09-21T09:42:49.000Z
 ---
 
 The post paired Anthropic's own 13.6%-vs-89% classifier result with LeadDev's 81%/7% agent-write-access split, arguing that the permission decision is made once, long before any classifier inspects a command.
 
-It landed at 163 impressions against a 750 median for its 1-to-4-week scrape cohort — 22% of cohort — and sits inside the t0 band (76 to 236) in `wiki/audience.md`, where it is already recorded under `disputed` as the page's one predictive miss.
+It landed at 163 impressions against a 597 median for its 1-to-4-week scrape cohort — 27% of cohort — and sits inside the t0 band (78 to 236) in `wiki/audience.md`, where it is already recorded under `disputed` as the page's one predictive miss.
 
 The primary failure is the one the tier model already absorbed: the brief scored `reach_ceiling: 2` because Claude Code auto mode was being argued about everywhere that week, not because a large crowd already stands around the subject. The subject was one vendor's self-reported classifier number, which is a textbook t0. That resolution is settled — it produced the heat-is-not-size rule — so this postmortem adds the second, still-open observation.
 

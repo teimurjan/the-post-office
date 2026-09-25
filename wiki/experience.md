@@ -4,7 +4,7 @@ kind: audience
 title: What reaches in the experience lane
 status: provisional
 confidence: low
-evidence_n: 6
+evidence_n: 7
 lane: experience
 evidence_posts:
   - posts/2025/12-09-i-finally-get-to-share-something-i-ve-been-working-on-for-we.md
@@ -13,6 +13,7 @@ evidence_posts:
   - posts/2026/05-28-four-linkedin-posts-lost-in-a-row-same-shape-every-time-toda.md
   - posts/2025/02-28-i-m-thrilled-to-share-one-of-our-biggest-milestones-yet-at-r.md
   - posts/2026/09-09-the-dashboards-will-eat-your-evening-before-the-code-does-up.md
+  - posts/2026/09-14-368-on-meta-ads-three-sign-ups-week-one-of-running-ads-for-w.md
 # Shipped-work posts that landed at or below the process-report cluster. They are why
 # this page makes no claim that shipping something is enough.
 counter_posts:
@@ -25,10 +26,10 @@ counter_evidence:
   - post: posts/2026/06-17-single-thread-no-parallelism-3-8x-faster-than-libspng-i-buil.md
     impressions: 242
     shape: the owner's own benchmarked PNG encoder
-posts_covered: 60
-corpus_median_at_revision: 439
-patterns_generated_at: 2026-09-02
-last_revised: 2026-09-16
+posts_covered: 61
+corpus_median_at_revision: 435
+patterns_generated_at: 2026-09-21
+last_revised: 2026-09-21
 revised_by: wiki-curator
 supersedes: []
 # Lane-scoped, from `bun run post-patterns --lane experience`. Twins every number
@@ -43,17 +44,17 @@ lane_stats:
   median_minus_top: 330
   cohort_2to7d_n: 3
   cohort_2to7d_median: 282
-  cohort_1to4w_n: 8
-  cohort_1to4w_median: 226
+  cohort_1to4w_n: 9
+  cohort_1to4w_median: 210
   above_400_n: 9
   above_400_threshold: 400
-# The bottom five of the lane after it grew to 20 posts. Two are uncharted here (the
-# 09-14 Meta-ads post and the 08-28 image-differ counter-post); the other three are
-# charted. Twins the numbers in "What the posts show".
+# The bottom five of the lane at 20 posts. One is uncharted here (the 08-28
+# image-differ counter-post); the other four are charted. The 09-14 Meta-ads post was
+# rescraped from 96 to 125 on 2026-09-18. Twins the numbers in "What the posts show".
 bottom_five:
   - impressions: 76
     post: posts/2025/02-28-i-m-thrilled-to-share-one-of-our-biggest-milestones-yet-at-r.md
-  - impressions: 96
+  - impressions: 125
     post: posts/2026/09-14-368-on-meta-ads-three-sign-ups-week-one-of-running-ads-for-w.md
   - impressions: 138
     post: posts/2026/09-09-the-dashboards-will-eat-your-evening-before-the-code-does-up.md
@@ -85,6 +86,42 @@ observed:
     impressions: 76
     shape: a company milestone announcement
     note: the lane minimum
+  - post: posts/2026/09-14-368-on-meta-ads-three-sign-ups-week-one-of-running-ads-for-w.md
+    impressions: 125
+    shape: the owner's own failed marketing experiment, filed before the fix had a number
+    note: first didnt-teach-me pillar post; first about the sell side rather than the owner's tooling
+# Receipt-bearing posts that landed in the low end anyway. Twins "A first data point
+# on receipts". n=3, so this is still an early signal, not a finding.
+receipt_bearing_low:
+  evidence_n: 3
+  lane_median: 362
+  evidence:
+    - post: posts/2026/06-17-single-thread-no-parallelism-3-8x-faster-than-libspng-i-buil.md
+      impressions: 242
+      receipt: a 3.8x benchmark
+    - post: posts/2026/09-09-the-dashboards-will-eat-your-evening-before-the-code-does-up.md
+      impressions: 138
+      receipt: a full day to two minutes across 17 languages
+    - post: posts/2026/09-14-368-on-meta-ads-three-sign-ups-week-one-of-running-ads-for-w.md
+      impressions: 125
+      receipt: $368, 42k impressions, three sign-ups
+# Pillar-tagged posts ingested so far, one per pillar at most. Nothing here is a claim
+# about a pillar; each is a single post.
+pillars_observed:
+  replaced-a-hire:
+    evidence_n: 1
+    post: posts/2026/09-09-the-dashboards-will-eat-your-evening-before-the-code-does-up.md
+    impressions: 138
+  didnt-teach-me:
+    evidence_n: 1
+    post: posts/2026/09-14-368-on-meta-ads-three-sign-ups-week-one-of-running-ads-for-w.md
+    impressions: 125
+# Uncharted upper-half post named in "Open questions" as the pair for the 09-14 miss.
+# Not evidence; a pointer to the retro that would make it evidence.
+uncharted_pair:
+  post: posts/2026/09-01-10-years-as-an-engineer-0-years-as-a-founder-why-for-most-of.md
+  impressions: 943
+  days_before_0914: 13
 ---
 
 # What reaches in the experience lane
@@ -136,14 +173,19 @@ shipped software with a 3.8x benchmark in the hook and landed at 242. Both are r
 as `counter_posts`. Shipping something is not sufficient, and the 1,271 launch is one post.
 
 What survives is the narrower, negative half: **the owner's process- and tooling-report
-posts cluster around half the lane median.** Four are now charted — the commit log (210),
+posts cluster around half the lane median.** Four are charted — the commit log (210),
 the benchmarking setup (200), the posting retrospective (181), and the 09-09 dashboards
-post (138) — against a lane median of 362. As the lane grew to 20 posts, two newer
-entries (the 09-14 Meta-ads post at 96 and the dashboards post at 138) took over the
-strict bottom of the range, but the process-report cluster stayed low regardless. The
-milestone announcement (76) is the floor and is the one charted post with no technical
-artifact in it at all. `evidence_n: 6`, `confidence: low`: this is a floor observation
-about one shape, not a theory of the lane.
+post (138) — against a lane median of 362. The milestone announcement (76) is the floor
+and is the one charted post with no technical artifact in it at all.
+
+The 09-14 Meta-ads post (125, rescraped from 96) widens that floor by one shape. It is
+not a tooling report; it is the owner's own failed ad experiment, receipts on every
+line, and it landed second-lowest in the lane. What it shares with the process reports
+is that the reader is handed an account of the owner's week with nothing to use — the
+post ends before the narrowed audience has a number. So the floor is better described
+as **reports on the owner's own operation with no outcome the reader can act on**,
+whether the operation is tooling or marketing. `evidence_n: 7`, `confidence: low`: a
+floor observation, not a theory of the lane.
 
 [[audience]] independently reached the same exclusion from the news side: it records that
 a firsthand line about the owner's *process* does not promote a subject, citing the
@@ -154,20 +196,23 @@ commit-log post. That is the same underlying post, so it is agreement, not confi
 - **Almost nothing about pillars.** The brand wiki defines four
   (`replaced-a-hire`, `numbers-from-a-company-of-one`, `didnt-teach-me`,
   `nights-and-weekends`). The five relocated posts predate the axis and were labelled
-  post-hoc; mapping them now would be inventing evidence. The 09-09 dashboards post is
-  the first drafted against a pillar (`replaced-a-hire`) to be ingested here — one post,
-  enough to start the work, not to characterize a pillar. At n=1 the only honest read is
-  that a `replaced-a-hire` post built purely as an internal-tooling receipt landed at 138,
-  in the process-report cluster.
+  post-hoc; mapping them now would be inventing evidence. Two pillar-tagged posts have
+  been ingested, one each (`pillars_observed`): the 09-09 dashboards post
+  (`replaced-a-hire`, 138) and the 09-14 Meta-ads post (`didnt-teach-me`, 125). Both
+  landed in the low cluster. At n=1 per pillar the only honest read is that neither
+  pillar has yet produced a post above the lane median, and that says nothing about the
+  pillars.
 - **Nothing with a tier model.** Five posts across five different shapes cannot produce
   bands. Do not import [[audience]]'s t0/t1/t2 here; the tiers measure a standing public
   audience, which is not what this lane draws on.
-- **A first data point on receipts.** `post-critic` zeroes `specificity` on an
+- **An early signal on receipts.** `post-critic` zeroes `specificity` on an
   experience post with no number, and the dossier requires the receipt. This page now
-  has two posts that carried a clear number and still landed low: the 06-17 PNG-encoder
-  (a 3.8x benchmark, 242) and the 09-09 dashboards post (a day-to-two-minutes automation
-  receipt, 138). Two posts is not a finding, but the early signal is that a receipt is
-  necessary, not sufficient — it does not lift a post out of the low cluster on its own.
+  has three posts that carried a clear number and still landed low
+  (`receipt_bearing_low`): the 06-17 PNG-encoder (a 3.8x benchmark, 242), the 09-09
+  dashboards post (a day-to-two-minutes automation receipt, 138), and the 09-14 Meta-ads
+  post ($368, 42k impressions, three sign-ups — 125). Three posts is still not a finding,
+  but the signal has held three times: a receipt is necessary, not sufficient, and does
+  not lift a post out of the low cluster on its own.
 - **Nothing about the lane's upper half.** Nine of the twenty posts clear 400
   impressions and not one of them is charted here, because none had a retro to ingest.
   Every claim above is drawn from the bottom of the lane.
@@ -176,6 +221,9 @@ commit-log post. That is the same underlying post, so it is agreement, not confi
 
 - What separates the 1,271 launch from the 179 launch? Both are the owner shipping
   software. This is the lane's central open question and nothing on this page answers it.
+- What separates the 09-01 founder post (943, uncharted) from the 09-14 Meta-ads post
+  (125)? Same app, thirteen days apart, one in the lane's top three and one in its bottom
+  two. A retro on the 09-01 post would be the first upper-half data point this page has.
 - Is the process-report floor real, or is it four posts that were separately weak? They
   cluster around half the lane median of 362, which is suggestive at n=4 and nothing more.
 - What do the nine posts above 400 have in common? The lane's entire upper half is

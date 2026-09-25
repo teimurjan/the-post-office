@@ -222,3 +222,49 @@ what it contradicted. The `contradicted:` line is required even when the answer 
   - wiki/experience.md — fingerprint 56/439 -> 60/439
 - claim added: in the experience lane a concrete before/after receipt does not lift a report on the owner's own internal tooling out of the bottom (process-report) cluster
 - contradicted: none. Reinforces the process-report floor and begins answering the "Nothing about receipts" open question.
+
+## [2026-09-21] ingest | session summary — two retros and one postmortem absorbed
+
+- corpus: 61 posts, median 435 (news n=41 median 578, experience n=20 median 362)
+- trigger: three lessons carrying `wiki_ingested: false`, swept oldest first
+- changed:
+  - wiki/experience.md — evidence +1 (09-14 Meta-ads, first didnt-teach-me post), evidence_n 6 -> 7, receipts signal n=2 -> 3, fingerprint refreshed
+  - wiki/audience.md — t0 exemplars +1 (09-16 coreutils license, third pre-scored t2 miss), evidence_n 22 -> 23, new assignment rule "the noun is not the argument", fingerprint refreshed
+  - wiki/index.md — catalog rows refreshed by hand (see the lint-fix entry at the end of the day)
+- claim added: see the per-lesson entries that follow this one
+- contradicted: none in either page
+
+## [2026-09-21] ingest | retro 2026-09-14 meta-ads-three-sign-ups
+
+- corpus: 61 posts, median 435 (experience lane n=20, median 362)
+- trigger: retros/2026-09-14-368-on-meta-ads-three-sign-ups.md (decision: modify)
+- changed:
+  - wiki/experience.md — evidence_posts +1 (Meta-ads 125), evidence_n 6 -> 7; `bottom_five` entry for this post rescraped 96 -> 125; `cohort_1to4w` 8/226 -> 9/210; new `receipt_bearing_low` twin (n=3) and `pillars_observed` twin (replaced-a-hire n=1, didnt-teach-me n=1); floor observation widened from "process/tooling reports" to "reports on the owner's own operation with no outcome the reader can act on"; open question added on the 09-01 founder post (943) vs this one (125), same app
+- claim added: a fully-receipted report of the owner's own experiment that ends before the outcome is known lands in the experience lane's bottom cluster; the receipt does not lift it (reinforces the receipts signal, now n=3, still `low`)
+- contradicted: none
+
+## [2026-09-21] ingest | retro 2026-09-16 ubuntu-gpl-coreutils-mit
+
+- corpus: 61 posts, median 435 (news lane n=41, median 578)
+- trigger: retros/2026-09-16-ubuntu-just-replaced-its-gpl-coreutils-with-mit.md (decision: modify)
+- changed:
+  - wiki/audience.md — t0 exemplars +1 (coreutils license 107, pre_scored), observed_n 10 -> 11, observed_median 185 -> 184; 09-08 exemplar rescraped 143 -> 147; evidence_n 22 -> 23; counter_posts +1; `disputed` +1 (third pre-scored t2 miss, resolved by the retro as an assignment error of a third kind); promotion_review 5 scored / 2 missed -> 6 / 3; new section "The noun is not the argument" and a third assignment rule; new `runnable_artifact_watch` twin (n=1, anecdote); context_stats, cohort and firsthand_flag twins recomputed from the 2026-09-21 report (agents n=15 median 750, firsthand ratio 0.67 on n=27, 1-to-4-week cohort 597); two open questions extended
+- claim added: a pre-scored t2 subject lands in t0's band when the argument is about a property of the tool the reader has not fought with (its license); the tier test applies to the argued property, not the noun in the hook
+- contradicted: none — the bands held; the assignment procedure missed for a third named reason. Confidence stays `medium` with an explicit drop-to-`low` trigger on the next pre-scored t2 miss
+
+## [2026-09-21] ingest | postmortem 2026-09-16 ubuntu-gpl-coreutils-mit
+
+- corpus: 61 posts, median 435 (news lane n=41, median 578)
+- trigger: retros/postmortems/2026-09-16-ubuntu-just-replaced-its-gpl-coreutils-with-mit-licensed-rus.md (decision: modify)
+- changed: nothing — same post and same claim as the 09-16 retro absorbed in the entry above; the postmortem names the same three failure modes (t0 property on a t2 noun, artifact for a different claim, 41h cohort of n=1). Reinforces, adds no evidence.
+- claim added: none (duplicate of the retro's)
+- contradicted: none
+
+## [2026-09-21] lint-fix | index catalog refreshed by hand
+
+- corpus: 61 posts, median 435
+- trigger: `bun run wiki index` looks for `wiki/brand/index.md`, which this repo does not have (the index is `wiki/index.md`), so the catalog rows were two revisions stale
+- changed:
+  - wiki/index.md — catalog rows audience n=21/56 posts/2026-09-02 -> n=23/61/2026-09-21, experience n=5 -> n=7, last_revised bumped
+- claim added: none
+- contradicted: none. Follow-up for the tooling: point the `index` subcommand at `wiki/index.md`.

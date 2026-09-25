@@ -2,11 +2,11 @@
 urn: 'urn:li:activity:7503437432105771008'
 url: 'https://www.linkedin.com/feed/update/urn:li:activity:7503437432105771008/'
 posted_at: '2026-09-09T13:01:30.940Z'
-impressions: 142
+impressions: 146
 likes: null
 comments: null
 shares: null
-scraped_at: '2026-09-18T06:20:39.280Z'
+scraped_at: '2026-09-25T08:25:09.165Z'
 concept_path: concepts/2026-09-09-the-dashboards-will-eat-your-evening-before-the/prompt.md
 lane: experience
 ---
