@@ -2,11 +2,11 @@
 urn: 'urn:li:activity:7505249294283816960'
 url: 'https://www.linkedin.com/feed/update/urn:li:activity:7505249294283816960/'
 posted_at: '2026-09-14T13:01:12.546Z'
-impressions: 144
+impressions: 151
 likes: null
 comments: null
 shares: null
-scraped_at: '2026-09-25T08:25:09.088Z'
+scraped_at: '2026-10-06T05:35:02.888Z'
 concept_path: concepts/2026-09-14-368-on-meta-ads-three-sign-ups/prompt.md
 lane: experience
 ---

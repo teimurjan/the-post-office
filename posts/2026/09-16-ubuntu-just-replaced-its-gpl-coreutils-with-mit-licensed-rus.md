@@ -2,11 +2,11 @@
 urn: 'urn:li:activity:7505974022212382721'
 url: 'https://www.linkedin.com/feed/update/urn:li:activity:7505974022212382721/'
 posted_at: '2026-09-16T13:01:01.149Z'
-impressions: 129
+impressions: 138
 likes: null
 comments: null
 shares: null
-scraped_at: '2026-09-25T08:25:09.087Z'
+scraped_at: '2026-10-06T05:35:02.967Z'
 concept_path: concepts/2026-09-16-ubuntu-just-replaced-its-gpl-coreutils-with-mit/prompt.md
 lane: news
 ---

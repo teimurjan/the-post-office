@@ -4,9 +4,9 @@ kind: audience
 title: Standing-audience tiers for scoring reach_ceiling
 status: active
 confidence: medium
-evidence_n: 23
+evidence_n: 24
 lane: news
-# The page's own predictive use has now failed three times out of six pre-scored posts.
+# The page's own predictive use has failed three times out of seven pre-scored posts.
 # Kept here, not buried in prose.
 counter_posts:
   - posts/2026/08-10-humans-catch-13-6-of-dangerous-agent-commands-a-classifier-c.md
@@ -14,46 +14,54 @@ counter_posts:
   - posts/2026/08-21-your-database-has-a-failover-plan-github-doesn-t-on-august-1.md
   - posts/2026/08-25-windows-paint-bakes-a-server-issued-guid-into-your-pixels-xu.md
   - posts/2026/09-16-ubuntu-just-replaced-its-gpl-coreutils-with-mit-licensed-rus.md
-posts_covered: 61
-corpus_median_at_revision: 435
-patterns_generated_at: 2026-09-21
-last_revised: 2026-09-21
+posts_covered: 63
+corpus_median_at_revision: 415
+patterns_generated_at: 2026-09-25
+last_revised: 2026-09-25
 revised_by: wiki-curator
 supersedes: []
 # Lane-scoped family medians quoted in the body, so they can be rechecked against
 # `bun run post-patterns --lane news` rather than drifting silently.
 context_stats:
-  lane_news_n: 41
-  lane_news_median: 578
-  agents_n: 15
-  agents_median: 750
-  agents_min: 107
+  lane_news_n: 43
+  lane_news_median: 443
+  agents_n: 16
+  agents_median: 593
+  agents_min: 129
   agents_max: 128280
-  security_n: 11
-  security_median: 408
+  security_n: 12
+  security_median: 390
   other_n: 4
   other_median: 3898
   # The scrape-age cohort every prospectively-scored post is compared against.
-  cohort_2to7d_n: 1
-  cohort_2to7d_median: 876
-  cohort_1to4w_n: 36
-  cohort_1to4w_median: 597
-# The firsthand flag flips sign under lane scoping. Both readings twinned so the
-# body's claim is recomputable from either.
+  cohort_2to7d_n: 2
+  cohort_2to7d_median: 550
+  cohort_1to4w_n: 37
+  cohort_1to4w_median: 443
+# The firsthand flag has changed verdict twice: validated at 0.67x under lane scoping
+# on 2026-09-21, discredited at 0.93x on 2026-09-25 after two posts and a rescrape.
+# The current and the prior lane-scoped readings are both twinned so the body's
+# claim is recomputable from either.
 firsthand_flag:
   news_lane_n: 27
   news_lane_flagged_median: 443
-  news_lane_unflagged_median: 664
-  news_lane_ratio: 0.67
-  news_lane_verdict: validated
-  unscoped_n: 29
-  unscoped_ratio: 0.76
+  news_lane_unflagged_median: 475
+  news_lane_ratio: 0.93
+  news_lane_verdict: discredited
+  news_lane_prior_unflagged_median: 664
+  news_lane_prior_ratio: 0.67
+  news_lane_prior_verdict: validated
+  news_lane_prior_read_at: 2026-09-21
+  unscoped_n: 32
+  unscoped_ratio: 1.12
   unscoped_verdict: discredited
 # Thresholds for promoting this page's confidence. See "Confidence" below.
 promotion_review:
   pre_scored_posts_required: 8
-  pre_scored_posts_so_far: 6
-  pre_scored_held: 2
+  pre_scored_posts_so_far: 7
+  pre_scored_held: 3
+  # The third hold is the first pre-scored t0: 09-21 Jev, scored 0, landed 224.
+  pre_scored_t0_held: 1
   pre_scored_missed: 3
   # Pre-scored t2 that landed under t2's observed floor but over t2_miss_below,
   # so it is neither a clean hold nor a dispute. Counted on its own line.
@@ -76,7 +84,7 @@ tiers:
         impressions: 108960
         subject: XGBoost
       - post: posts/2026/08-19-cursor-built-a-github-competitor-that-still-runs-on-github-o.md
-        impressions: 100588
+        impressions: 100618
         subject: GitHub
         pre_scored: true
       - post: posts/2026/07-15-your-dependency-bot-should-be-three-days-late-github-just-ch.md
@@ -121,14 +129,19 @@ tiers:
   - id: t0-vendor-paper-or-self
     score: 0
     label: One vendor's product, one paper, one configuration nobody else is in
-    observed_n: 11
-    observed_median: 184
+    observed_n: 12
+    observed_median: 185
     observed_min: 78
     observed_max: 236
     exemplars:
       - post: posts/2026/05-22-google-is-sunsetting-gemini-cli-and-gemini-code-assist-on-ju.md
         impressions: 236
         subject: one vendor's product sunset
+      - post: posts/2026/09-21-jev-will-not-replace-your-model-it-goes-in-front-of-it-types.md
+        impressions: 224
+        subject: one vendor's decision model, scored 0 and owner-overridden for a firsthand layer
+        pre_scored: true
+        scored_at_ideation: 0
       - post: posts/2026/05-20-yesterday-i-posted-about-teampcp-and-637-malicious-npm-versi.md
         impressions: 211
         subject: a sequel to the owner's own prior post
@@ -144,6 +157,10 @@ tiers:
       - post: posts/2026/05-25-a-new-paper-benchmarks-llm-coding-agents-on-100-back-end-tas.md
         impressions: 184
         subject: one paper
+      - post: posts/2026/09-08-agents-that-skipped-the-skill-file-wrote-better-code-dan-luu.md
+        # 147 at first scrape; rescraped 2026-09-25.
+        impressions: 164
+        subject: one agent-testing study
       - post: posts/2026/06-19-vercel-just-bet-your-agent-is-a-directory-not-code-they-open.md
         impressions: 163
         subject: one vendor's agent format
@@ -151,11 +168,9 @@ tiers:
         impressions: 163
         subject: one classifier result
         pre_scored: true
-      - post: posts/2026/09-08-agents-that-skipped-the-skill-file-wrote-better-code-dan-luu.md
-        impressions: 147
-        subject: one agent-testing study
       - post: posts/2026/09-16-ubuntu-just-replaced-its-gpl-coreutils-with-mit-licensed-rus.md
-        impressions: 107
+        # 107 at 41h; rescraped 2026-09-25.
+        impressions: 129
         subject: the license of coreutils (a t2 tool, a t0 property)
         pre_scored: true
       - post: posts/2026/08-25-windows-paint-bakes-a-server-issued-guid-into-your-pixels-xu.md
@@ -189,8 +204,8 @@ sequel_discount:
       subject_tier: 2
       prior_post: posts/2026/08-19-cursor-built-a-github-competitor-that-still-runs-on-github-o.md
       days_after_prior: 2
-      prior_impressions: 100588
-      published_impressions: 1895
+      prior_impressions: 100618
+      published_impressions: 1905
     - post: posts/2026/05-20-yesterday-i-posted-about-teampcp-and-637-malicious-npm-versi.md
       subject: the TeamPCP npm compromise
       subject_tier: 0
@@ -244,8 +259,10 @@ disputed:
     post: posts/2026/09-16-ubuntu-just-replaced-its-gpl-coreutils-with-mit-licensed-rus.md
     scored_at_ideation: 2
     outcome_tier: 0
-    published_impressions: 107
-    scrape_age_hours: 41
+    published_impressions: 129
+    scrape_age_hours: 211
+    first_scrape_impressions: 107
+    first_scrape_age_hours: 41
     trigger: t2_miss_below
     status: resolved
     resolution: assignment error of a third kind — the tier test was applied to the noun, not the argued property
@@ -253,8 +270,8 @@ disputed:
     note: >-
       The brief's case was the right shape — not heat, not recognition, but "every
       developer has typed cp and sort" — and it passes for the tool. The post's argument
-      was about the tool's license, which the reader has not fought with. Scraped at 41h,
-      so the number is young; it is not young by the 50x the t2 floor would need. The
+      was about the tool's license, which the reader has not fought with. Scraped at 41h
+      (107) and again at 211h (129); the number moved and stays 40x under the t2 floor. The
       classifier reads the post as having no firsthand signal; the body has a runnable
       artifact (blazediff-png). Both readings recorded. See "The noun is not the argument".
 # The first news post carrying a runnable firsthand artifact. It was attached to a
@@ -264,7 +281,7 @@ runnable_artifact_watch:
   confidence: anecdote
   evidence_n: 1
   post: posts/2026/09-16-ubuntu-just-replaced-its-gpl-coreutils-with-mit-licensed-rus.md
-  impressions: 107
+  impressions: 129
   artifact: blazediff-png, a single-thread SIMD reimplementation of libspng
   classifier_has_firsthand_signal: false
   note: the artifact evidences the rewrite claim, not the license claim the post turns on
@@ -299,9 +316,9 @@ Catalogued in [[index]]. Revision history in [[log]].
 ## Why subject, not topic family
 
 `topic_family` does not separate winners from losers in this corpus. In the news lane
-`agents` is the largest family (n=15) with a median of 750, and it contains both the
-best post (128,280) and the newest miss (107) — a 1199x range inside one label.
-`security` (n=11, median 408) contains the #3 post and one of the worst. The
+`agents` is the largest family (n=16) with a median of 593, and it contains both the
+best post (128,280) and a post at 129 — a 994x range inside one label.
+`security` (n=12, median 390) contains the #3 post and one of the worst. The
 classifier that assigns these labels is a first-match-wins keyword cascade, so
 `TypeScript 7 is 11x faster` is filed as `security` because the body says "npm" once.
 
@@ -311,7 +328,7 @@ Subject recognizability does separate them, and the bands do not overlap:
 |---|---|---|---|
 | t2 | 8 | 33509 | 5154 – 128280 |
 | t1 | 4 | 2637 | 1380 – 3570 |
-| t0 | 11 | 184 | 78 – 236 |
+| t0 | 12 | 185 | 78 – 236 |
 
 t0's ceiling (236) sits below t1's floor (1380). t1's ceiling (3570) sits below t2's
 floor (5154). The gaps are wide enough that the separation survived removing five
@@ -342,28 +359,37 @@ A firsthand artifact is thought to promote t0 to t1 when the artifact is a real
 technical thing another builder could run. **That promotion is still unevidenced** —
 there is no post in the corpus where a runnable firsthand artifact lifted a t0
 subject out of the band. Only the negative half is evidenced: process-level firsthand
-lines do not promote. The 09-08 agents/skill-file post is the third such exemplar —
+lines do not promote. The 09-08 agents/skill-file post was the third such exemplar —
 a t0 study subject carrying a process-level firsthand line ("I keep a repo of my own
-skills…") that landed at 147, inside the band.
+skills…") that landed at 164, inside the band.
+
+The 09-21 Jev post is the fourth, and the cleanest test so far. The ideator scored it
+0; the owner overrode the score to see whether a firsthand layer clears the band; and
+the layer was an experience line — tiny models on a Raspberry Pi and in an old car,
+all of them generating text to make a decision — not anything the reader could run.
+It landed at 224, twelve under the ceiling, with two comments validating the wedge.
+An override of a 0 for a firsthand story buys the top of the band at most. Only a
+runnable artifact still has an open claim to promotion.
 
 The first *runnable* artifact in a news post arrived on 09-16 — blazediff-png, a codec
 the reader could build and run — and it does not answer the question either way, because
-it was attached to a subject scored t2 that landed at 107, inside t0's band
+it was attached to a subject scored t2 that landed at 107, 129 on rescrape, inside t0's band
 (`runnable_artifact_watch`, n=1). The artifact evidenced "a rewrite is entirely my code";
 the post's claim was that a license had been dropped. A receipt for a different claim is
 not a receipt. Note the classifier read that post as `hasFirsthandSignal: false`, the
 same split the 08-10 post produced; both readings are recorded.
 
-What the lane-scoped corpus does say is the reverse of what this page claimed before
-2026-09-02. Under `--lane news`, "news posts without firsthand signal" is a
-**validated anti-pattern**: n=27, median 443 against 664 for posts that have it
-(0.67x). Unscoped — mixing both lanes — the same flag reads 0.76x across 29 posts and
-is reported as discredited. The lane-scoped number is the one that governs a news
-draft, and the earlier revision of this page cited the unscoped one.
+The lane-scoped flag is not stable. On 2026-09-21, under `--lane news`, "news posts
+without firsthand signal" read as a **validated anti-pattern**: n=27, median 443
+against 664 for posts that have it (0.67x). On 2026-09-25, after two more news posts
+and a rescrape of the recent ones, the same flag reads 443 against 475 (0.93x) and
+sits in the discredited list; unscoped it reads 1.12x across 32 posts. A flag that
+changes verdict on two posts is not a rule in either direction. Do not cite it as the
+cause of a miss, and do not cite a firsthand line as the defence of one.
 
 That said, its absence is not decisive at t2: the SQLite/Tailscale post carried
 `experience_hook: none` and published at 7416, the Cursor/GitHub post carried
-`experience_hook: none` and published at 100,588. Firsthand work buys a floor under a
+`experience_hook: none` and published at 100,618. Firsthand work buys a floor under a
 small subject. It does not add reach to a subject that already has a room.
 
 ### Heat is not size
@@ -406,7 +432,7 @@ lost an afternoon to this."
 The third prospective miss passed both tests above and still landed in t0's band. The
 09-16 coreutils post was pre-scored `reach_ceiling: 2` on the right kind of argument —
 not heat, not recognition, but "every developer has typed cp and sort" — and published
-at 107, scraped at 41 hours. The tool is t2. The post's argument was about the tool's
+at 107 at 41 hours, 129 when rescraped at 211 hours. The tool is t2. The post's argument was about the tool's
 *license*: GPL GNU replaced by MIT uutils, and nobody chose to drop copyleft.
 
 "Has the reader lost an afternoon to this" is true of `cp` and false of copyleft. The
@@ -441,8 +467,8 @@ of that same subject.** If a post on subject X published within the last seven d
 the next post's `reach_ceiling` at `1`, whatever tier X sits in.
 
 The evidence is a controlled pair, tight because the subject is held constant. On 08-19 the
-Cursor/Origin post published at 100,588. On 08-21, two days later, the GitHub-outage failover
-post published at 1,895 — 1.9% of it. Both subjects are GitHub. Both were pre-scored
+Cursor/Origin post published at 100,618. On 08-21, two days later, the GitHub-outage failover
+post published at 1,905 — 1.9% of it. Both subjects are GitHub. Both were pre-scored
 `reach_ceiling: 2`, `t2-universal`. Both scored 11 at ideation, both were labelled
 `risk: rehash`, both carried `experience_hook: none`. Every axis the rubric records is
 identical; the reach differs 53x. So the separating variable is not on the rubric, and the
@@ -451,14 +477,14 @@ only difference between the two briefs is that the second one was second.
 The corpus carries one older exemplar: the 05-20 TeamPCP post opened "Yesterday I posted
 about TeamPCP" and landed at 211. That one is filed under t0, which is why the discount was
 invisible — it read as a t0 subject performing like a t0 subject. The GitHub pair separates
-the two effects: a t2 subject took the same discount and landed at 1,895, inside t1's band
+the two effects: a t2 subject took the same discount and landed at 1,905, inside t1's band
 (1,380–3,570) rather than t2's (5,154–128,280). The discount lands a tier down, which is why
 the rule caps rather than zeroes.
 
 `confidence: low`, `evidence_n: 2`, and two alternatives are not ruled out. The failover post
 argues at the reader in the second person and closes on an instruction — but `Your dependency
 bot should be three days late` is the same shape at 34,287, so the shape is not the fault.
-And 100,588 is an outlier that a single algorithmic pickup could explain, which would make
+And 100,618 is an outlier that a single algorithmic pickup could explain, which would make
 the ratio meaningless; the failover post performed like an ordinary good post, not like a
 failure. What survives both objections is that the second post did not inherit the first
 one's room, and nothing in the pipeline expected that: `post-ideator` dedups on *angle*, and
@@ -496,7 +522,7 @@ only the tier assignment predicted the outcome.
 **There is no tier above t2.** This page previously left that open at n=1, because the
 only six-figure post was Linus Torvalds telling the kernel list to stop sending AI patches
 — arguably a cross-cutting moment rather than a known artifact. The Cursor/GitHub post
-settles it: 100,588 impressions on an ordinary tool subject, pre-scored `2`, and a hold.
+settles it: 100,618 impressions on an ordinary tool subject, pre-scored `2`, and a hold.
 Two of the three largest posts in the corpus are now plain t2 tools, so the 100k band is
 t2's top end and not a tier of its own. t2's range is wide (5,154–128,280, a 25x spread)
 and the wedge presumably decides where in it a post lands, but that spread lives inside
@@ -514,10 +540,12 @@ publishing and the bands still hold. If a pre-scored t2 lands under 1000, or a
 pre-scored t0 clears 3000, record it in `disputed` and revise the tier definitions
 rather than the post's tier.
 
-`promotion_review` tracks that count: **six scored prospectively, two held, three missed,
-one near-miss.** All three misses were pre-scored t2 subjects that were t0, and all three
+`promotion_review` tracks that count: **seven scored prospectively, three held, three missed,
+one near-miss.** The third hold is the first pre-scored t0: scored 0, published at 224,
+inside the band, so the bands have now held once from below as well as twice from above.
+All three misses were pre-scored t2 subjects that were t0, and all three
 were assignment errors rather than band errors — each landed inside or below t0's range,
-not between bands. A 3-of-6 miss rate on the *procedure* while the *bands* stay intact is
+not between bands. A 3-of-7 miss rate on the *procedure* while the *bands* stay intact is
 what `medium` describes, and it is also the number to watch: if the next pre-scored t2
 misses, the procedure is wrong more often than it is right and `confidence` drops to
 `low` whatever the bands say. The three named failure modes above are the fix.
@@ -535,7 +563,7 @@ objecting in advance, and all resolved. Resolved entries stay on the page: they 
 evidence behind `promotion_review.pre_scored_missed`, and deleting them would leave that
 count unsupported.
 
-Only 23 of 41 news posts carry a tier: the unambiguous top and bottom. The middle is
+Only 24 of 43 news posts carry a tier: the unambiguous top and bottom. The middle is
 unassigned on purpose. Assigning it requires the same judgment call the tiers exist to
 make, and doing it in bulk from known outcomes would inflate `evidence_n` without adding
 evidence.
@@ -545,8 +573,9 @@ evidence.
 Things this page cannot yet answer, which the next retros should settle:
 
 - Does firsthand work promote a t0 subject to t1 at all? Still unshown in the positive
-  direction. The negative half has three exemplars: process-level firsthand lines that
-  did not promote. The one runnable artifact so far (09-16) was attached to a t2-scored
+  direction. The negative half has four exemplars: process-level or experience-level firsthand
+  lines that did not promote, the fourth (09-21) on a post the owner published for
+  exactly this test. The one runnable artifact so far (09-16) was attached to a t2-scored
   subject and evidenced a different claim than the post made, so it tests nothing here.
   `firsthand_promotion` is marked `unevidenced` rather than `true`.
 - Does a t2 tool's room transfer to *any* property of the tool, or only to the ones the
@@ -554,6 +583,11 @@ Things this page cannot yet answer, which the next retros should settle:
   only the latter. A coreutils post arguing a behaviour change would settle it.
 - Is t0 one room or two? See "Below the band" — one post landed at 78 against a floor of
   163, on a subject the audience does not operate. One more would make it a sub-band.
+  The 09-21 Jev post, inside the path, landed at the ceiling (224), which is consistent
+  with the hypothesis and not evidence for it. The 09-16 coreutils post sits at 129
+  after its rescrape, under the 150 retest threshold; it counts as the second only if
+  the argued property (a license) rather than the tool is the subject, and no retro has
+  argued that, so it is not counted.
 - Where does a t2 subject with a dull wedge land? Every t2 exemplar here also had a sharp
   take, so the tier's floor is untested.
 - Does the seven-day discount apply to a reused *frame* as well as a reused subject? One

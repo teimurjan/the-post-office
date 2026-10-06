@@ -1,5 +1,8 @@
 {
   "permissions": {
     "allow": ["Edit(.claude/skills/**)", "Edit(.agents/skills/**)"]
+  },
+  "skillOverrides": {
+    "simple-english": "off"
   }
 }

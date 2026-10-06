@@ -268,3 +268,14 @@ what it contradicted. The `contradicted:` line is required even when the answer 
   - wiki/index.md — catalog rows audience n=21/56 posts/2026-09-02 -> n=23/61/2026-09-21, experience n=5 -> n=7, last_revised bumped
 - claim added: none
 - contradicted: none. Follow-up for the tooling: point the `index` subcommand at `wiki/index.md`.
+
+## [2026-09-25] ingest | retro 2026-09-21 jev-will-not-replace-your-model
+
+- corpus: 63 posts, median 415 (news lane n=43, median 443)
+- trigger: retros/2026-09-21-jev-will-not-replace-your-model-it-goes-in-front.md (decision: modify)
+- changed:
+  - wiki/audience.md — t0 exemplars +1 (Jev 224, pre_scored, scored_at_ideation 0, owner-overridden), observed_n 11 -> 12, observed_median 184 -> 185; evidence_n 23 -> 24; promotion_review 6 scored / 2 held -> 7 / 3, new `pre_scored_t0_held: 1` (the first prospective t0, a hold); "On firsthand signal" gains the override lesson as the fourth negative exemplar; open questions 1 and 3 extended (the 09-16 post now sits under the 150 sub-band threshold and is explicitly not counted); context_stats, cohort and firsthand_flag twins recomputed from the 2026-09-25 report (news n=43 median 443, agents n=16 median 593, 1-to-4-week cohort 443, 2-to-7-day cohort n=2 median 550)
+  - wiki/audience.md — rescraped numbers refreshed from posts/: 09-08 147 -> 164, 09-16 107 -> 129 (the `disputed` entry and `runnable_artifact_watch` keep the 41h reading as `first_scrape_*` twins), Cursor 100588 -> 100618, GitHub failover 1895 -> 1905; the sequel_discount ratio is unchanged at 1.9% / 53x
+  - wiki/index.md — audience row n=23 / 61 posts / 2026-09-21 -> n=24 / 63 posts / 2026-09-25
+- claim added: a firsthand experience line does not lift a pre-scored t0 subject out of t0's band; overriding a 0 for the sake of a firsthand layer buys the top of the band at most
+- contradicted: the page's own `firsthand_flag` verdict — `validated` (0.67x on n=27, read 2026-09-21) is now `discredited` (0.93x on n=27, read 2026-09-25; unscoped 1.12x on n=32). The body no longer calls the flag a rule in either direction and both readings stay twinned. The bands themselves held: the first pre-scored t0 landed inside t0's band
