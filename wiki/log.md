@@ -279,3 +279,42 @@ what it contradicted. The `contradicted:` line is required even when the answer 
   - wiki/index.md — audience row n=23 / 61 posts / 2026-09-21 -> n=24 / 63 posts / 2026-09-25
 - claim added: a firsthand experience line does not lift a pre-scored t0 subject out of t0's band; overriding a 0 for the sake of a firsthand layer buys the top of the band at most
 - contradicted: the page's own `firsthand_flag` verdict — `validated` (0.67x on n=27, read 2026-09-21) is now `discredited` (0.93x on n=27, read 2026-09-25; unscoped 1.12x on n=32). The body no longer calls the flag a rule in either direction and both readings stay twinned. The bands themselves held: the first pre-scored t0 landed inside t0's band
+
+## [2026-10-06] ingest | session summary — two retros absorbed, one lint fix
+
+- corpus: 66 posts, median 425 (news n=45 median 449, experience n=21 median 330)
+- trigger: two lessons carrying `wiki_ingested: false` (09-25 DHH/Rails, 09-28 superuser), swept oldest first, plus a lint error on the t0 band after the Jev rescrape
+- changed:
+  - wiki/audience.md — t1 exemplars +1 (DHH/Rails 2638, near-miss), evidence_n 24 -> 25, promotion_review 7 -> 8 scored with confidence held at `medium`; t0 band recomputed 78–236 -> 78–449 after the Jev rescrape; fingerprint and twins refreshed
+  - wiki/experience.md — evidence +1 (09-28 superuser 133, second didnt-teach-me post), evidence_n 7 -> 8, floor redescribed as the ledger shape, fingerprint and twins refreshed
+  - wiki/index.md — catalog rows refreshed
+- claim added: see the per-lesson entries that follow this one
+- contradicted: see the per-lesson entries — one explanation withdrawn on experience, one band ceiling superseded on audience
+
+## [2026-10-06] ingest | retro 2026-09-25 creator-of-rails-pencils-down
+
+- corpus: 66 posts, median 425 (news lane n=45, median 449)
+- trigger: retros/2026-09-25-the-creator-of-rails-put-pencils-down.md (decision: repeat)
+- changed:
+  - wiki/audience.md — t1 exemplars +1 (DHH/Rails 2638, pre_scored, scored_at_ideation 2), observed_n 4 -> 5, observed_median 2637 -> 2638; evidence_n 24 -> 25; promotion_review 7 scored / 1 near-miss -> 8 / 2, the 8-post threshold reached and `confidence` held at `medium` (the bands held on all eight, the procedure predicted three of eight) with a second drop trigger added (a third near-miss); "The noun is not the argument" gains the mirror case; open question 2 extended with the three-reading gradation as a hypothesis; disputes count 24 of 43 -> 25 of 45
+- claim added: a t2 name attached to one company's policy lands in t1's band, not t2's; the name is used, the policy is not (n=1, recorded in the section and counted as a near-miss, not scored as a rule)
+- contradicted: none — the post landed inside t1's band, not between bands, so the tiers held; the assignment procedure over-scored by one tier for a fourth named reason
+
+## [2026-10-06] ingest | retro 2026-09-28 one-superuser-657-of-ads
+
+- corpus: 66 posts, median 425 (experience lane n=21, median 330)
+- trigger: retros/2026-09-28-one-superuser-did-what-657-of-ads.md (decision: modify)
+- changed:
+  - wiki/experience.md — evidence_posts +1 (09-28 superuser 133), evidence_n 7 -> 8; `bottom_five` recomputed at 21 posts (09-28 enters at 133, the 05-28 posting retrospective leaves); rescrapes 09-09 138 -> 147 and 09-14 125 -> 151 refreshed in every twin; `receipt_bearing_low` n=3 -> 4; `pillars_observed.didnt-teach-me` n=1 -> 2; new `upper_half_observed` twin (five posts above 800, none a ledger) behind a new open question; lane_stats recomputed from the 2026-10-06 report (n=21, median 330, p25 181, top removed 306, 1-to-4-week cohort n=11 median 200, 2-to-7-day cohort n=2 median 338); fingerprint 61/435 -> 66/425
+- claim added: in the experience lane a receipted report of the owner's own experiment lands in the bottom cluster whether or not it carries the outcome; filing after the result is known does not lift it (reinforces the floor, now n=8; `confidence` held at `low` because every evidence post is drawn from the bottom of the lane)
+- contradicted: the page's own explanation of the floor from the 09-14 ingest — that the missing outcome ("no outcome the reader can act on") was the variable. The 09-28 post carried the outcome and landed eighteen under the 09-14 post. The explanation is withdrawn, the floor is redescribed as the ledger shape itself, and the 09-14 retro's `modify` prescription (file when the result is in) is recorded as tested and not supported
+
+## [2026-10-06] lint-fix | audience t0 band recomputed after the Jev rescrape
+
+- corpus: 66 posts, median 425 (news lane n=45, median 449)
+- trigger: `bun run wiki lint` error on wiki/audience.md — t0 `observed_max: 236` but the cited exemplars give 449: the 09-21 Jev post rescraped 224 -> 449 on 2026-10-06, and 09-16 coreutils 129 -> 138
+- changed:
+  - wiki/audience.md — t0 observed_max 236 -> 449 (median 185 and min 78 unchanged); Jev and coreutils exemplar numbers refreshed with the earlier readings kept as comments; `disputed` coreutils entry 129 at 211h -> 138 at 473h (40x -> 37x under the t2 floor); `runnable_artifact_watch` 129 -> 138; tier table and every "78 to 236" / "236 ceiling" reading updated; "On firsthand signal" now records that overriding a 0 for a firsthand story bought the top of the band (449) and not a tier (t1 floor 1380); band_overshoots ratio 3.7x -> 1.9x against the new ceiling; "Below the band" in-path range 163–236 -> 138–449; context_stats, cohort and firsthand_flag twins recomputed from the 2026-10-06 report (news n=45 median 449, agents n=17 median 750 min 138, security n=13 median 400, 1-to-4-week cohort n=40 median 446, 2-to-7-day n=2 median 526, firsthand flag 0.76x on n=28 and 0.98x unscoped on n=34, the 09-25 reading kept as a twin); fingerprint 63/415 -> 66/425
+  - wiki/index.md — catalog rows audience n=24 / 63 posts / 2026-09-25 -> n=25 / 66 / 2026-10-06, experience n=7 / 61 / 2026-09-21 -> n=8 / 66 / 2026-10-06
+- claim added: none
+- contradicted: the band's own crispness — t0's ceiling moved from 236 to 449 on one rescraped post. The tiers still do not overlap (t0 max 449 under t1 min 1380), so the separation claim stands, but the "78 to 236" band quoted in earlier entries is superseded

@@ -102,6 +102,6 @@ Trigger phrases:
 
 ## When NOT to use
 
-- Writing the post itself → `post-writer`.
+- Enhancing the owner's post → `post-enhancer`.
 - Deciding whether the post did well → `post-retro`.
 - The "comments" are on someone else's post (this skill assumes the owner is replying under their own post, as the author). Reframe before using.

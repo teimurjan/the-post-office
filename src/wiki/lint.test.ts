@@ -252,7 +252,7 @@ describe("wiki lint", () => {
     const findings = lint([makePage("audience", VALID)], {
       skillFiles: new Map([
         [
-          ".agents/skills/post-writer/SKILL.md",
+          ".agents/skills/post-enhancer/SKILL.md",
           "read .vendor/teimurjan-llm-wiki/wiki/facts/proof.md for the numbers",
         ],
       ]),

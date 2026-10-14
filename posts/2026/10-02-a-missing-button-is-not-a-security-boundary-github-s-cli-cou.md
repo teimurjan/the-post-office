@@ -2,11 +2,11 @@
 urn: 'urn:li:activity:7511773373878796288'
 url: 'https://www.linkedin.com/feed/update/urn:li:activity:7511773373878796288/'
 posted_at: '2026-10-02T13:05:34.333Z'
-impressions: 176
+impressions: 215
 likes: null
 comments: null
 shares: null
-scraped_at: '2026-10-06T05:34:58.831Z'
+scraped_at: '2026-10-14T10:18:27.367Z'
 concept_path: concepts/2026-10-01-a-missing-button-is-not-a-security-boundary/prompt.md
 lane: news
 ---

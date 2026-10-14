@@ -2,11 +2,11 @@
 urn: 'urn:li:activity:7508510958160474112'
 url: 'https://www.linkedin.com/feed/update/urn:li:activity:7508510958160474112/'
 posted_at: '2026-09-23T13:01:53.813Z'
-impressions: 400
+impressions: 411
 likes: null
 comments: null
 shares: null
-scraped_at: '2026-10-06T05:34:58.808Z'
+scraped_at: '2026-10-14T10:18:28.255Z'
 concept_path: concepts/2026-09-23-opus-55-got-20-cheaper-your-agent-got/prompt.md
 lane: news
 ---

@@ -59,7 +59,7 @@ Banned, because they are what a translation sounds like: `данный`, `явл
 
 ## Platform
 
-- **Text-only by default.** A message is 4,096 characters; as a photo caption, 1,024 (4,096 with Premium). The concept image at `images/<date>-<slug>/prompt.png` has the LinkedIn hook rendered in English, so it does not go under Russian text as-is; say so once if the owner asks for it.
+- **Text-only by default.** A message is 4,096 characters; as a photo caption, 1,024 (4,096 with Premium). The post's artifact (the first entry in `files` when `concepts/<date>-<slug>/prompt.md` carries `kind: artifact`) is a real screenshot or photo with no English headline on it and can go under the Russian text if the owner asks.
 - **The first line is the notification.** Keep the hook first, then a blank line, as in the samples.
 - **One link, last.** The draft's `Comment link:` returns to the body as the final line. Write it as a bare URL on its own line (the owner can turn it into a text link in the composer). Do not link the LinkedIn post.
 - **Count the saved body, newlines included**, since Telegram counts them:
@@ -111,5 +111,5 @@ Print the message, then `Mode: translation | follow-up`, then `Characters: <n> (
 
 ## When NOT to use
 
-- Writing the post → `post-writer`. The Substack Note → `post-substack`.
+- Enhancing the owner's post → `post-enhancer`. The Substack Note → `post-substack`.
 - An English Telegram message: the wiki rejected that (`channels`, alternatives_rejected). Say so once and do it only if the owner confirms.

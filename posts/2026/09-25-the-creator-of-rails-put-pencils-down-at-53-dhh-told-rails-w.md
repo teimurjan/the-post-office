@@ -2,11 +2,11 @@
 urn: 'urn:li:activity:7509236824347869184'
 url: 'https://www.linkedin.com/feed/update/urn:li:activity:7509236824347869184/'
 posted_at: '2026-09-25T13:06:13.798Z'
-impressions: 2638
+impressions: 2654
 likes: null
 comments: null
 shares: null
-scraped_at: '2026-10-06T05:34:58.799Z'
+scraped_at: '2026-10-14T10:18:27.349Z'
 concept_path: concepts/2026-09-25-the-creator-of-rails-put-pencils-down/prompt.md
 lane: news
 ---

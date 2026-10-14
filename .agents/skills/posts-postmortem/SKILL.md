@@ -1,11 +1,11 @@
 ---
 name: posts-postmortem
-description: Generate retrospective failure analyses for the worst-performing published posts so the writer and critic learn from misses, not just wins. Reads the bottom-5 posts by impressions from `posts/`, classifies each, and writes one postmortem file per post to `retros/postmortems/<post-date>-<slug>.md`. Use when the user says "run postmortems", "analyze bottom posts", "what failed", "post-mortem the losers", or "refresh failure analyses". Scoped to one lane (`--lane news` by default) so a news miss and an experience miss are never ranked against each other.
+description: Generate retrospective failure analyses for the worst-performing published posts so the enhancer and critic learn from misses, not just wins. Reads the bottom-5 posts by impressions from `posts/`, classifies each, and writes one postmortem file per post to `retros/postmortems/<post-date>-<slug>.md`. Use when the user says "run postmortems", "analyze bottom posts", "what failed", "post-mortem the losers", or "refresh failure analyses". Scoped to one lane (`--lane news` by default) so a news miss and an experience miss are never ranked against each other.
 ---
 
 # posts-postmortem
 
-This skill produces structured failure analyses for the worst-performing posts in the archive. `post-retro` covers the recent post you just shipped — this skill covers the bottom of the corpus so the writer and critic know which patterns reliably miss.
+This skill produces structured failure analyses for the worst-performing posts in the archive. `post-retro` covers the recent post you just shipped — this skill covers the bottom of the corpus so the enhancer and critic know which patterns reliably miss.
 
 ## Inputs
 

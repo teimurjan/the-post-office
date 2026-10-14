@@ -16,7 +16,7 @@ One file:
 - **A draft in `drafts/`** — the path the owner gives, or the newest file there when none is given (say which one).
 - **A published post in `posts/YYYY/`** — the archive text. Ignore its comments.
 
-Read `lane`, `pillar`, `format`, and `concept_path` from the frontmatter. Derive the image path from `concept_path` (`concepts/<date>-<slug>/prompt.md` → `images/<date>-<slug>/prompt.png`); if the PNG exists, the Note attaches it.
+Read `lane`, `pillar`, `image_kind`, and `concept_path` from the frontmatter. When `concepts/<date>-<slug>/prompt.md` carries `kind: artifact`, the Note attaches the first entry in its `files` (the owner's own screenshot or photo); `image_kind: none` means no image.
 
 ## What a Note is
 
@@ -31,14 +31,9 @@ Read `lane`, `pillar`, `format`, and `concept_path` from the frontmatter. Derive
 
 ## Voice
 
-The post's voice, a little tighter. Every hard rule from `post-writer` holds: no emoji, no em dashes, no quotation marks, no LinkedIn vocabulary, no anonymous actors, no flourish verbs over a number, no `X. Not Y.` couplets, no mic-drop closer. At this length one balanced couplet stands out, so read it aloud.
+The post's voice, a little tighter. Every hard rule from `post-enhancer` holds: no emoji, no em dashes, no quotation marks, no LinkedIn vocabulary, no anonymous actors, no flourish verbs over a number, no `X. Not Y.` couplets, no mic-drop closer. At this length one balanced couplet stands out, so read it aloud.
 
 Nothing is added. If the post has no number, the Note has none; the Kill Test still applies (a generic indie developer could not post it). If the post ends on a question, the Note ends one beat earlier, on the stance the question was pointing at; do not invent a new closer.
-
-## Formats other than text
-
-- **`format: carousel`** — the story of the comparison: what was compared and why, which one won and for whom, in two or three lines (`Compared A, B, C for X. C won, and it is not close.`), then the link or the image. The cells do not come along.
-- **`format: decision-tree`** — the decision stated, not asked (`Which notebook tool to use, by constraint`), the one branch that matters most with its recommendation, then the image. The tree image carries the question; the Note does not end on it.
 
 ## Output file
 
@@ -51,7 +46,7 @@ lane: experience
 pillar: didnt-teach-me            # experience lane only
 kind: note
 char_count: 540
-image: images/2026-09-14-368-on-meta-ads-three-sign-ups/prompt.png   # or null
+image: images/2026-09-14-368-on-meta-ads-three-sign-ups/artifact-1.png   # or null
 generated_at: 2026-09-14T12:00:00.000Z
 status: drafted
 ---
@@ -78,5 +73,5 @@ Print the Note, then `Characters: <n>`, then `Attach: <image path>` when there i
 
 ## When NOT to use
 
-- Writing the post → `post-writer`. The Telegram translation → `post-telegram`.
+- Enhancing the owner's post → `post-enhancer`. The Telegram translation → `post-telegram`.
 - A Substack essay. The wiki's `content-engine` has one essay a month rolled up from the month's artifacts; that is a different job and this skill does not do it.

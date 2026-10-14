@@ -72,11 +72,11 @@ score each: hook(0-10), originality(0-10), risk(0-10). rank.`,
   },
   {
     id: "writer",
-    name: "Writer",
-    role: "drafts the post in the owner's voice",
-    blurb: "Takes the winning angle and writes the actual post — hook, body, no fluff.",
+    name: "Enhancer",
+    role: "enhances the post the owner wrote",
+    blurb: "Takes the owner's draft and tightens it — first line, cuts, one missing specific. Never writes the body.",
     currentInstruction:
-`# post-writer
+`# post-enhancer
 angle: "agentic IDEs = autocomplete in a trenchcoat"
 voice: dry, first-person, concrete. <1100 chars. one idea.
 open with a confession or a strong claim. no hashtags > 3.`,

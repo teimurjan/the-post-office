@@ -3,7 +3,7 @@ page: index
 kind: index
 title: Wiki index
 status: active
-last_revised: 2026-09-25
+last_revised: 2026-10-06
 ---
 
 # Wiki
@@ -44,8 +44,8 @@ untidy one.
 <!-- BEGIN catalog -->
 | Page | Kind | Confidence | Evidence | Covers | Revised |
 |---|---|---|---|---|---|
-| [audience](audience.md) | audience | medium | n=24 | 63 posts | 2026-09-25 |
-| [experience](experience.md) | audience | low | n=7 | 61 posts | 2026-09-21 |
+| [audience](audience.md) | audience | medium | n=25 | 66 posts | 2026-10-06 |
+| [experience](experience.md) | audience | low | n=8 | 66 posts | 2026-10-06 |
 <!-- END catalog -->
 
 ## Not built yet

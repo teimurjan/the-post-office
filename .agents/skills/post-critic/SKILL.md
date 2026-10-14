@@ -1,6 +1,6 @@
 ---
 name: post-critic
-description: Critique one draft against its brief (the approved idea for a news post, the owner's own thought and the brand dossier for an experience post), the archive winners of the same lane, and the lane-scoped pattern report. Use when the user says "review this draft", "should I publish this", "critique this post", or points at a file in drafts/. Approves only strong drafts and returns a single rewrite plan when rejecting.
+description: Critique one draft against its brief (the approved idea and the owner's artifact for a news post, the owner's own draft and the brand dossier for an experience post), the archive winners of the same lane, and the lane-scoped pattern report. Checks authorship (every draft must be the owner's), the touched-it artifact, the slop tells LinkedIn's 2026 ranking punishes, and whether the cover image is a real artifact. Use when the user says "review this draft", "should I publish this", "critique this post", or points at a file in drafts/. Approves only strong drafts and returns a single rewrite plan when rejecting.
 ---
 
 # post-critic
@@ -20,6 +20,11 @@ Every draft carries `lane: news | experience` in its frontmatter. A draft with n
 
 Never read the other lane's numbers for this draft. An experience post compared against the news median is being judged in the wrong room.
 
+## Preconditions (before scoring)
+
+- **Authorship.** Read `author`. Every draft with `drafted_at` after 2026-10-08, in both lanes, must carry `author: owner`; one with any other value, or no `author` at all, is returned as `Rejected (authorship).` with one line: the owner writes posts and `post-enhancer` enhances them, so the draft goes back to be written. Do not score it. The owner's hand-written founder post reached 943 while the pipeline-written experience posts after it landed at 137 to 151; that is the whole reason for this check.
+- **Lane sanity.** A draft whose body is a take on someone else's news but carries `lane: experience` is scored as news; say so in the verdict.
+
 ## Required inputs
 
 Read these before scoring:
@@ -29,9 +34,7 @@ Read these before scoring:
 3. `bun run post-patterns --lane <lane>` (includes both the success retros and the postmortem-derived failure modes for that lane). Bucket sections cover only the quartiles and print their sample size — respect the `too few to cite` marker, and treat `topic_family` as bookkeeping rather than signal. The experience cohort is small; when its marker fires, say so in the verdict rather than citing a median.
 3.5. `wiki/audience.md` (news lane) for the subject-tier check below; the brand bundle (experience lane) for the pillar and receipts checks.
 4. The draft file in `drafts/`
-5. The concept at the path in the draft's `concept_path` frontmatter, if non-null. `prompt.md` exists only after the owner has picked one of the three image variants; if the concept folder holds only `variant-N.md` files, score the visual axis on the best of the three metaphors and note that the pick is pending. If there is no concept folder at all, score the axis against the draft's metaphor potential only and note that no concept exists yet.
-
-**Then read the draft's `format`.** If `format: carousel`, score it with the [Carousel scoring](#carousel-scoring) interpretation below. If `format: decision-tree`, use [Decision-tree scoring](#decision-tree-scoring). If `format` is `text` or absent, use the scorecard as written.
+5. The draft's `image_kind` and the concept at `concept_path`, if non-null. `artifact` means `prompt.md` lists one to four real screenshots or photos the owner supplied (`files`, each with what it shows and its alt text, plus the redaction check); open the files if they exist. `none` means the post goes out text-only. A null `image_kind` with no concept folder means the image step has not run; score the axis on what the post could show and say so.
 
 ## Scorecard
 
@@ -43,15 +46,15 @@ Score each category from `0` to `2`:
 - `readability`
 - `builder relevance`
 - `discussion potential`
-- `visual concept fit`
+- `artifact fit`
 
-For `visual concept fit`, score the metaphor in the linked concept prompt:
+For `artifact fit`, score what the reader will see next to the post, by `image_kind`:
 
-- `2/2` — the metaphor is tactile, specific, built from materials physically connected to the post's topic, and not on the banned-cliché list in `post-image`. Hook overlay text matches the draft's actual hook.
-- `1/2` — the metaphor is workable but generic, or the hook overlay paraphrases instead of using the draft's wording.
-- `0/2` — the metaphor is a banned cliché (brain, lightbulb, gears, lock-and-key, robot face, magnifying glass, chess pieces, rocket, plain handshake, dollar sign, upward chart line) without literal justification, or no concept prompt exists at all when one was expected.
+- `2/2` — `artifact`: a real screenshot or photo of the thing the post talks about (the ads manager, the terminal, the dashboard, the diff, the desk), legible on a phone, cropped to the one thing that matters, no secrets or other people's data, no hook text baked into it.
+- `1/2` — `artifact` that only loosely shows the post's subject or still needs a crop, or `none` (text-only is a valid post, it just gives up the image lift).
+- `0/2` — any generated or AI-enhanced image, a stock photo, a quote or headline card, a templated slide, text or a frame added on top of a screenshot, an image unrelated to the post, or an artifact that exposes a secret, an email, a key, or a customer name.
 
-Every concept is a black sketch on white; the style is fixed, so never score the style — only the scene and the hook overlay.
+Score whether the image is the real thing from the post, as a person would have posted it.
 
 Approval rule:
 
@@ -68,7 +71,7 @@ These are deterministic. If any condition triggers, the named category becomes `
 
    **In the experience lane this rule narrows, it does not vanish.** The owner's *operation* — their apps, their numbers, a function they built instead of hiring, a lesson the sell side taught them — is the subject by design, and it passes when it carries something a builder could copy, measure, or argue with (a system, a cost, a conversion number, a rejection reason). The owner's *LinkedIn* is still off limits in both lanes. A Headcount Zero post about the content pipeline is the one exception the dossier itself carves out ("I automated my own LinkedIn presence, here are the real numbers"), and it passes only with real numbers attached.
 
-2. **Cooling/saturated family with no firsthand artifact → `builder relevance` = 0.** If the draft's `topic_family` appears in the `## Cooling families` section of `bun run post-patterns` **and** you have confirmed the streak reflects a real shared topic rather than a classifier artifact, OR its `topic_family + source_type` combination appears in any file under `retros/postmortems/` from the last 30 days, AND the draft body contains no firsthand artifact (the owner's own benchmark, code, migration story, measured result, or direct usage), zero `builder relevance`. A family that has genuinely lost repeatedly needs a personal anchor to break through. The family classifier is a keyword cascade that mislabels, so an unconfirmed streak is not grounds for a hard zero — note it and drop the category by one instead. **This applies only to cooling/saturated families.** A draft on a *fresh* topic carried by a sharp differentiated wedge is fine without a firsthand artifact — that is how every `t2` exemplar in `wiki/audience.md` won. Do not zero those.
+2. **Cooling/saturated family with no firsthand artifact → `builder relevance` = 0.** If the draft's `topic_family` appears in the `## Cooling families` section of `bun run post-patterns` **and** you have confirmed the streak reflects a real shared topic rather than a classifier artifact, OR its `topic_family + source_type` combination appears in any file under `retros/postmortems/` from the last 30 days, AND the draft body contains no firsthand artifact (the owner's own benchmark, code, migration story, measured result, or direct usage), zero `builder relevance`. A family that has genuinely lost repeatedly needs a personal anchor to break through. The family classifier is a keyword cascade that mislabels, so an unconfirmed streak is not grounds for a hard zero — note it and drop the category by one instead. Rule 7 below now requires an artifact on every news draft; this rule stays as the record of why cooling families needed one first.
 
 3. **Hook buries the strongest line → `hook strength` = 0.** Identify the single most quotable sentence in the body — the one with a named phenomenon, a quantified result, or an arguable stake the reader could fight about. If that sentence is not in the first one or two lines, zero `hook strength`. Example: "Constraint decay. The phenomenon has a name now." sitting in paragraph 3 while the opening line is "A new paper benchmarks…" is a hard zero.
 
@@ -76,33 +79,13 @@ These are deterministic. If any condition triggers, the named category becomes `
 
    **Only fire this on a frame the report actually names.** The frame detector recognizes one template today, so `## Recent hooks` usually lists no frames at all and this rule usually does not apply. Do not substitute your own eyeballed frame match: reuse does not predict reach in this archive — the same two-numbers-in-tension template runs from 135 to 5144 impressions, and the difference is subject tier, not the template. When no frame is named, spend the check on the subject-tier test instead.
 
-5. **Experience post with no receipt → `specificity` = 0.** The dossier's voice rule is benchmarks and receipts: every claim gets a number. An experience-lane draft whose body carries no real number — no count, no cost, no hours, no revenue, no conversion, no date — is zero on `specificity` regardless of how concrete its nouns are. "It went well" is the failure the lane exists to avoid. A number the owner supplied in the loop counts; a number the writer inferred does not, so if the provenance is unclear, ask before approving.
+5. **Experience post with no receipt → `specificity` = 0.** The dossier's voice rule is benchmarks and receipts: every claim gets a number. An experience-lane draft whose body carries no real number — no count, no cost, no hours, no revenue, no conversion, no date — is zero on `specificity` regardless of how concrete its nouns are. "It went well" is the failure the lane exists to avoid. A number the owner supplied in the loop counts; a number the enhancer inferred does not, so if the provenance is unclear, ask before approving.
+
+6. **Slop tell or comment ask → `readability` = 0.** Any of these in the body: "it's not X, it's Y", "stop X, start Y", "the result?", "plot twist", "what nobody tells you", "here's why", "here's the thing", "let that sink in", arrow bullets, three parallel fragments in a row, a hook ending in a colon, or any ask for comments ("comment X", "agree?", "let me know below"). LinkedIn's July 2026 enforcement and the within-author studies around it (MagicPost, LigoSocial) put measured reach costs on exactly these shapes, and readers report them as slop. A question as the closing line is not a hard zero; it is a required fix (see Style tics).
+
+7. **News post with no touched-it artifact → `builder relevance` = 0.** A news-lane draft whose `experience_hook` is `none`, empty, or a process-level line (what the owner usually does, a repo of their own skills) rather than a thing the owner ran, built, migrated, or broke that another builder could look at. Since 2026-10-08 the news lane runs only on subjects the owner has touched. The evidence is the September news posts without an artifact (164, 138, 182) against an account whose reach was 98% out-of-network, the distribution LinkedIn now withholds from posts without lived experience.
 
 Document which hard-zero rule (if any) triggered in the rejection's `Rewrite plan`.
-
-## Carousel scoring
-
-**Applies only when the draft is `format: carousel`.** Same seven axes, same `>= 10/14` bar, same no-zero rule — the meaning of each axis shifts to a multi-slide comparison. The draft body is a per-slide outline (intro, one slide per tool, closing, caption); the concept is a folder with an index `prompt.md` plus `slide-NN.md` files.
-
-- **hook strength** → scored on **Slide 1 only**. Hard-zero rule 3 (buries the strongest line) re-points to: the sharpest comparison claim must be on Slide 1, not stranded on a later slide. Hard-zero rule 4 (recent frame) still applies to the Slide-1 line.
-- **specificity** → judged across the comparison cells. Pros/cons must be concrete and tool-specific; generic filler that could apply to any tool drops this axis. Invented version numbers or fabricated metrics are a specificity *failure*, not a strength — flag them.
-- **novelty** → is the comparison itself a non-obvious wedge, or a recap of a table everyone has seen? A flat matrix with no stance drops novelty.
-- **readability** → can each slide be parsed in milliseconds at portrait size? Too many cells per slide, or sentence-length cells, drop this.
-- **builder relevance** → unchanged in intent. Hard-zero rule 1 still kills navel-gazing (a carousel comparing the owner's own posting tools fails). The comparison must help a stranger builder choose.
-- **discussion potential** → does the comparison take a side that invites disagreement? A neutral matrix scores low; a clear stance ("I'd never pick Z for production") scores high.
-- **visual concept fit** → spans **all slides via the index**. Read `concept_path` (the folder's `prompt.md`) and verify: (a) `visual_system` is present and real (a recurring frame tying slides together), (b) the logo region is reserved on every slide, (c) per-slide subjects are not banned clichés, (d) `hook_overlay` matches Slide 1's actual hook, (e) `slide_count` matches the number of slides in the draft. A missing index, a mismatched slide count, or banned-cliché interior slides degrade or zero this axis exactly as a missing/cliché concept does on the text path. As on the text path, a carousel critiqued before `post-carousel` ran (no `concept_path`) is scored on comparison potential only, with a note that no concept exists yet.
-
-## Decision-tree scoring
-
-**Applies only when the draft is `format: decision-tree`.** Same seven axes, same `>= 10/14` bar, same no-zero rule. The body is a root question plus 3 to 5 condition→recommendation branches and a caption; the concept is a single flowchart image at `concept_path`.
-
-- **hook strength** → scored on the **root question**. Hard-zero rule 3 (buries the line) re-points to: the real decision must be the headline, not buried under setup. Hard-zero rule 4 (recent frame) still applies to the question phrasing.
-- **specificity** → are the branch conditions concrete and checkable (team size, latency, ownership), and the recommendations named and specific? Vague conditions ("if you need power") or "it depends" leaves drop this axis.
-- **novelty** → is the way the decision is *cut* non-obvious, or a tree everyone could draw? A predictable routing drops novelty.
-- **readability** → can the tree be parsed in milliseconds? More than 5 branches, overlapping conditions, or deep nesting drop this.
-- **builder relevance** → unchanged in intent. Hard-zero rule 1 still kills navel-gazing. The decision must be one a stranger builder actually faces.
-- **discussion potential** → does the routing take defensible sides someone would argue with? A wishy-washy tree scores low; opinionated routing scores high.
-- **visual concept fit** → the flowchart in `concept_path` must be legible, its title must match the root question, branches must match the draft, and it must read clean at a glance. A decision flowchart is the **one allowed exception** to the no-chart/no-diagram cliché rule (the diagram is the literal content), so do not penalize it for being a flowchart — penalize only an unreadable, mismatched, or wrong-branch one. As elsewhere, a decision-tree critiqued before `post-flowchart` ran (no `concept_path`) is scored on routing clarity only, with a note that no concept exists yet.
 
 ## What to look for
 
@@ -111,15 +94,16 @@ Document which hard-zero rule (if any) triggered in the rejection's `Rewrite pla
 - **Pillar and Kill Test (experience lane).** The draft names a `pillar` from the dossier (`replaced-a-hire`, `numbers-from-a-company-of-one`, `didnt-teach-me`, `nights-and-weekends`); check the body actually delivers that pillar's payload (a system and its cost; a real number; a sell-side lesson; the day-job constraint). Then run the dossier's Kill Test: could a generic indie developer post the same text? If yes, drop `novelty` by one and say which sentence is the one only the owner could write, or that none is. A retired label in the body ("Impact Engineer", "Agentic Indie", "solo dev shipping apps") is a required fix.
 - **No selling.** In either lane, a paragraph that pitches the app instead of reporting on it drops `builder relevance` by one. The apps are the lab, not the product.
 - The draft should sound like a real technical builder, not a recap bot.
-- **The owner's words are present.** The writer asks the owner for a firsthand layer before drafting and records it in `experience_hook`. If `experience_hook` names a real detail and the body does not carry it, that is a hook/body mismatch — request the fix. If it says `none`, do not penalize a news draft for carrying the wedge alone; that shape wins in this archive.
-- **Style tics.** Flag and require a fix for any em dash or quotation mark in the body. The voice bans both: claims are stated plainly or paraphrased, never air-quoted, scare-quoted, or wrapped around a source's words.
+- **The owner's words are present.** The enhancer records the owner's artifact (news) or missing specific (experience) in `experience_hook`. If it names a real detail and the body does not carry it by paragraph 3, that is a hook/body mismatch — request the fix. `author` must be `owner` in both lanes (Preconditions).
+- **Ledger shape (experience lane).** If the body is a ledger of the owner's own operation (dollars or hours in, outcomes out, every line a figure) with no turn (a thing built, a person who showed up, a decision changed), drop `discussion potential` by one and name it. The lane's four receipted ledgers landed at 133 to 242; its five posts above 800 were none of them. `confidence: low` on the wiki's `experience` page, so a drop, not a zero.
+- **Style tics.** Flag and require a fix for any em dash or quotation mark in the body. The voice bans both: claims are stated plainly or paraphrased, never air-quoted, scare-quoted, or wrapped around a source's words. Also flag and require a fix for a question as the closing line (the news lane's validated anti-pattern at 0.68x, and −7% within author in LigoSocial's 2026 study) and for an opening line that is a question.
 - **Links in the body.** LinkedIn cuts reach on posts with external links in the body. Flag any `http` in the body and require it to move to a `Comment link:` line (first comment), with the body pointing at it in words.
 - **No prior-post references.** Flag any sentence that points back to the owner's previous posts or leans on a topic just covered as throwaway evidence (a one-line "X already does this" about last post's subject). Each post must stand alone for a stranger; request the line be cut.
 - The hook should make a concrete claim quickly.
 - The body should cash that claim out with evidence from the idea brief.
 - The opinion wedge should be visible, not implied.
 - The draft should fit the anti-pattern guidance from `bun run post-patterns`, including the **Recurring failure modes from postmortems** and **Cooling families** sections. Soft fits (one-off matches, partial overlaps) drop `novelty` or `builder relevance` by one; the hard zeros above handle the repeat cases.
-- The concept prompt (if linked) should illustrate the post's actual content, not a stock visual for the topic family. A strong post with a banned-cliché image is not ready to publish — request a new concept before approving.
+- The image (if any) should show the post's actual thing. A strong post with a generated image, a stock photo, a text card, or a screenshot with a secret in it is not ready to publish — request the artifact fix before approving.
 
 ## Output
 
@@ -135,7 +119,7 @@ Score:
 - readability: X/2
 - builder relevance: X/2
 - discussion potential: X/2
-- visual concept fit: X/2
+- artifact fit: X/2
 
 Why it passes: <2 to 4 sentences>
 ```
@@ -152,17 +136,17 @@ Score:
 - readability: X/2
 - builder relevance: X/2
 - discussion potential: X/2
-- visual concept fit: X/2
+- artifact fit: X/2
 
 Rewrite plan:
 - what to cut: ...
 - what evidence to add: ...
 - how to sharpen the hook: ...
-- visual concept fix: <only if the concept axis is the blocker; otherwise omit>
-- ending: takeaway | question
+- artifact fix: <only if the image axis is the blocker; otherwise omit>
+- ending: takeaway | imperative | confession | link-out
 ```
 
-If the rejection is driven purely by the concept (text is approve-worthy but the concept is a banned cliché), keep the rewrite plan but title it `Rejected (concept only).` and limit fields to `visual concept fix` and `ending`. The user can then regenerate the image for the same draft without rewriting the body.
+If the rejection is driven purely by the image (text is approve-worthy but the image fails), keep the rewrite plan but title it `Rejected (image only).` and limit fields to `artifact fix` and `ending`. The owner can then supply a different artifact for the same draft without rewriting the body.
 
 Open the verdict with one line naming the lane and the room it was judged in, e.g. `Lane: experience — judged against the experience cohort (n=18, too few to cite)`.
 

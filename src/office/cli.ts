@@ -33,10 +33,8 @@ function flag(argv: string[], name: string): string | undefined {
 const SKILL_STAGE: Record<string, AgentId> = {
   "topics-briefing": "scout",
   "post-ideator": "ideator",
-  "post-writer": "writer",
+  "post-enhancer": "writer",
   "post-image": "illustrator",
-  "post-carousel": "illustrator",
-  "post-flowchart": "illustrator",
   "post-critic": "critic",
   "post-retro": "analyst",
 };

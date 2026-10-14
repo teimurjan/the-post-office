@@ -70,12 +70,12 @@ const AGENT_META: AgentMeta[] = [
   },
   {
     id: "writer",
-    name: "Writer",
-    role: "drafts the post in the owner's voice",
+    name: "Enhancer",
+    role: "enhances the post the owner wrote",
     blurb:
-      "Takes the winning angle and writes the actual post — hook, body, no fluff.",
+      "Takes the owner's draft and tightens it — first line, cuts, one missing specific. Never writes the body.",
     currentInstruction:
-      "# post-writer\nDraft from one approved brief in the owner's voice. Hook first, one idea, no fluff.",
+      "# post-enhancer\nEnhance the owner's draft: three versions of their first line, the missing specific, a change list they veto. Never write the body.",
   },
   {
     id: "illustrator",

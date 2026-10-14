@@ -2,11 +2,11 @@
 urn: 'urn:li:activity:7507785972504219650'
 url: 'https://www.linkedin.com/feed/update/urn:li:activity:7507785972504219650/'
 posted_at: '2026-09-21T13:01:03.763Z'
-impressions: 449
+impressions: 451
 likes: null
 comments: null
 shares: null
-scraped_at: '2026-10-06T05:35:05.244Z'
+scraped_at: '2026-10-07T05:20:52.242Z'
 concept_path: concepts/2026-09-21-jev-will-not-replace-your-model-it-goes-in-front/prompt.md
 lane: news
 ---

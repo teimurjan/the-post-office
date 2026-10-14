@@ -1,38 +1,36 @@
 ---
 name: news-post-cycle
-description: Run the news-lane LinkedIn pipeline end-to-end in one go — briefing (if missing), news-lane top-posts + patterns context, ideator shortlist (with an interactive pick that shows each idea's one-line gist, scored out of 10), a human-in-the-loop writer draft, critic verdict, and a three-variant cover image the user picks from. Use when the user says "news cycle", "run the news pipeline", "news-post-cycle", "give me a news post end to end", or wants a single command that replaces invoking topics-briefing, post-ideator, post-writer, post-critic, and post-image separately for a post about an external event. For a post about the owner's own work, use experience-post-cycle instead. Optionally accepts an idea number to skip the pick.
+description: Run the news-lane LinkedIn pipeline end-to-end in one go — the one-news-post-a-week cap, briefing (if missing), news-lane top-posts + patterns context, ideator shortlist gated on subjects the owner has touched (with an interactive pick that shows each idea's one-line gist, score out of 10, and the artifact the owner is expected to have), the owner's own draft written from the brief and enhanced around that artifact, critic verdict, and a cover image that is a real screenshot or photo the owner supplies. Use when the user says "news cycle", "run the news pipeline", "news-post-cycle", "give me a news post end to end", or wants a single command that replaces invoking topics-briefing, post-ideator, post-enhancer, post-critic, and post-image separately for a post about an external event. For a post about the owner's own work, use experience-post-cycle instead. Optionally accepts an idea number to skip the pick.
 ---
 
 # news-post-cycle
 
-Orchestrates the **news lane** end-to-end so the user does not run each skill by hand. You are the conductor. The underlying skills (`topics-briefing`, `posts-postmortem`, `post-retro`, `wiki-curator`, `post-ideator`, `post-writer`, `post-critic`, `post-image`, `post-carousel`, `post-flowchart`) own their logic and each runs standalone. Do not duplicate their rules. Do not skip them.
+Orchestrates the **news lane** end-to-end so the user does not run each skill by hand. You are the conductor. The underlying skills (`topics-briefing`, `posts-postmortem`, `post-retro`, `wiki-curator`, `post-ideator`, `post-enhancer`, `post-critic`, `post-image`) own their logic and each runs standalone. Do not duplicate their rules. Do not skip them.
 
 **Lanes.** Every post belongs to one of two lanes. A `news` post reacts to an external event and comes out of the briefing. An `experience` post is about the owner's own work and operation and comes straight from a thought the owner typed; that lane has its own conductor, `experience-post-cycle`. The two are analyzed separately, so every context command in this cycle is scoped with `--lane news`. If the user's request is really a thought about their own work, stop and point them at `experience-post-cycle` rather than forcing it through the briefing.
 
 ## Inputs
 
-`args` (optional) carries two independent tokens, in any order:
-
-- **An integer `1..5`** picking a specific idea from the freshly generated shortlist, no prompt. If absent, step 4 asks the user to pick interactively — see below.
-- **A format token** — `text`, `carousel`, or `decision-tree` — the **requested format** for this run. If absent, the format is whatever the chosen idea carries (default `text`).
-
-Examples: `/news-post-cycle carousel` (interactive pick among carousel-fit ideas), `/news-post-cycle 2` (idea 2 directly, no prompt, its own format), `/news-post-cycle 2 decision-tree` (idea 2, forced to a decision-tree, no prompt).
-
-When a format token is present it constrains the run: the ideator is asked to surface and prioritize angles that fit that format (step 3), the pick prefers an idea already tagged with it (step 4), and the visual step routes accordingly (step 7). A requested format that cannot honestly fit any shortlisted angle is a stop condition, not something to force onto a mismatched idea.
+`args` (optional) carries an integer `1..5` picking a specific idea from the freshly generated shortlist, no prompt, and/or `--force` to ignore the weekly cap for this run. With no number, step 4 asks the user to pick interactively. Every post is a text post with the owner's own screenshots or photos, or none; there is no format to choose.
 
 ## Human in the loop
 
-This cycle is not autonomous. It pauses at three points and waits for the owner:
+This cycle is not autonomous. It pauses at four points and waits for the owner:
 
-1. **The idea pick** (step 4), unless an idea number was passed.
-2. **The writer's two questions** (step 5): the hook pick and the personal layer. The writer will not draft until the owner answers. Never answer them on the owner's behalf.
-3. **The image pick** (step 7): three metaphor sentences, the owner chooses one; only the pick is rendered.
+1. **The weekly cap** (step 0): if a news post went out in the last seven days, the cycle stops and asks before continuing.
+2. **The idea pick** (step 4), unless an idea number was passed, followed by the artifact confirmation: the owner says whether they have the thing the brief expects them to show. A `none` drops the idea.
+3. **The draft, then the enhancer's two questions** (step 5): the owner writes the post from the brief; then the first-line pick and the artifact, if the draft does not carry it. Never write the draft for them and never answer on their behalf.
+4. **The image** (step 7): the owner supplies a real screenshot or photo, or says `none` for text-only.
 
 Everything else runs without stopping unless a step truly fails.
 
 ## Workflow
 
 Run the steps in order. Each step produces a concrete artifact on disk.
+
+### 0. Weekly cap
+
+The news lane publishes at most one post a week; the freed slots go to the owner's own experience post and to commenting on other people's posts, which is where followers now come from. Run the check `post-ideator` documents under its Weekly cap. If it prints a news post or news draft from the last seven days, print the status line `cap: held — <post>` and end. Continue only if `args` carries `--force` or the owner says to ignore the cap for this run.
 
 ### 1. Briefing (only if missing)
 
@@ -49,7 +47,7 @@ Briefings are dated. Yesterday's file does not count as today's; only same-day m
 
 ### 1.5. Postmortems (only if stale)
 
-The writer and critic need failure context, not just success context. Postmortems live in `retros/postmortems/` and are slow-changing, so they do not regenerate every cycle.
+The enhancer and critic need failure context, not just success context. Postmortems live in `retros/postmortems/` and are slow-changing, so they do not regenerate every cycle.
 
 Check freshness:
 
@@ -128,9 +126,8 @@ Invoke the `post-ideator` skill. It will:
 - Read the latest briefing and the brand bundle (`bun run --silent --cwd .vendor/teimurjan-llm-wiki wiki view post-writing`).
 - Use the news-lane `post-patterns` and `top-posts` context already gathered.
 - Dedup against recent drafts and published posts.
+- Gate every candidate on `touched_it` (the owner has personally run, built, migrated, or been bitten by the subject) and name the `expected_artifact`.
 - Emit 3 to 5 scored idea briefs, each with a one-line `gist`, and write shortlisted entries into `ideas/$(date +%Y-%m-%d).md` with `lane: news`.
-
-If `args` carried a **format token** (`carousel` or `decision-tree`), tell the ideator to surface and prioritize angles that fit that format and tag them with it. The format never lowers the bar — a forced format still has to clear the rubric and gates. If the ideator can produce no idea that honestly fits the requested format, stop and tell the user (do not bend a mismatched angle into the wrong shape).
 
 Do not draft yet. Wait for the ideator to finish.
 
@@ -140,26 +137,26 @@ Do not draft yet. Wait for the ideator to finish.
 - If the pick is out of range, stop and ask the user which idea to use.
 - Otherwise (no number in `args`), run the interactive pick below.
 
-**Interactive pick.** Read every shortlisted idea's `gist`, `score` (out of 12), `opinion_wedge`, `reach_ceiling`, and `risk` from `ideas/$(date +%Y-%m-%d).md`. Rank by `score` descending; if a **format token** was requested, rank ideas already tagged with that `format` first. Ask the user to choose with `AskUserQuestion`, one option per idea:
+**Interactive pick.** Read every shortlisted idea's `gist`, `score` (out of 12), `opinion_wedge`, `reach_ceiling`, and `risk` from `ideas/$(date +%Y-%m-%d).md`. Rank by `score` descending. Ask the user to choose with `AskUserQuestion`, one option per idea:
 
 - Cap at 4 options (the tool's hard max). With 5 shortlisted ideas, offer the top 4 by the ranking above and say in the question text that a 5th exists and can be reached by typing its number into "Other".
 - Option label: rank + display score, e.g. `#1 · 8/10`. Convert the ideator's `score` (out of 12) to the friendlier out-of-10 shown here: `round(score * 10 / 12)`.
-- Option description: **the `gist` first, verbatim, as its own line** — the owner has to see in one plain sentence what the post would be about before reading anything else. Then one line of **Pros:** the `opinion_wedge`, plus the `reach_ceiling` note when it's `2` (a bigger room). Then one line of **Cons:** the `risk` field, plus the `reach_ceiling` note when it's `1` (capped at a sub-community). If the requested format differs from the idea's own `format`, add one clause noting the conversion. Do not invent judgment beyond what the brief already says. Keep the whole description under ~50 words.
+- Option description: **the `gist` first, verbatim, as its own line** — the owner has to see in one plain sentence what the post would be about before reading anything else. Then one line **Artifact:** the `expected_artifact`. Then one line of **Pros:** the `opinion_wedge`, plus the `reach_ceiling` note when it's `2` (a bigger room). Then one line of **Cons:** the `risk` field, plus the `reach_ceiling` note when it's `1` (capped at a sub-community). Do not invent judgment beyond what the brief already says. Keep the whole description under ~50 words.
 - Question header: `Pick idea`. Question text: `Which idea should we draft next?`
 
 Map the answer back to its `idea_id`. If `AskUserQuestion` cannot be presented (no interactive channel available), stop and print the shortlist with gists — do not pick on the owner's behalf.
 
-If a format was requested and the chosen idea's `format` differs, set the idea's `format` to the requested value via Edit — but only if the angle genuinely supports that shape (a real 3-to-6-option comparison for `carousel`; a real 3-to-5-branch decision for `decision-tree`). If it cannot fit, stop and tell the user the picked angle does not suit the requested format.
-
 Mark the chosen idea's `status` in `ideas/$(date +%Y-%m-%d).md` to `approved` via Edit. Leave the others as `shortlisted`.
 
-### 5. Draft (human in the loop)
+**Confirm the artifact.** Ask in plain text: `The brief expects you to show <expected_artifact>. Do you have it, or something else from your own work on this? Say none if not.` Wait. On `none`, set the idea back to `shortlisted`, say the news lane runs only on subjects the owner has touched, and end the cycle; do not fall through to the next idea on the owner's behalf.
 
-Invoke the `post-writer` skill with the approved idea brief. Pass through every field the writer expects: `angle`, `gist`, `source_url`, `source_title`, `briefing_date`, `topic_family`, `source_type`, `lane`, `format`, `why_now`, `opinion_wedge`, `experience_hook`, `evidence_points`. The writer drafts in the brief's `format` (prose for `text`, the per-slide outline for `carousel`, the routing tree for `decision-tree`).
+### 5. The owner writes, the enhancer enhances
 
-The writer will stop twice — once to have the owner pick a hook, once to ask for the owner's personal layer (a firsthand detail, a number from their own work, or their take in their own words). Let it. Relay the owner's answers verbatim; do not paraphrase them, and do not fill them in yourself. A draft written without the owner's own words is the exact output this pipeline stopped producing.
+Print the approved brief in full: `gist`, `angle`, `opinion_wedge`, `why_now`, `evidence_points`, `source_url`, `expected_artifact`. Then ask in plain text and wait: `Write the post the way you would publish it, with <expected_artifact> in it. Rough is fine, typos are fine; the enhancer edits from there.` Never write a line of it yourself, and never proceed on a guessed draft.
 
-The writer saves to `drafts/$(date +%Y-%m-%d)-<slug>.md` with `lane: news`. Capture that path for the next step.
+Invoke the `post-enhancer` skill with the owner's draft and the `idea_id`. It reads the brief from the ledger, fact-checks the draft against the source, stops twice (three versions of the owner's first line; the artifact if the draft does not carry it), applies only the edits on its change list, and saves to `drafts/$(date +%Y-%m-%d)-<slug>.md` with `lane: news` and `author: owner`. Relay the owner's answers verbatim. If the enhancer ends without saving because the draft has no artifact, the cycle ends there too.
+
+Capture the draft path for the next step.
 
 ### 6. Critique
 
@@ -167,26 +164,21 @@ Invoke the `post-critic` skill with the draft path from step 5. The critic will 
 
 If the critic rejects, stop here. Do not generate a concept image for a draft that is not going to publish.
 
-### 7. Visual concept (only if critic approved)
+### 7. Image (only if critic approved)
 
-Read the approved draft's `format` and branch to the matching visual skill. Every visual is a black sketch on white; there is no style or size to pick.
+Invoke `post-image` with the approved draft. It names two candidate artifacts from the post and asks the owner for one to four real screenshots or photos, or `none` for text-only. Each file is checked for size, legibility, and leaks, filed under `images/<date>-<slug>/`, and described with alt text in `concepts/<date>-<slug>/prompt.md`; the draft gets `concept_path` and `image_kind`. Nothing is generated. Wait for the owner; never make an artifact up.
 
-- **`format: text` (or absent)** → `post-image`. It builds **three** metaphor variants and asks the owner to pick one with `AskUserQuestion`, before rendering anything. The pick is promoted to `concepts/<date>-<slug>/prompt.md` via `bun run select-variant` (which deletes the losing variants) and rendered to `images/<date>-<slug>/prompt.png` when `OPENAI_API_KEY` is set. Wait for the pick; never choose for the owner.
-- **`format: carousel`** → `post-carousel`. Always square 1200×1200, one render per slide, no variants. Writes an index `concepts/<date>-<slug>/prompt.md` plus `slide-NN.md` files.
-- **`format: decision-tree`** → `post-flowchart`. Always square, one render, no variants. Writes a single `concepts/<date>-<slug>/prompt.md`.
-
-Whichever runs will update the draft frontmatter with `concept_path: concepts/<…>/prompt.md` and print the prompt(s) so the user can paste them into an image tool if generation was skipped.
-
-If the visual skill fails to build or save the prompt itself, surface the error and stop — the draft is already saved and approved, and the user can re-run `/post-image <draft>` (text), `/post-carousel <draft>` (carousel), or `/post-flowchart <draft>` (decision-tree) manually. A missing `OPENAI_API_KEY` or a failed generation call is **not** this kind of failure — the prompts are still saved, so treat it as a soft `skipped`/`failed` note and continue to Output.
+If `post-image` fails to file the artifact, surface the error and stop; the draft is already saved and approved, and the owner can re-run `/post-image <draft>`.
 
 ## Output
 
 Print, in order:
 
-1. A one-line status per step: `briefing: created | reused`, `postmortems: refreshed | fresh | skipped`, `retros: N swept | none pending`, `ideation: N briefs`, `pick: interactive | direct (arg N)`, `chosen: <idea_id> — <gist>`, `format: text | carousel | decision-tree`, `draft: <path>`, `critic: approved | rejected`, `concept: <path> | skipped`, `image: variant N picked (generated) | variant N picked (prompt only, no OPENAI_API_KEY) | N slides generated, K failed | skipped`.
+1. A one-line status per step: `cap: clear | held — <post>`, `briefing: created | reused`, `postmortems: refreshed | fresh | skipped`, `retros: N swept | none pending`, `ideation: N briefs`, `pick: interactive | direct (arg N)`, `chosen: <idea_id> — <gist>`, `draft: <path>`, `critic: approved | rejected`, `concept: <path> | skipped`, `image: artifact (N files) | none (text-only)`.
 2. The full draft text (so the user can read it without opening the file).
 3. The critic's verdict block verbatim.
-4. If the concept was generated, the visual skill's output block verbatim, including its `Image:`/`Images:` line. When generation succeeded, tell the user the PNG(s) are already sitting in `images/<date>-<slug>/`; when skipped or failed, the prompt is still there to paste manually.
+4. `post-image`'s output block verbatim; the files are already under `images/<date>-<slug>/` and the alt text is in the block.
+5. One closing line for after publishing: reply to every comment within two hours in your own words, and spend the day's 20 minutes commenting on the target accounts. The pipeline does neither, and they are the first lever on reach now.
 
 If the critic rejected the draft, stop after step 3. Do not auto-revise and do not generate a concept image. The rewrite plan is the user's call.
 
@@ -195,9 +187,10 @@ If the critic rejected the draft, stop after step 3. Do not auto-revise and do n
 - Briefing step fails: report the failure and stop. The rest of the pipeline depends on a current briefing.
 - `bun run top-posts` or `bun run post-patterns` fails: report and stop.
 - Ideator returns zero passing briefs: stop and tell the user the shortlist was empty. Do not invent an angle.
-- Writer fails to save the draft: stop. Do not retry without the user.
+- Enhancer fails to save the draft: stop. Do not retry without the user.
 - Critic rejects: this is not a pipeline failure. Print the rewrite plan and end normally.
 - The owner does not answer a question: stop and wait. Never proceed past a human-in-the-loop stop with a guessed answer.
+- The owner has no artifact for the picked idea: not a failure. Drop the idea, say why, and end.
 
 ## What this skill does not do
 
@@ -205,7 +198,8 @@ If the critic rejected the draft, stop after step 3. Do not auto-revise and do n
 - It does not publish to LinkedIn.
 - It does not bypass the critic. A rejected draft stays a draft.
 - It does not edit `posts/`. Those are scraped output.
-- It does not pick a hook, a personal detail, or an image on the owner's behalf.
+- It does not pick a hook, an artifact, or an image on the owner's behalf, and it does not write a sentence of the post.
+- It does not run more than one news post a week.
 
 ## When to use
 
@@ -217,4 +211,4 @@ Trigger phrases:
 - "pipeline a post from the briefing"
 - "ideate, draft, and critique"
 
-If the user already has a draft and just wants it critiqued, use `post-critic` directly. If they already picked an idea, use `post-writer` directly. If the user typed a thought about their own work, use `experience-post-cycle`. This skill is for the cold start on external news.
+If the user already has a draft and just wants it critiqued, use `post-critic` directly. If they already wrote the post from a brief, use `post-enhancer` directly. If the user typed a thought about their own work, use `experience-post-cycle`. This skill is for the cold start on external news.
