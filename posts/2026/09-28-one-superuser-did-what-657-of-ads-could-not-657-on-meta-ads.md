@@ -2,11 +2,11 @@
 urn: 'urn:li:activity:7510324271773265921'
 url: 'https://www.linkedin.com/feed/update/urn:li:activity:7510324271773265921/'
 posted_at: '2026-09-28T13:07:21.468Z'
-impressions: 157
-likes: null
+impressions: 158
+likes: 2
 comments: null
 shares: null
-scraped_at: '2026-10-14T10:18:26.677Z'
+scraped_at: '2026-10-15T09:07:50.594Z'
 concept_path: concepts/2026-09-28-one-superuser-did-what-657-of-ads/prompt.md
 lane: experience
 ---

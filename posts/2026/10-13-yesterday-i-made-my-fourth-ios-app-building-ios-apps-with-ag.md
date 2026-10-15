@@ -2,11 +2,11 @@
 urn: 'urn:li:activity:7515758609339789313'
 url: 'https://www.linkedin.com/feed/update/urn:li:activity:7515758609339789313/'
 posted_at: '2026-10-13T13:01:28.509Z'
-impressions: 48131
-likes: null
-comments: null
+impressions: 55051
+likes: 171
+comments: 13
 shares: null
-scraped_at: '2026-10-14T10:18:31.047Z'
+scraped_at: '2026-10-15T09:07:55.252Z'
 concept_path: concepts/2026-10-13-yesterday-i-made-my-fourth-ios-app/prompt.md
 lane: experience
 ---
@@ -36,14 +36,6 @@ I changed my approach to human-in-the-loop on every step of the creative: strate
 
 >> Ehtasam Ahmad Raza Might be, depending on your approach. For instance, to get 1 creative idea out of my head, I spend around an hour. To get 10 creative ideas from an LLM and pick one, I spend 5-10 minutes (1-2$). So, for me it's more about the quality.
 
-**Tobias Paz Posse**
-
-> The UI in the first screenshot looks very polished. What is that app about?
-
-↳ **Teimur Gasanov**
-
->> Tobias Paz Posse Appreciate it! It’s oyno.app
-
 **Andrey Badaev**
 
 > I spent 11 months from idea to stores )
@@ -58,9 +50,21 @@ I changed my approach to human-in-the-loop on every step of the creative: strate
 >> Andrey Badaev Thanks for sharing! I think we're pursuing different goals. I admire your diligence, and I will do the same once I have a product. Before the product, I need to validate the product-market fit, so I'll launch a simple thing quickly and monitor feedback and numbers. I am not trying to spam the store; I'm trying to find a gem to make it shine :)
 >> … more
 
+**Tobias Paz Posse**
+
+> The UI in the first screenshot looks very polished. What is that app about?
+
+↳ **Teimur Gasanov**
+
+>> Tobias Paz Posse Appreciate it! It’s oyno.app
+
 **Periklis Tzeka**
 
 > the slopification of youtube in app form - was there any consideration of user usefulness/research for this app or just engagement fishing
+
+**Muhammad Usman Liaqat**
+
+> The gap between building an MVP and getting people to pay for it is becoming more noticeable. AI can speed up development, but understanding the audience, testing the message, and finding the right acquisition channel still require experimentation. A faster launch doesnt automatically mean faster product-market fit.
 
 **Askhalan A**
 
