@@ -134,7 +134,7 @@ comments 17/50, shares 7/50, missing values counting as zero), which makes any
 ## Content pipeline
 
 Runs inside Claude Code or Codex as a set of skills. Each skill runs standalone and hands
-off through files; the two cycles are the only things that chain them. The pipeline is a
+off through files; `experience-post-cycle` is the only thing that chains them, and `post-ideator` refreshes the briefing itself. The pipeline is a
 draft engine, not a publish engine: the writer stops for the owner's hook pick and their
 own firsthand layer, and the image step stops for the owner's pick of three variants.
 
@@ -153,9 +153,8 @@ own firsthand layer, and the image step stops for the owner's pick of three vari
 `retros/postmortems/`, so the writer and critic learn from misses and not only wins.
 
 ```sh
-/news-post-cycle                                       # briefing → ideator → pick → writer → critic → image
 /experience-post-cycle "one paying user on Wait Professor, 14 months in"
-/post-ideator                                          # step 3 on its own
+/post-ideator                                          # briefing (if missing) → scored ideas
 /post-writer "two days fighting a tokio panic that was a logging macro"
 /post-image drafts/YYYY-MM-DD-<slug>.md
 /post-critic

@@ -2,11 +2,11 @@
 urn: 'urn:li:activity:7515758609339789313'
 url: 'https://www.linkedin.com/feed/update/urn:li:activity:7515758609339789313/'
 posted_at: '2026-10-13T13:01:28.509Z'
-impressions: 55051
-likes: 171
-comments: 13
+impressions: 72846
+likes: 224
+comments: 14
 shares: null
-scraped_at: '2026-10-15T09:07:55.252Z'
+scraped_at: '2026-10-19T11:08:31.830Z'
 concept_path: concepts/2026-10-13-yesterday-i-made-my-fourth-ios-app/prompt.md
 lane: experience
 ---
@@ -57,6 +57,10 @@ I changed my approach to human-in-the-loop on every step of the creative: strate
 ↳ **Teimur Gasanov**
 
 >> Tobias Paz Posse Appreciate it! It’s oyno.app
+
+**Davies Aniefiok**
+
+> The 'added more human' part is the real lesson here. I'm doing the reverse on two app ideas: testing demand with a waitlist before building, with 75 signups in 2 weeks or I drop it. Curious whether human-in-the-loop on the creative changes your cost per purchase.
 
 **Periklis Tzeka**
 

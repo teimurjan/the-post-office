@@ -1,6 +1,6 @@
 ---
 name: post-ideator
-description: Find news-lane LinkedIn post angles that can reach technical builders right now, but only when the angle is specific, differentiated, and defensible. Use when the user says "what should I post about", "pitch me ideas", "give me post angles", "find a topic", "ideate a post", or asks for fresh material without supplying a thought. Returns 3 to 5 scored idea briefs, each with a one-line gist and the artifact the owner is expected to have, and writes shortlisted ones into ideas/YYYY-MM-DD.md with lane news. Gated on a subject the owner has personally touched and capped at one news post a week. A thought about the owner's own work is not ideated; the owner writes it and `post-enhancer` edits it as an experience post.
+description: Refresh today's briefing if it is missing, then find news-lane LinkedIn post angles that can reach technical builders right now, but only when the angle is specific, differentiated, and defensible. Use when the user says "what should I post about", "pitch me ideas", "give me post angles", "find a topic", "ideate a post", "news cycle", or asks for fresh material without supplying a thought. Returns 3 to 5 scored idea briefs, each with a one-line gist and the artifact the owner is expected to have, and writes shortlisted ones into ideas/YYYY-MM-DD.md with lane news. Gated on a subject the owner has personally touched and capped at one news post a week. A thought about the owner's own work is not ideated; the owner writes it and `post-enhancer` edits it as an experience post.
 ---
 
 # post-ideator
@@ -23,7 +23,15 @@ for f in posts/$(date +%Y)/*.md; do d="$(date +%Y)-$(basename "$f" | cut -c1-5)"
 for f in drafts/*.md; do d=$(basename "$f" | cut -c1-10); [ "$d" \> "$since" ] && grep -q '^lane: news' "$f" && echo "drafted: $f"; done
 ```
 
-If anything prints, stop: name the post, say the cap holds until seven days after it, and end without ideating. The only override is the user saying so for this run ("ignore the cap", "anyway", `--force`). The cap is a reach decision, not a style rule: Shield's February 2026 data puts the per-post reach rate at 10% of followers for 9 to 15 posts a month against 16% for 1 to 3, van der Blom's 2026 report has daily posters down 26% per post, and this account's own September at 2.4 posts a week produced its lowest month. The slot the cap frees goes to the owner's own experience post and to commenting on other people's posts, which is where followers now come from.
+If anything prints, stop: name the post, say the cap holds until seven days after it, and end without ideating or fetching a briefing. The only override is the user saying so for this run ("ignore the cap", "anyway", `--force`). The cap is a reach decision, not a style rule: Shield's February 2026 data puts the per-post reach rate at 10% of followers for 9 to 15 posts a month against 16% for 1 to 3, van der Blom's 2026 report has daily posters down 26% per post, and this account's own September at 2.4 posts a week produced its lowest month. The slot the cap frees goes to the owner's own experience post and to commenting on other people's posts, which is where followers now come from.
+
+## Briefing (refresh if missing)
+
+```sh
+test -f "briefings/$(date +%Y-%m-%d).md" && echo present || echo missing
+```
+
+On `missing`, invoke the `topics-briefing` skill and wait for it to write today's file. Only a same-day file counts; yesterday's is stale. If the briefing fails, report it and stop, since every angle depends on it.
 
 The selection criterion is **externally relevant + sharp wedge + defensible + touched by the owner**. A hot topic alone is not enough, and neither is a personal story alone. The post needs a concrete detail, a real opinion wedge, a reason a builder who has never heard of the owner would care, and a thing the owner can show.
 
@@ -40,7 +48,7 @@ scores are ungrounded that run.
 
 ## Inputs to read first
 
-1. **Latest briefing** (required): `ls briefings/*.md | sort | tail -1` and read it. This is the canonical signal for this week.
+1. **Today's briefing** (required): `briefings/$(date +%Y-%m-%d).md`, written by the step above. This is the canonical signal for this week.
 2. **`bun run post-patterns --lane news`** (required): the mechanical ground truth over the news-lane archive — medians, sample sizes, anti-patterns, cooling streaks. The `--lane news` scope keeps the owner's own launches and build logs (the experience lane, a different room) out of the medians. Two cautions when reading it. The top/bottom bucket sections cover only the quartiles, so a family there can show `n=2`; every bucket prints its sample size and marks thin ones `too few to cite`. Respect that marker. And `topic_family` labels come from a keyword cascade that mislabels, so treat the family axis as bookkeeping, not signal.
 2.5. **`wiki/audience.md`** (required when `wiki/` exists): the accumulated judgment layer. `post-patterns` gives you counts; the wiki gives you the conclusions those counts support, each carrying its own `confidence` and `evidence_n`. Never cite a claim whose `confidence` is `anecdote`.
 2.7. **The brand bundle** — `bun run --silent --cwd .vendor/teimurjan-llm-wiki wiki view post-writing`. It tells you who is posting — a senior engineer building agents for a living who runs consumer apps with zero employees, nights and weekends — and therefore which news items the owner has an honest entry point into (agent tooling, app-store mechanics, indie economics, the sell side). Use it to ground `experience_hook`; never to invent one.
@@ -177,7 +185,7 @@ a later retro can tell whether a miss came from the model or from the pick. `lan
 
 ## Where this skill ends
 
-At the ledger. You do not draft, and you do not invoke anything else. When the user picks a brief (by number, idea id, or "do #2"), mark that entry `status: approved` in `ideas/YYYY-MM-DD.md` via Edit and print its `idea_id`, `gist`, and `expected_artifact`, so the owner can say at once whether they have it. The owner writes from the brief and `post-enhancer` reads it from the ledger — every field it needs (`angle`, `gist`, `source_url`, `source_title`, `briefing_date`, `topic_family`, `source_type`, `lane`, `format`, `why_now`, `opinion_wedge`, `experience_hook`, `touched_it`, `expected_artifact`, `evidence_points`) is in the frontmatter you wrote, so the file is the handoff.
+At the ledger. You do not draft, and you invoke nothing but `topics-briefing`. When the user picks a brief (by number, idea id, or "do #2"), mark that entry `status: approved` in `ideas/YYYY-MM-DD.md` via Edit and print its `idea_id`, `gist`, and `expected_artifact`, so the owner can say at once whether they have it. If they do not, set the entry back to `shortlisted`: the news lane runs only on subjects the owner has touched. The owner writes from the brief and `post-enhancer` reads it from the ledger — every field it needs (`angle`, `gist`, `source_url`, `source_title`, `briefing_date`, `topic_family`, `source_type`, `lane`, `format`, `why_now`, `opinion_wedge`, `experience_hook`, `touched_it`, `expected_artifact`, `evidence_points`) is in the frontmatter you wrote, so the file is the handoff.
 
 ## If input is ambiguous
 

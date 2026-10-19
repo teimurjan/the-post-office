@@ -72,8 +72,8 @@ export async function collectDatedEntries(root: string): Promise<DatedEntry[]> {
 }
 
 /**
- * Drafts of published posts that still have no retro. news-post-cycle's retro sweep
- * reads the draft, so pruning one by age would strand that post's 72h review.
+ * Drafts of published posts that still have no retro. post-retro reads
+ * the draft, so pruning one by age would strand that post's 72h review.
  */
 export async function findRetroPendingDrafts(
   root: string,
@@ -95,7 +95,7 @@ export async function findRetroPendingDrafts(
 
 /**
  * Archive slugs keep more of the post's first line than the draft slug does,
- * so a published post is matched by prefix, the way news-post-cycle matches it.
+ * so a published post is matched by prefix, the way the retro sweep matches it.
  */
 async function isPublished(root: string, base: string): Promise<boolean> {
   const names = await readdir(join(root, "posts", base.slice(0, 4))).catch(

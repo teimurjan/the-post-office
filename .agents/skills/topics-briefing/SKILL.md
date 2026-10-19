@@ -1,6 +1,6 @@
 ---
 name: topics-briefing
-description: Generate a weekly SWE+AI topic briefing (HN + Lobsters + RSS newsletters + Exa fresh news, merged and bucketed by recency) for LinkedIn post ideation. Use whenever the user asks "what should I post about", "LinkedIn topic candidates", "weekly briefing", "topic ideas this week", or wants a single markdown brief to paste into their LinkedIn Claude project. Combines all four sources in one run.
+description: Generate a weekly SWE+AI topic briefing (HN + Lobsters + RSS newsletters + Exa fresh news, merged and bucketed by recency) for LinkedIn post ideation. Use whenever the user asks for "LinkedIn topic candidates", "weekly briefing", "topic ideas this week", or wants a single markdown brief to paste into their LinkedIn Claude project. Combines all four sources in one run. `post-ideator` runs it on its own when today's briefing is missing.
 ---
 
 # topics-briefing

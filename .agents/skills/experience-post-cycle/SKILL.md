@@ -1,6 +1,6 @@
 ---
 name: experience-post-cycle
-description: Take a draft the owner wrote about their own work through the pipeline — the owner's own first line picked from three versions of it, an edit pass that keeps every sentence theirs, critic verdict, and a real screenshot or photo as the cover. No briefing, no ideator, no drafting; the owner's text is the post. Use when the user says "experience cycle", "experience-post-cycle", "edit my post", "polish this into a post", "post about what I built", "founder update", or hands over a draft (or a thought, which the cycle asks them to write out) about their apps, their numbers, a system they built instead of hiring, or something ten years of engineering didn't teach them. For a post reacting to external news, use news-post-cycle instead.
+description: Take a draft the owner wrote about their own work through the pipeline — the owner's own first line picked from three versions of it, an edit pass that keeps every sentence theirs, critic verdict, and a real screenshot or photo as the cover. No briefing, no ideator, no drafting; the owner's text is the post. Use when the user says "experience cycle", "experience-post-cycle", "edit my post", "polish this into a post", "post about what I built", "founder update", or hands over a draft (or a thought, which the cycle asks them to write out) about their apps, their numbers, a system they built instead of hiring, or something ten years of engineering didn't teach them. For a post reacting to external news, use post-ideator instead.
 ---
 
 # experience-post-cycle
@@ -9,7 +9,7 @@ Orchestrates the **experience lane** end-to-end. The input is a draft the owner 
 
 **What an experience post is.** A post whose subject is the owner's own operation: an app they run, a number they measured, a function they built instead of hiring for, a lesson the sell side taught them, the nights-and-weekends constraint. The brand wiki in `.vendor/teimurjan-llm-wiki/` defines this lane — its four pillars, its voice (benchmarks and receipts), and what it is not (indie-dev generic, "agentic" slogans, retired labels). Read it before anything else in this cycle with `bun run --silent --cwd .vendor/teimurjan-llm-wiki wiki view post-writing`. It is the reason this lane exists.
 
-**What it is not.** A take on someone else's news. If the thought is really "here is what I think about X that just shipped", stop and point the user at `news-post-cycle`. A thought that is about the owner's *posting* (metrics, streaks, this pipeline) fails the critic's navel-gazing rule in either lane — say so before drafting.
+**What it is not.** A take on someone else's news. If the thought is really "here is what I think about X that just shipped", stop and point the user at `post-ideator`. A thought that is about the owner's *posting* (metrics, streaks, this pipeline) fails the critic's navel-gazing rule in either lane — say so before drafting.
 
 ## Inputs
 
@@ -37,7 +37,7 @@ Read the brand bundle in full: `bun run --silent --cwd .vendor/teimurjan-llm-wik
 
 ### 1. Retro sweep (experience drafts, last 3 months)
 
-The 72-hour retro has no trigger of its own, so sweep for pending debt at the top of the cycle — but only for **experience-lane drafts**, so this cycle never spends time analyzing news posts. `news-post-cycle` sweeps both lanes; this one sweeps its own.
+The 72-hour retro has no trigger of its own, so sweep for pending debt at the top of the cycle — but only for **experience-lane drafts**, so this cycle never spends time analyzing news posts. News drafts get their retro from `post-retro`, run by hand.
 
 A draft is a retro candidate when **all** hold:
 
@@ -116,7 +116,7 @@ If the critic rejected, stop after step 4.
 
 - It does not read the briefing or run the ideator. The owner's draft is the post.
 - It does not write or rewrite a sentence of the post.
-- It does not draft news takes. That is `news-post-cycle`.
+- It does not ideate news takes. That is `post-ideator`.
 - It does not publish to LinkedIn.
 - It does not bypass the critic.
 - It does not edit `posts/` or `wiki/`.

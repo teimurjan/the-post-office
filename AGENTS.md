@@ -8,7 +8,7 @@ The repo has two halves: an **archive** (scraped corpus of the owner's past post
 
 Every post, draft, idea, and retro carries `lane: news | experience`.
 
-- **`news`** — the post reacts to an external event. It comes out of the briefing → ideator → the owner writes → enhancer → critic → image path, conducted by `news-post-cycle`.
+- **`news`** — the post reacts to an external event. It comes out of the briefing → ideator → the owner writes → enhancer → critic → image path. `post-ideator` produces the briefing and the ideas; the owner runs the rest skill by skill.
 - **`experience`** — the post is about the owner's own operation: an app they run, a number they measured, a function they built instead of hiring, a lesson the sell side taught them. It comes from a draft the owner wrote and goes enhancer → critic → image, conducted by `experience-post-cycle`. No briefing, no ideator.
 
 The two lanes are **analyzed separately**. `bun run post-patterns --lane <lane>` and `bun run top-posts --lane <lane>` scope every number to one lane; the unscoped report adds a `## Lanes` table so both cohorts stay visible. A news post's reach says nothing about an experience post's, and `wiki/audience.md` (the standing-audience tier model) was calibrated on news posts only. Never compare a post against the other lane. Posts without a `lane` in their frontmatter predate the axis and count as `news`.
@@ -110,17 +110,16 @@ only until deleted.
 
 ## Workflow
 
-News lane, conducted by `news-post-cycle`:
+News lane, no conductor. `post-ideator` covers steps 0 to 3; the owner runs the rest by hand:
 
 0. Hold if a news post went out in the last 7 days: the lane runs one post a week.
-1. Refresh `briefings/` (only if today's is missing).
-2. Sweep pending 72-hour retros (both lanes) and ingest their lessons into the wiki.
-3. Run `bun run top-posts --lane news` and `bun run post-patterns --lane news`.
-4. Produce 3 to 5 scored idea briefs with `post-ideator`, each with a one-line `gist` and an `expected_artifact`, gated on subjects the owner has personally touched; save shortlisted ideas in `ideas/YYYY-MM-DD.md`.
-5. The owner picks an idea (the pick shows each idea's gist and expected artifact first) and confirms they have the artifact.
-6. The owner writes the post from the brief. `post-enhancer` enhances it (three versions of their first line, the artifact if the draft lacks it, a fact-check against the source, a change list they veto); no artifact, no post.
-7. Gate the draft through `post-critic`.
-8. `post-image` files the owner's screenshot or photo, or marks the post text-only.
+1. Refresh `briefings/` through `topics-briefing` (only if today's is missing).
+2. Run `bun run top-posts --lane news` and `bun run post-patterns --lane news`.
+3. Produce 3 to 5 scored idea briefs, each with a one-line `gist` and an `expected_artifact`, gated on subjects the owner has personally touched; save shortlisted ideas in `ideas/YYYY-MM-DD.md`.
+4. The owner picks an idea (the pick shows its gist and expected artifact) and confirms they have the artifact.
+5. The owner writes the post from the brief. `post-enhancer` enhances it (three versions of their first line, the artifact if the draft lacks it, a fact-check against the source, a change list they veto); no artifact, no post.
+6. Gate the draft through `post-critic`.
+7. `post-image` files the owner's screenshot or photo, or marks the post text-only.
 
 Experience lane, conducted by `experience-post-cycle`:
 
@@ -144,10 +143,10 @@ Key directories:
 4. **`retros/YYYY-MM-DD-<slug>.md`** — one post-publish review per draft, written 72 hours after publishing. Retros carry `lane`, compare against the lane's scrape-age cohort, answer whether the post beat that cohort, validated the intended discussion angle, matched hook to body, and whether the pattern should be repeated, modified, or blocked. `retros/postmortems/` holds the same shape for the worst performers of one lane, marked `kind: postmortem`.
 5. **`wiki/`** — the accumulated judgment layer. See `## Wiki` below.
 6. **`tone-samples/`** (gitignored) — pieces the owner wrote by hand, the canonical voice reference. Samples 1 to 4 are rough drafts; sample 5 is the published founder post that opened the experience lane and is that lane's register. `ru-N.md` are pieces the owner wrote in Russian by hand, the register for `post-telegram`: `ru-1.md` is the Meta-ads post translated, `ru-2.md` and `ru-3.md` are Telegram-only follow-ups.
-7. **Skills in `.agents/skills/`**. Each skill runs standalone and hands off through files, never by invoking another skill; only the two cycles compose them.
-   - `news-post-cycle`, `experience-post-cycle` — the two conductors.
+7. **Skills in `.agents/skills/`**. Each skill runs standalone and hands off through files, never by invoking another skill; only `experience-post-cycle` composes them, and `post-ideator` runs `topics-briefing` when today's briefing is missing.
+   - `experience-post-cycle` — the experience-lane conductor. The news lane has none.
    - `topics-hn`, `topics-lobsters`, `topics-rss`, `topics-briefing` — source fetchers (news lane).
-   - `post-ideator` — news lane only. Scores angles 0-2 on six axes (`heat`, `specificity`, `differentiation`, `builder_fit`, `reach_ceiling`, `discussion_potential`) and pitches only those clearing 8/12, each with a plain-language `gist`. `reach_ceiling`, `builder_fit`, and `touched_it` (the owner has personally run, built, or been bitten by the subject; each brief names the `expected_artifact`) are hard gates, and the lane is capped at one post a week. Requires `bun run post-patterns --lane news` plus `wiki/audience.md`, reads the dossier for what the owner actually runs, and ends at the ledger.
+   - `post-ideator` — news lane only. Refreshes today's briefing if missing, then scores angles 0-2 on six axes (`heat`, `specificity`, `differentiation`, `builder_fit`, `reach_ceiling`, `discussion_potential`) and pitches only those clearing 8/12, each with a plain-language `gist`. `reach_ceiling`, `builder_fit`, and `touched_it` (the owner has personally run, built, or been bitten by the subject; each brief names the `expected_artifact`) are hard gates, and the lane is capped at one post a week. Requires `bun run post-patterns --lane news` plus `wiki/audience.md`, reads the dossier for what the owner actually runs, and ends at the ledger.
    - `post-enhancer` — enhances a post the owner wrote, in either lane, never writing the body: three versions of their first line, the one missing specific (the artifact for news, the number or the moment for experience), a fact-check against the source for news, and a change list the owner vetoes line by line. Grounds in the dossier, `tone-samples/`, the lane-scoped pattern report, and recent posts of the same lane. Moves body links to a `Comment link:` line.
    - `post-critic` — reads the lane first, then scores 0-2 across seven categories (hook strength, specificity, novelty, readability, builder relevance, discussion potential, artifact fit) against the lane's report. Approves only at `>= 10/14` with no zero-scored category. Seven hard-zero rules: the fifth zeros `specificity` on an experience post with no number, the sixth zeros `readability` on a slop tell or a comment ask, the seventh zeros `builder relevance` on a news post with no touched-it artifact. An experience draft not written by the owner is rejected before scoring.
    - `post-image` — native only: one to four real screenshots or photos the owner supplies, checked for leaks and filed with alt text; `none` for text-only. Nothing is generated.
@@ -167,8 +166,8 @@ bun run cleanup --days 7     # widen the retention window
 
 Prunes dated entries in `ideas/`, `drafts/`, and `images/` only. `briefings/`,
 `posts/`, `concepts/`, `retros/`, and `wiki/` are durable and never touched, and
-a draft whose published post has no retro yet is held back so the retro sweep at
-the top of either cycle can still read it.
+a draft whose published post has no retro yet is held back so `post-retro` (swept by
+`experience-post-cycle`, run by hand for news) can still read it.
 
 ## Analytics
 
@@ -240,7 +239,7 @@ curator. Current pages: `audience.md` (the news-lane standing-audience tier mode
 - "What topics get the most engagement?" → rank by impressions; the engagement formula is unusable at current metric coverage (see Analytics). For *why* something reached, read `wiki/audience.md`.
 - "How has my post frequency changed?" → count files per month under `posts/`.
 - "What did I post about in May 2026?" → list `posts/2026/05-*.md`.
-- "What should I post about this week?" → `news-post-cycle`, or `post-ideator` on its own.
+- "What should I post about this week?" → `post-ideator`.
 - "Edit my post" / "Turn this draft into a post" → `experience-post-cycle`, or `post-enhancer` on its own.
 - "Should this draft be published?" → invoke `post-critic`.
 - "What patterns should I stop repeating?" → run `bun run post-patterns --lane <lane>`.

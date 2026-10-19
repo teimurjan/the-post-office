@@ -69,7 +69,7 @@ export type IdeaBrief = {
   evidencePoints: string[];
   status: IdeaStatus;
   body: string;
-  // Written by post-ideator and read by the news cycle's pick step. These were
+  // Written by post-ideator and read back when the owner picks an idea. These were
   // absent from the round-trip, so any edit through render dropped them.
   format?: string;
   score?: number;
