@@ -2,11 +2,11 @@
 urn: 'urn:li:activity:7515758609339789313'
 url: 'https://www.linkedin.com/feed/update/urn:li:activity:7515758609339789313/'
 posted_at: '2026-10-13T13:01:28.509Z'
-impressions: 72846
-likes: 224
+impressions: 73129
+likes: 225
 comments: 14
 shares: null
-scraped_at: '2026-10-19T11:08:31.830Z'
+scraped_at: '2026-10-21T11:00:13.676Z'
 concept_path: concepts/2026-10-13-yesterday-i-made-my-fourth-ios-app/prompt.md
 lane: experience
 ---

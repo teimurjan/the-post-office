@@ -2,11 +2,11 @@
 urn: 'urn:li:activity:7513222579550289920'
 url: 'https://www.linkedin.com/feed/update/urn:li:activity:7513222579550289920/'
 posted_at: '2026-10-06T13:04:11.890Z'
-impressions: 271
+impressions: 275
 likes: 1
 comments: null
 shares: null
-scraped_at: '2026-10-19T11:08:33.497Z'
+scraped_at: '2026-10-21T11:00:09.906Z'
 concept_path: concepts/2026-10-06-node-will-run-your-typescript-but-not-your/prompt.md
 lane: news
 ---
