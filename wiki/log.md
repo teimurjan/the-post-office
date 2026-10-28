@@ -318,3 +318,23 @@ what it contradicted. The `contradicted:` line is required even when the answer 
   - wiki/index.md — catalog rows audience n=24 / 63 posts / 2026-09-25 -> n=25 / 66 / 2026-10-06, experience n=7 / 61 / 2026-09-21 -> n=8 / 66 / 2026-10-06
 - claim added: none
 - contradicted: the band's own crispness — t0's ceiling moved from 236 to 449 on one rescraped post. The tiers still do not overlap (t0 max 449 under t1 min 1380), so the separation claim stands, but the "78 to 236" band quoted in earlier entries is superseded
+
+## [2026-10-21] ingest | retro 2026-10-13 fourth-ios-app
+
+- corpus: 69 posts, median 415 (experience lane n=23, median 330)
+- trigger: retros/2026-10-13-yesterday-i-made-my-fourth-ios-app.md (decision: repeat)
+- changed:
+  - wiki/experience.md — evidence_posts +1 (10-13 fourth iOS app, 73129 at 190h, third didnt-teach-me post), evidence_n 8 -> 9; new section "The first charted post from the top"; `observed`, `pillars_observed.didnt-teach-me` (n=2 -> 3) and `upper_half_observed` (n=5 -> 6) gain the post; rescrape 09-28 133 -> 172 refreshed in every twin and in the body; lane_stats recomputed from the 2026-10-21 report (n=23, median 330, p25 200, p75 865, max 1271 -> 73129, top removed 307, 2-to-7-day cohort n=3 median 284, 1-to-4-week cohort n=12 median 205, above 400 n=10); open questions on the ledger shape and the out-of-network split updated; fingerprint 66/425 -> 69/415
+  - wiki/index.md — experience row n=8 / 66 posts / 2026-10-06 -> n=9 / 69 / 2026-10-21
+- claim added: in the experience lane, a build story about what the owner shipped that turns on what the automation could not do reaches far above a ledger of the same operation's spend and outcomes (reinforces the ledger floor as a floor of the shape, not of the subject or the pillar; n=1 on the high side, four variables changed at once, `confidence` held at `low`)
+- contradicted: the page's own scale paragraph, which said the whole lane fits inside the bottom third of the news lane's range with a maximum of 1,271. The lane maximum is now 73,129, and the sentence was a cross-lane comparison the page forbids; removed rather than restated. The 09-28 "eighteen under the mid-course post" reading is superseded by the rescrape (172 against 151); both remain in the bottom four, so the floor claim holds
+
+## [2026-10-21] ingest | retro 2026-10-15 users-who-left-after-trial
+
+- corpus: 69 posts, median 415 (experience lane n=23, median 330)
+- trigger: retros/2026-10-15-2-users-who-left-after-trial-told-me.md (decision: modify)
+- changed:
+  - wiki/experience.md — evidence_posts +1 (10-15 churn post, 284 at 142h, fourth didnt-teach-me post), evidence_n 9 -> 10; `observed` gains the post; `receipt_bearing_low` n=4 -> 5 (redescribed as under the lane median, since 284 sits above the bottom cluster); `pillars_observed.didnt-teach-me` n=3 -> 4; new `breakout_followup` twin behind a new open question on carry-over
+  - wiki/index.md — experience row n=9 -> n=10
+- claim added: none as a claim. The retro's lesson, that a breakout post does not lift the owner's next post, is n=1 and confounded (the follow-up was text-only and on a narrower subject), so it is recorded as an open question with its twin, not in the body as a finding. The post reinforces the receipt signal (a receipt is necessary, not sufficient) a fifth time
+- contradicted: none. The post is not a ledger and landed above the ledger floor, which is consistent with the floor claim without testing it

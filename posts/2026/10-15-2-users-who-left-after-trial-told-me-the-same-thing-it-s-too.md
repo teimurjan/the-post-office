@@ -2,11 +2,11 @@
 urn: 'urn:li:activity:7516475816038363137'
 url: 'https://www.linkedin.com/feed/update/urn:li:activity:7516475816038363137/'
 posted_at: '2026-10-15T12:31:23.911Z'
-impressions: 284
-likes: 1
-comments: null
+impressions: 316
+likes: 2
+comments: 2
 shares: null
-scraped_at: '2026-10-21T11:00:06.398Z'
+scraped_at: '2026-10-28T08:06:37.995Z'
 lane: experience
 ---
 2 users who left after trial told me the same thing: it's too simple.
@@ -22,3 +22,16 @@ There is a specific niche where apps and websites are made in an unusual design 
 I've spent 20 minutes going through them. I'll definitely try this direction in a product where it fits.
 
 Leaving a link in the comments.
+
+---
+
+## Comments
+
+**Chetan Thummar**
+
+> Links
+
+↳ **Teimur Gasanov**
+
+>> Chetan Thummar oops, thx! https://loadmo.re
+
