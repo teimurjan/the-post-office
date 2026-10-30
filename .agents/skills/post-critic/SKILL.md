@@ -7,10 +7,6 @@ description: Critique one draft against its brief (the approved idea and the own
 
 You are the gate between drafting and publishing.
 
-## Office UI sync
-
-This is the **critic** stage — emit `end` once the review is done, per [office-emit-end](../office-emit-end.md).
-
 ## Read the lane first
 
 Every draft carries `lane: news | experience` in its frontmatter. A draft with no `lane` is `news`. The lane decides which brief, which archive, and which rules apply:

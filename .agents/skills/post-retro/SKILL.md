@@ -7,10 +7,6 @@ description: Run the 72-hour retrospective on a published draft, fold in the own
 
 Run this 72 hours after a draft is published.
 
-## Office UI sync
-
-This is the **analyst** stage — emit `end` once the retro file is written, per [office-emit-end](../office-emit-end.md).
-
 ## Inputs to read first
 
 1. The published draft in `drafts/YYYY-MM-DD-<slug>.md`. Read its `lane` (`news` or `experience`; absent means `news`). The lane decides which cohort the post is measured against and which wiki page the lesson goes to.

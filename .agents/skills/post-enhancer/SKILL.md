@@ -11,10 +11,6 @@ The pipeline stopped drafting on 2026-10-08. The owner's hand-written founder po
 
 **This skill is not autonomous.** It stops twice before it touches the body and waits for the owner both times. If no human is available to answer, print the questions and end. Do not guess.
 
-## Office UI sync
-
-This lights the **writer** stage on the dashboard (the stage id predates the rename) — emit `end` once the enhanced draft is saved, per [office-emit-end](../office-emit-end.md).
-
 ## Input and lane
 
 The input is always **a draft the owner wrote**: the post the way they would publish it, rough is fine, typos are fine. The lane decides what you check it against:

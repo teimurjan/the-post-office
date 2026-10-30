@@ -9,10 +9,6 @@ Your job is to find candidate angles for a **news-lane** LinkedIn post — a rea
 
 The owner's own work (their apps, numbers, replaced hires, lessons) is the **experience lane** and is never ideated from a briefing; the owner types those thoughts themselves. If the user's request is really one of those, say so and stop.
 
-## Office UI sync
-
-This is the **ideator** stage — emit `end` once `ideas/<YYYY-MM-DD>.md` is written, per [office-emit-end](../office-emit-end.md).
-
 ## Weekly cap (check first)
 
 The news lane publishes at most one post a week. Before reading the briefing, look for a news post published or drafted in the last seven days:

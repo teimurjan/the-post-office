@@ -20,10 +20,6 @@ Nothing is generated. Since 2026-10-08 the pipeline makes no images: no AI illus
 - **Never**: an AI-generated or AI-enhanced image, a stock photo, a quote or headline card, a templated slide, a logo on a gradient, a composed collage with labels.
 - **Up to four images per post.** The first is the thumbnail and the one that matters. AuthoredUp's 3M-post set put multi-image posts near 1.3x a text post's reach and single images near 1.1x; four weak images are not better than one strong one.
 
-## Office UI sync
-
-This is the **illustrator** stage — emit `end` once `concepts/<date>-<slug>/prompt.md` exists or the draft is marked `image_kind: none`, per [office-emit-end](../office-emit-end.md).
-
 ## Inputs
 
 A **draft path** like `drafts/2026-09-01-10-years-as-an-engineer.md`, required, since the artifact is filed against the draft. Read the file in full; the body tells you which artifact fits it. The skill does not accept `posts/...` paths; images are for new drafts only.
