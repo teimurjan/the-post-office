@@ -2,11 +2,11 @@
 urn: 'urn:li:activity:7520901585405751297'
 url: 'https://www.linkedin.com/feed/update/urn:li:activity:7520901585405751297/'
 posted_at: '2026-10-27T17:37:49.555Z'
-impressions: 47
+impressions: 131
 likes: 1
 comments: null
 shares: null
-scraped_at: '2026-10-28T08:06:38.052Z'
+scraped_at: '2026-11-01T17:49:12.998Z'
 ---
 Socials will probably kill themselves.
 

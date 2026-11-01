@@ -2,11 +2,11 @@
 urn: 'urn:li:activity:7515758609339789313'
 url: 'https://www.linkedin.com/feed/update/urn:li:activity:7515758609339789313/'
 posted_at: '2026-10-13T13:01:28.509Z'
-impressions: 73248
+impressions: 73296
 likes: 225
 comments: 14
 shares: null
-scraped_at: '2026-10-28T08:06:36.342Z'
+scraped_at: '2026-11-01T17:49:20.779Z'
 concept_path: concepts/2026-10-13-yesterday-i-made-my-fourth-ios-app/prompt.md
 lane: experience
 ---
@@ -61,4 +61,18 @@ I changed my approach to human-in-the-loop on every step of the creative: strate
 **Davies Aniefiok**
 
 > The 'added more human' part is the real lesson here. I'm doing the reverse on two app ideas: testing demand with a waitlist before building, with 75 signups in 2 weeks or I drop it. Curious whether human-in-the-loop on the creative changes your cost per purchase.
+
+**Periklis Tzeka**
+
+> the slopification of youtube in app form - was there any consideration of user usefulness/research for this app or just engagement fishing
+
+**Muhammad Usman Liaqat**
+
+> The gap between building an MVP and getting people to pay for it is becoming more noticeable. AI can speed up development, but understanding the audience, testing the message, and finding the right acquisition channel still require experimentation. A faster launch doesnt automatically mean faster product-market fit.
+
+**Askhalan A**
+
+> Teimur Gasanov Your journey in app development is truly inspiring! Automating each step from idea to MVP in just 3-4 days is remarkable. 
+> 
+> Looking forward to hearing about the results of your human-in-the-loop approach!
 

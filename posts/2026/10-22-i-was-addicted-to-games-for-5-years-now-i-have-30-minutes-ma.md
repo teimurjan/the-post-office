@@ -2,11 +2,11 @@
 urn: 'urn:li:activity:7519021633127456768'
 url: 'https://www.linkedin.com/feed/update/urn:li:activity:7519021633127456768/'
 posted_at: '2026-10-22T13:07:34.004Z'
-impressions: 232
+impressions: 249
 likes: 4
 comments: null
 shares: null
-scraped_at: '2026-10-28T08:06:35.355Z'
+scraped_at: '2026-11-01T17:49:11.623Z'
 lane: experience
 ---
 I was addicted to games for 5 years.

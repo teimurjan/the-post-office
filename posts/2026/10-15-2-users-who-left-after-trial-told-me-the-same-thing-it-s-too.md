@@ -2,11 +2,11 @@
 urn: 'urn:li:activity:7516475816038363137'
 url: 'https://www.linkedin.com/feed/update/urn:li:activity:7516475816038363137/'
 posted_at: '2026-10-15T12:31:23.911Z'
-impressions: 316
+impressions: 324
 likes: 2
 comments: 2
 shares: null
-scraped_at: '2026-10-28T08:06:37.995Z'
+scraped_at: '2026-11-01T17:49:10.759Z'
 lane: experience
 ---
 2 users who left after trial told me the same thing: it's too simple.
