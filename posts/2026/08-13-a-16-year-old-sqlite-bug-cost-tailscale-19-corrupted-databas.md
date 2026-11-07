@@ -7,6 +7,7 @@ likes: 9
 comments: null
 shares: null
 scraped_at: '2026-09-01T10:41:14.666Z'
+lane: news
 ---
 A 16-year-old SQLite bug cost Tailscale 19 corrupted databases.
 

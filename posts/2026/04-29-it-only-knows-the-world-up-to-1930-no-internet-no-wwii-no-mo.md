@@ -7,6 +7,7 @@ likes: 5
 comments: null
 shares: null
 scraped_at: '2026-05-13T11:10:17.374Z'
+lane: news
 ---
 It only knows the world up to 1930. No internet, no WWII, no moon landing. You can chat with it like a person stuck in that decade.
 

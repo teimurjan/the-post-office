@@ -31,8 +31,6 @@ export type HookType =
 
 export type EndingType = "question" | "takeaway" | "prediction" | "linkout";
 
-export type IdeaStatus = "shortlisted" | "approved" | "rejected" | "drafted";
-
 export type DraftStatus = "drafted" | "approved" | "published" | "rejected";
 
 export type RetroDecision = "repeat" | "modify" | "block";
@@ -40,48 +38,20 @@ export type RetroDecision = "repeat" | "modify" | "block";
 export type RetroKind = "retro" | "postmortem";
 
 /**
- * Which pipeline a post belongs to. `news` posts react to an external event
- * and come out of the briefing → ideator path; `experience` posts are about
- * the owner's own work and operation and come straight from a raw thought.
+ * Which pipeline a post belongs to. `news` posts reacted to an external event
+ * (retired 2026-11-02); `experience` posts are about the owner's own work.
  * The two are analyzed separately, so every artifact carries its lane.
  */
 export type PostLane = "news" | "experience";
 
 export const POST_LANES: readonly PostLane[] = ["news", "experience"];
 
-/** The archive predates the lane axis; everything unlabeled was a news post. */
-export const DEFAULT_LANE: PostLane = "news";
+/** Every archived file carries its lane, so an unlabeled one is a new post published without a draft. */
+export const DEFAULT_LANE: PostLane = "experience";
 
 export function parsePostLane(value: unknown): PostLane | undefined {
   return oneOf<PostLane>(value, POST_LANES);
 }
-
-export type IdeaBrief = {
-  ideaId: string;
-  sourceUrl: string;
-  sourceTitle: string;
-  briefingDate: string;
-  topicFamily: TopicFamily;
-  sourceType: SourceType;
-  angle: string;
-  whyNow: string;
-  opinionWedge: string;
-  evidencePoints: string[];
-  status: IdeaStatus;
-  body: string;
-  // Written by post-ideator and read back when the owner picks an idea. These were
-  // absent from the round-trip, so any edit through render dropped them.
-  format?: string;
-  score?: number;
-  experienceHook?: string;
-  reachCeiling?: number;
-  reachTier?: string;
-  wikiRev?: string;
-  risk?: string;
-  lane?: PostLane;
-  /** One plain sentence saying what the post is about, for the idea pick. */
-  gist?: string;
-};
 
 export type DraftFrontmatter = {
   sourceUrl?: string;
@@ -239,174 +209,6 @@ export function renderDraftMarkdown(
       ? { shares_72h: frontmatter.shares72h }
       : {}),
   });
-}
-
-/**
- * Idea ledgers are written by an LLM as hand-rolled YAML, and prose values
- * routinely break the parser: a wedge that opens on a quoted phrase
- * (`opinion_wedge: "Choose boring technology" is sold as...`) reads as a
- * double-quoted scalar with trailing garbage, and a value containing a
- * colon-space reads as a nested mapping. Either one used to throw and take the
- * whole file with it — 17 of 35 ledgers on disk were unreadable, and the Post
- * Office silently showed them as empty.
- *
- * Re-emit those values as single-quoted scalars before parsing. Only
- * single-line `key: value` pairs are touched; list items, block scalars and
- * already-safe values pass through untouched.
- */
-export function requoteAmbiguousScalars(frontmatter: string): string {
-  return frontmatter
-    .split("\n")
-    .map((line) => {
-      const pair = /^([ \t]*)([A-Za-z0-9_-]+):[ \t]+(.*\S)[ \t]*$/.exec(line);
-      if (pair) {
-        const [, indent = "", key = "", value = ""] = pair;
-        if (isYamlDirective(value) || isSafePlainScalar(value)) return line;
-        return `${indent}${key}: ${singleQuote(value)}`;
-      }
-
-      const item = /^([ \t]*)-[ \t]+(.*\S)[ \t]*$/.exec(line);
-      if (item) {
-        const [, indent = "", value = ""] = item;
-        if (isYamlDirective(value)) return line;
-        // `- key: value` is a nested mapping entry, not prose. Anything that
-        // opens on a quote is prose no matter what follows the first colon.
-        const isMappingEntry =
-          /^[A-Za-z0-9_-]+:[ \t]/.test(value) && !/^["']/.test(value);
-        if (isMappingEntry || isSafePlainScalar(value)) return line;
-        return `${indent}- ${singleQuote(value)}`;
-      }
-
-      return line;
-    })
-    .join("\n");
-}
-
-function singleQuote(value: string): string {
-  return `'${value.replace(/'/g, "''")}'`;
-}
-
-/** Block scalars, anchors, aliases and tags carry YAML meaning of their own. */
-function isYamlDirective(value: string): boolean {
-  return /^[|>&*!%@`]/.test(value);
-}
-
-function isSafePlainScalar(value: string): boolean {
-  // A well-formed quoted scalar spanning the entire value is already valid.
-  const quoted =
-    (value.startsWith('"') && value.endsWith('"') && value.length > 1) ||
-    (value.startsWith("'") && value.endsWith("'") && value.length > 1);
-  if (quoted) {
-    const inner = value.slice(1, -1);
-    const quote = value[0] ?? '"';
-    // A closing quote in the middle means the scalar ends early.
-    if (!inner.includes(quote)) return true;
-    if (quote === "'" && !/(^|[^'])'([^']|$)/.test(inner)) return true;
-    return false;
-  }
-  // A plain scalar may not open with a quote, nor contain a colon-space
-  // (which YAML reads as a nested key) or a trailing colon.
-  if (value.startsWith('"') || value.startsWith("'")) return false;
-  if (value.includes(": ") || value.endsWith(":")) return false;
-  if (value.includes(" #")) return false;
-  return true;
-}
-
-/**
- * Split a ledger into `---`-delimited segments and pair each frontmatter block
- * with the body that follows it. Scanning delimiters positionally used to
- * misread a file whose entries sit back-to-back (`---` immediately followed by
- * `---`, no body between): the closing and opening fences merged, and the next
- * entry's frontmatter was swallowed into the previous entry's body, losing half
- * the ideas in the file.
- */
-function splitLedgerEntries(
-  raw: string,
-): Array<{ frontmatter: string; body: string }> {
-  const segments = raw.split(/^---[ \t]*$/m);
-  const out: Array<{ frontmatter: string; body: string }> = [];
-
-  for (let i = 0; i < segments.length; i++) {
-    const segment = segments[i] ?? "";
-    if (!/^[ \t]*idea_id[ \t]*:/m.test(segment)) continue;
-    const next = segments[i + 1] ?? "";
-    // A segment holding another entry's frontmatter is not this entry's body.
-    const body = /^[ \t]*idea_id[ \t]*:/m.test(next) ? "" : next;
-    out.push({ frontmatter: segment.trim(), body: body.trim() });
-  }
-
-  return out;
-}
-
-export function parseIdeaLedger(raw: string): IdeaBrief[] {
-  const entries: IdeaBrief[] = [];
-
-  for (const { frontmatter, body } of splitLedgerEntries(raw)) {
-    const parsed = matter(
-      `---\n${requoteAmbiguousScalars(frontmatter)}\n---\n`,
-    );
-    const data = parsed.data as Record<string, unknown>;
-    entries.push({
-      ideaId: str(data.idea_id) ?? "",
-      sourceUrl: str(data.source_url) ?? "",
-      sourceTitle: str(data.source_title) ?? "",
-      briefingDate: str(data.briefing_date) ?? "",
-      topicFamily: topicFamily(data.topic_family) ?? "other",
-      sourceType: sourceType(data.source_type) ?? "opinion",
-      angle: str(data.angle) ?? "",
-      whyNow: str(data.why_now) ?? "",
-      opinionWedge: str(data.opinion_wedge) ?? "",
-      evidencePoints: stringArray(data.evidence_points),
-      status: ideaStatus(data.status) ?? "shortlisted",
-      body,
-      ...optional("format", str(data.format)),
-      ...optional("score", num(data.score)),
-      ...optional("experienceHook", str(data.experience_hook)),
-      ...optional("reachCeiling", num(data.reach_ceiling)),
-      ...optional("reachTier", str(data.reach_tier)),
-      ...optional("wikiRev", str(data.wiki_rev)),
-      ...optional("risk", str(data.risk)),
-      ...optional("lane", parsePostLane(data.lane)),
-      ...optional("gist", str(data.gist)),
-    });
-  }
-
-  return entries;
-}
-
-export function renderIdeaLedger(entries: IdeaBrief[]): string {
-  return entries
-    .map((entry) =>
-      matter.stringify(entry.body.trim(), {
-        idea_id: entry.ideaId,
-        source_url: entry.sourceUrl,
-        source_title: entry.sourceTitle,
-        briefing_date: entry.briefingDate,
-        topic_family: entry.topicFamily,
-        source_type: entry.sourceType,
-        ...(entry.lane !== undefined ? { lane: entry.lane } : {}),
-        ...(entry.format !== undefined ? { format: entry.format } : {}),
-        ...(entry.gist !== undefined ? { gist: entry.gist } : {}),
-        angle: entry.angle,
-        ...(entry.score !== undefined ? { score: entry.score } : {}),
-        why_now: entry.whyNow,
-        opinion_wedge: entry.opinionWedge,
-        ...(entry.experienceHook !== undefined
-          ? { experience_hook: entry.experienceHook }
-          : {}),
-        ...(entry.reachCeiling !== undefined
-          ? { reach_ceiling: entry.reachCeiling }
-          : {}),
-        ...(entry.reachTier !== undefined
-          ? { reach_tier: entry.reachTier }
-          : {}),
-        ...(entry.wikiRev !== undefined ? { wiki_rev: entry.wikiRev } : {}),
-        ...(entry.risk !== undefined ? { risk: entry.risk } : {}),
-        evidence_points: entry.evidencePoints,
-        status: entry.status,
-      }),
-    )
-    .join("\n");
 }
 
 export async function loadRetros(root = RETROS_DIR): Promise<RetroRecord[]> {
@@ -593,15 +395,6 @@ function hookType(value: unknown): HookType | undefined {
     "contrarian",
     "observation",
     "result",
-  ]);
-}
-
-function ideaStatus(value: unknown): IdeaStatus | undefined {
-  return oneOf<IdeaStatus>(value, [
-    "shortlisted",
-    "approved",
-    "rejected",
-    "drafted",
   ]);
 }
 

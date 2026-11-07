@@ -1,4 +1,5 @@
 ---
+lane: news
 draft_file: drafts/2026-07-17-grok-build-uploaded-a-file-it-refused-to.md
 topic_family: security
 source_type: news

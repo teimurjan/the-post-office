@@ -6,10 +6,6 @@
   "scripts": {
     "scrape": "bun run src/scraper/index.ts",
     "rescrape": "bun src/scraper/cli/rescrape.ts",
-    "hn": "bun src/briefing/cli/hn.ts",
-    "lobsters": "bun src/briefing/cli/lobsters.ts",
-    "rss": "bun src/briefing/cli/rss.ts",
-    "briefing": "bun src/briefing/cli/briefing.ts",
     "top-posts": "bun src/analytics/cli/top-posts.ts",
     "post-patterns": "bun src/analytics/cli/post-patterns.ts",
     "wiki": "bun src/wiki/cli/wiki.ts",
@@ -18,8 +14,8 @@
     "post-lane": "bun src/scraper/cli/post-lane.ts",
     "cleanup": "bun src/cleanup/cli/cleanup.ts",
     "test": "bun test",
-    "lint": "biome check src",
-    "format": "biome format --write src"
+    "lint": "biome check src news/src",
+    "format": "biome format --write src news/src"
   },
   "dependencies": {
     "cloakbrowser": "^0.5.7",

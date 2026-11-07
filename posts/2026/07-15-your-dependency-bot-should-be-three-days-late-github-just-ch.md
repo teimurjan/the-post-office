@@ -8,6 +8,7 @@ comments: null
 shares: 2
 scraped_at: '2026-08-06T06:28:40.430Z'
 concept_path: concepts/2026-07-15-your-dependency-bot-should-be-three-days-late/prompt.md
+lane: news
 ---
 Your dependency bot should be three days late.
 

@@ -7,6 +7,7 @@ likes: 6
 comments: 1
 shares: null
 scraped_at: '2026-07-13T05:42:32.518Z'
+lane: news
 ---
 A job application goes in. Nothing comes back.
 

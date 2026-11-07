@@ -7,6 +7,7 @@ likes: 6
 comments: 1
 shares: 1
 scraped_at: '2026-07-01T11:25:02.003Z'
+lane: news
 ---
 AI code passes review because it reads clean. That's the bug.
 

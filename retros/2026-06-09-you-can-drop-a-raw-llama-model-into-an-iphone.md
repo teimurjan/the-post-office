@@ -1,4 +1,5 @@
 ---
+lane: news
 draft_file: drafts/2026-06-09-you-can-drop-a-raw-llama-model-into-an-iphone.md
 topic_family: other
 source_type: news

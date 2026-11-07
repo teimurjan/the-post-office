@@ -7,6 +7,7 @@ likes: 2
 comments: null
 shares: null
 scraped_at: '2026-06-03T07:11:25.321Z'
+lane: news
 ---
 A new paper benchmarks LLM coding agents on 100 back-end tasks across 8 web frameworks and finds something the leaderboard versions don't.
 

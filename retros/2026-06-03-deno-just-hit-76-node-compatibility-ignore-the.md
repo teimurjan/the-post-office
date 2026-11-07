@@ -1,4 +1,5 @@
 ---
+lane: news
 draft_file: drafts/2026-06-03-deno-just-hit-76-node-compatibility-ignore-the.md
 topic_family: frontend
 source_type: news

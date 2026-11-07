@@ -7,6 +7,7 @@ likes: null
 comments: null
 shares: null
 scraped_at: '2026-05-13T11:10:12.925Z'
+lane: news
 ---
 Everyone’s predicting LLM subscriptions will 2-3x in the next two years. I keep reading these takes and nodding halfway, then disagreeing.
 

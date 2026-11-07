@@ -7,6 +7,7 @@ likes: 15
 comments: 4
 shares: null
 scraped_at: '2026-06-12T06:37:37.655Z'
+lane: news
 ---
 Everyone read 4B params. I read 0.93 gigabytes.
 

@@ -366,7 +366,7 @@ describe("lane scoping", () => {
     expect(markdown).toContain("## Lanes (full archive)");
   });
 
-  test("lane scoping drops the other lane's retros; unlabeled retros count as news", () => {
+  test("lane scoping drops the other lane's retros; unlabeled retros count as experience", () => {
     const retro = (
       lane: "news" | "experience" | undefined,
       summary: string,
@@ -389,19 +389,20 @@ describe("lane scoping", () => {
       body: "",
     });
     const retros = [
-      retro(undefined, "legacy news lesson"),
-      retro("experience", "experience lesson"),
+      retro("news", "news lesson"),
+      retro(undefined, "unlabeled lesson"),
     ];
 
     const scoped = analyzePostPatterns([...news, ...experience], retros, {
       lane: "experience",
     });
-    expect(scoped.retroSignals.join("\n")).toContain("experience lesson");
-    expect(scoped.retroSignals.join("\n")).not.toContain("legacy news lesson");
+    expect(scoped.retroSignals.join("\n")).toContain("unlabeled lesson");
+    expect(scoped.retroSignals.join("\n")).not.toContain("news lesson");
 
     const newsOnly = analyzePostPatterns([...news, ...experience], retros, {
       lane: "news",
     });
-    expect(newsOnly.retroSignals.join("\n")).toContain("legacy news lesson");
+    expect(newsOnly.retroSignals.join("\n")).toContain("news lesson");
+    expect(newsOnly.retroSignals.join("\n")).not.toContain("unlabeled lesson");
   });
 });

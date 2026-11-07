@@ -7,6 +7,7 @@ likes: 1
 comments: null
 shares: null
 scraped_at: '2026-11-01T17:49:12.998Z'
+lane: news
 ---
 Socials will probably kill themselves.
 

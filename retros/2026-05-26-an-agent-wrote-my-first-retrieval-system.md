@@ -1,4 +1,5 @@
 ---
+lane: news
 draft_file: drafts/2026-05-26-an-agent-wrote-my-first-retrieval-system.md
 published_url: https://www.linkedin.com/feed/update/urn:li:activity:7465039149860020224/
 published_at: 2026-05-26T14:00:27.047Z

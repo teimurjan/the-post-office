@@ -3,7 +3,7 @@ page: index
 kind: index
 title: Wiki index
 status: active
-last_revised: 2026-10-21
+last_revised: 2026-11-05
 ---
 
 # Wiki
@@ -45,7 +45,7 @@ untidy one.
 | Page | Kind | Confidence | Evidence | Covers | Revised |
 |---|---|---|---|---|---|
 | [audience](audience.md) | audience | medium | n=25 | 66 posts | 2026-10-06 |
-| [experience](experience.md) | audience | low | n=10 | 69 posts | 2026-10-21 |
+| [experience](experience.md) | audience | low | n=10 | 73 posts | 2026-11-05 |
 <!-- END catalog -->
 
 ## Not built yet
@@ -54,7 +54,7 @@ Deliberately absent, in the order they would come next:
 
 - `plays/` — repeatable post shapes with a win/loss record, replacing the winner
   anecdotes still hardcoded in `post-writer`.
-- `hooks/` — hook frames discovered inductively, so `post-critic`'s frame gate has
+- `hooks/` — hook frames discovered inductively, so `linkedin-post-critic`'s frame gate has
   something real to compare against. It is currently inert: the classifier defines one
   frame template and no recent post matches it.
 - `imagery.md` — the concept/metaphor ledger. `post-image` already cites an "imagery
@@ -62,5 +62,5 @@ Deliberately absent, in the order they would come next:
 - `families/_taxonomy.md` — a warning label for the `topic_family` axis, if the axis
   survives at all.
 
-No `voice.md`: `tone-samples/` is already the canonical voice reference per
-`post-writer`, and a second source would recreate the problem this wiki fixes.
+No `voice.md`: `.vendor/teimurjan-agent-config/MY-VOICE.md` is already the canonical
+voice reference, and a second source would recreate the problem this wiki fixes.

@@ -9,6 +9,7 @@ shares: null
 scraped_at: '2026-08-17T10:33:54.710Z'
 concept_path: >-
   concepts/2026-07-27-one-symlink-and-your-coding-agent-leaves-the-repo/prompt.md
+lane: news
 ---
 One symlink, and your coding agent leaves the repo.
 

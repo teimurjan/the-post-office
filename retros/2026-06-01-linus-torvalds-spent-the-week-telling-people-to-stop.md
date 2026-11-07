@@ -1,4 +1,5 @@
 ---
+lane: news
 draft_file: drafts/2026-05-29-linus-torvalds-spent-the-week-telling-people-to-stop.md
 topic_family: other
 source_type: opinion

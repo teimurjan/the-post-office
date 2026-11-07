@@ -8,6 +8,7 @@ comments: 3
 shares: null
 scraped_at: '2026-07-23T06:58:56.435Z'
 concept_path: concepts/2026-07-07-top-tier-realtime-voice-is-not-a-premium-feature/prompt.md
+lane: news
 ---
 Top-tier realtime voice is not a premium feature anymore.
 

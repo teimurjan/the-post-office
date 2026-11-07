@@ -7,6 +7,7 @@ likes: 5
 comments: null
 shares: null
 scraped_at: '2026-05-13T11:10:15.179Z'
+lane: news
 ---
 A new TINY coding agent model dropped quietly: Omnicoder-9B.
 

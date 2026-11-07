@@ -1,4 +1,5 @@
 ---
+lane: news
 draft_file: drafts/2026-06-11-ai-code-passes-review-because-it-reads-clean.md
 topic_family: agents
 source_type: news

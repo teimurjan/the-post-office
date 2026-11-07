@@ -7,6 +7,7 @@ likes: null
 comments: null
 shares: null
 scraped_at: '2026-09-16T06:58:17.205Z'
+lane: news
 ---
 Windows Paint bakes a server-issued GUID into your pixels.
 

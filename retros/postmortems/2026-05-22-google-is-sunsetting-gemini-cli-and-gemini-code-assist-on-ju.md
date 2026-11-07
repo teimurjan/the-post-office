@@ -1,4 +1,5 @@
 ---
+lane: news
 kind: postmortem
 source_post: posts/2026/05-22-google-is-sunsetting-gemini-cli-and-gemini-code-assist-on-ju.md
 topic_family: agents

@@ -7,6 +7,7 @@ likes: 8
 comments: null
 shares: null
 scraped_at: '2026-08-20T04:07:26.412Z'
+lane: news
 ---
 TypeScript 7 is 11x faster. Your linter still can't run it.
 

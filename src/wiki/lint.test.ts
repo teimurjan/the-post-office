@@ -242,7 +242,10 @@ describe("wiki lint", () => {
   test("does not flag a skill pointing at a page that exists", () => {
     const findings = lint([makePage("audience", VALID)], {
       skillFiles: new Map([
-        [".agents/skills/post-ideator/SKILL.md", "read wiki/audience.md first"],
+        [
+          ".agents/skills/linkedin-post-critic/SKILL.md",
+          "read wiki/audience.md first",
+        ],
       ]),
     });
     expect(checks(findings)).not.toContain("dangling-wiki-path");
@@ -252,7 +255,7 @@ describe("wiki lint", () => {
     const findings = lint([makePage("audience", VALID)], {
       skillFiles: new Map([
         [
-          ".agents/skills/post-enhancer/SKILL.md",
+          ".agents/skills/linkedin-post-enhancer/SKILL.md",
           "read .vendor/teimurjan-llm-wiki/wiki/facts/proof.md for the numbers",
         ],
       ]),

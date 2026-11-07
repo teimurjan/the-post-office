@@ -7,6 +7,7 @@ likes: null
 comments: null
 shares: null
 scraped_at: '2026-09-25T08:25:11.042Z'
+lane: news
 ---
 Agents that skipped the skill file wrote better code.
 

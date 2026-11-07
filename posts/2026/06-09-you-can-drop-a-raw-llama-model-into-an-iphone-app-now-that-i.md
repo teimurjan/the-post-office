@@ -7,6 +7,7 @@ likes: 2
 comments: null
 shares: null
 scraped_at: '2026-07-01T11:25:01.976Z'
+lane: news
 ---
 You can drop a raw Llama model into an iPhone app now.
 

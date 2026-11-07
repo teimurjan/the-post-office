@@ -8,6 +8,7 @@ comments: null
 shares: null
 scraped_at: '2026-08-10T09:42:02.418Z'
 concept_path: concepts/2026-07-21-cursor-cut-70000-agent-conflicts-below-1000/prompt.md
+lane: news
 ---
 Cursor cut 70,000 agent conflicts below 1,000.
 

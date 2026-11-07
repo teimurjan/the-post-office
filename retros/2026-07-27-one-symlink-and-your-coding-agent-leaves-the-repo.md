@@ -1,4 +1,5 @@
 ---
+lane: news
 draft_file: drafts/2026-07-27-one-symlink-and-your-coding-agent-leaves-the-repo.md
 topic_family: security
 source_type: news

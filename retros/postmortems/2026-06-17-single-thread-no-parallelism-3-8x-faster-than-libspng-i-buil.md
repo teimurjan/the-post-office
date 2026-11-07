@@ -1,4 +1,5 @@
 ---
+lane: news
 kind: postmortem
 source_post: posts/2026/06-17-single-thread-no-parallelism-3-8x-faster-than-libspng-i-buil.md
 topic_family: performance

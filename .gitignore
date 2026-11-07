@@ -3,13 +3,11 @@ node_modules/
 debug/
 drafts/
 channels/
-ideas/
 images
 *.log
 .DS_Store
 .lethe
 cv.md
 .exa-cache/
-tone-samples/
 .playwright-mcp
 .env

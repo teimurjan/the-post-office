@@ -1,4 +1,5 @@
 ---
+lane: news
 draft_file: drafts/2026-06-29-a-job-application-goes-in-nothing-comes-back.md
 topic_family: other
 source_type: news

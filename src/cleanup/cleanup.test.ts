@@ -52,27 +52,21 @@ describe("cutoffDate", () => {
 describe("collectDatedEntries", () => {
   test("collects dated markdown files and dated image directories", async () => {
     const root = await tempRoot();
-    await writeAt(root, "ideas/2026-08-19.md");
     await writeAt(root, "drafts/2026-08-13-a-slug.md");
     await mkdir(join(root, "images/2026-08-13-a-slug"), { recursive: true });
 
     const entries = await collectDatedEntries(root);
 
     expect(entries.map((e) => e.path)).toEqual([
-      "ideas/2026-08-19.md",
       "drafts/2026-08-13-a-slug.md",
       "images/2026-08-13-a-slug",
     ]);
-    expect(entries.map((e) => e.date)).toEqual([
-      "2026-08-19",
-      "2026-08-13",
-      "2026-08-13",
-    ]);
+    expect(entries.map((e) => e.date)).toEqual(["2026-08-13", "2026-08-13"]);
   });
 
   test("ignores undated names, non-markdown files, and durable directories", async () => {
     const root = await tempRoot();
-    await writeAt(root, "ideas/README.md");
+    await writeAt(root, "drafts/README.md");
     await writeAt(root, "drafts/2026-08-13-a-slug.txt");
     await writeAt(root, "images/2026-08-13-loose.png");
     await writeAt(root, "briefings/2026-08-13.md");
@@ -118,14 +112,14 @@ describe("findRetroPendingDrafts", () => {
 describe("planCleanup", () => {
   test("keeps entries on or after the cutoff and removes the rest", () => {
     const entries = [
-      entry("ideas/2026-08-19.md", "2026-08-19"),
-      entry("ideas/2026-08-17.md", "2026-08-17"),
-      entry("ideas/2026-08-16.md", "2026-08-16"),
+      entry("drafts/2026-08-19-a.md", "2026-08-19"),
+      entry("drafts/2026-08-17-b.md", "2026-08-17"),
+      entry("drafts/2026-08-16-c.md", "2026-08-16"),
     ];
 
     const plan = planCleanup(entries, "2026-08-17", new Set());
 
-    expect(plan.remove.map((e) => e.path)).toEqual(["ideas/2026-08-16.md"]);
+    expect(plan.remove.map((e) => e.path)).toEqual(["drafts/2026-08-16-c.md"]);
     expect(plan.keep.map((e) => e.reason)).toEqual(["recent", "recent"]);
   });
 

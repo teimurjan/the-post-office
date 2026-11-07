@@ -9,6 +9,7 @@ shares: null
 scraped_at: '2026-08-06T06:28:36.940Z'
 concept_path: >-
   concepts/2026-07-13-claude-code-spends-33000-tokens-before-your-prompt/prompt.md
+lane: news
 ---
 The bill starts before you type.
 Claude Code spends 33,000 tokens before your prompt.

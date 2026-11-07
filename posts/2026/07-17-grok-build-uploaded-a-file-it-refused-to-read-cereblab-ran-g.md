@@ -8,6 +8,7 @@ comments: null
 shares: null
 scraped_at: '2026-08-06T06:28:39.467Z'
 concept_path: concepts/2026-07-17-grok-build-uploaded-a-file-it-refused-to/prompt.md
+lane: news
 ---
 Grok Build uploaded a file it refused to read.
 

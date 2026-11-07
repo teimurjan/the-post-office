@@ -8,6 +8,7 @@ comments: 4
 shares: null
 scraped_at: '2026-06-14T16:25:04.170Z'
 concept_path: concepts/2026-06-03-deno-just-hit-76-node-compatibility-ignore-the/prompt.md
+lane: news
 ---
 Deno just hit 76% Node compatibility. Ignore the number.
 

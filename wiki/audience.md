@@ -70,7 +70,7 @@ promotion_review:
   pre_scored_missed: 3
   # Pre-scored t2 that landed under t2's observed floor but over t2_miss_below,
   # so it is neither a clean hold nor a dispute. Counted on its own line: the 08-21
-  # GitHub failover (1905, sequel discount) and the 09-25 DHH/Rails post (2638).
+  # GitHub failover (1905, sequel discount) and the 09-25 DHH/Rails post (2664).
   pre_scored_near_miss: 2
   t2_miss_below: 1000
   t0_beat_above: 3000
@@ -113,7 +113,7 @@ tiers:
     score: 1
     label: A namable sub-community with an active audience
     observed_n: 5
-    observed_median: 2638
+    observed_median: 2664
     observed_min: 1380
     observed_max: 3570
     # The "or the owner's own shipped work" clause was removed on 2026-09-02: its
@@ -127,7 +127,8 @@ tiers:
         impressions: 3082
         subject: AI hiring screens
       - post: posts/2026/09-25-the-creator-of-rails-put-pencils-down-at-53-dhh-told-rails-w.md
-        impressions: 2638
+        # 2638 at first scrape; rescraped 2026-11-01.
+        impressions: 2664
         subject: one company's pencils-down policy carried by a t2 name (DHH, Rails); scored 2, landed in t1
         pre_scored: true
         scored_at_ideation: 2
@@ -143,14 +144,14 @@ tiers:
     observed_n: 12
     observed_median: 185
     observed_min: 78
-    observed_max: 449
+    observed_max: 451
     exemplars:
       - post: posts/2026/05-22-google-is-sunsetting-gemini-cli-and-gemini-code-assist-on-ju.md
         impressions: 236
         subject: one vendor's product sunset
       - post: posts/2026/09-21-jev-will-not-replace-your-model-it-goes-in-front-of-it-types.md
-        # 224 at 72h; rescraped 2026-10-06, now the top of the band.
-        impressions: 449
+        # 224 at 72h, 449 on 2026-10-06; rescraped 2026-11-01, the top of the band.
+        impressions: 451
         first_scrape_impressions: 224
         first_scrape_age_hours: 72
         subject: one vendor's decision model, scored 0 and owner-overridden for a firsthand layer
@@ -340,10 +341,10 @@ Subject recognizability does separate them, and the bands do not overlap:
 | Tier | n | Median | Range |
 |---|---|---|---|
 | t2 | 8 | 33509 | 5154 – 128280 |
-| t1 | 5 | 2638 | 1380 – 3570 |
-| t0 | 12 | 185 | 78 – 449 |
+| t1 | 5 | 2664 | 1380 – 3570 |
+| t0 | 12 | 185 | 78 – 451 |
 
-t0's ceiling (449) sits below t1's floor (1380). t1's ceiling (3570) sits below t2's
+t0's ceiling (451) sits below t1's floor (1380). t1's ceiling (3570) sits below t2's
 floor (5154). The gaps are wide enough that the separation survived removing five
 experience-lane posts from the pool on 2026-09-02.
 
@@ -358,7 +359,7 @@ It is: **when you name the subject in five words, has the reader used the thing?
 - **t1** — the subject has a real, namable audience, but not everyone is in it.
   SolidJS. Vercel Zero. A specific vendor's tool that a sub-community actually uses.
 - **t0** — one vendor's product nobody else is in, one paper, one benchmark result,
-  one configuration. A sharp wedge does not rescue this. Every t0 post in the corpus landed between 78 and 449 impressions, several of them with clean craft and a real
+  one configuration. A sharp wedge does not rescue this. Every t0 post in the corpus landed between 78 and 451 impressions, several of them with clean craft and a real
   argument.
 
 The three ways this assignment has gone wrong in practice all inflate a t0 into a t2.
@@ -380,7 +381,7 @@ The 09-21 Jev post is the fourth, and the cleanest test so far. The ideator scor
 the layer was an experience line — tiny models on a Raspberry Pi and in an old car,
 all of them generating text to make a decision — not anything the reader could run.
 It landed at 224 at 72 hours, twelve under the band's then-ceiling of 236, with two
-comments validating the wedge, and rescraped to 449 on 2026-10-06, which makes it the
+comments validating the wedge, and rescraped to 449 on 2026-10-06 and 451 on 2026-11-01, which makes it the
 top of t0's band and still 3x under t1's floor. An override of a 0 for a firsthand
 story buys the top of the band; it does not buy a tier. Only a runnable artifact still
 has an open claim to promotion.
@@ -465,7 +466,7 @@ afternoon to, and it held t1 under the sequel discount.
 
 The 09-25 DHH/Rails post is the mirror case, on one post. Pre-scored 2 on a t2 name,
 it argued one company's policy (hand-written code is now the exception at 37signals)
-against a Rails-core benchmark, and landed at 2638: inside t1's band, over the
+against a Rails-core benchmark, and landed at 2664: inside t1's band, over the
 `t2_miss_below` trigger, half the t2 floor. The argued thing was not a property nobody
 has fought with, as the license was; it was a debate the reader is already in. So the
 same rule read from the other side: the name brought the room to the door, and the
@@ -479,7 +480,7 @@ previous news-lane t0 floor of 163. `confidence: anecdote`, `evidence_n: 1` — 
 establishes nothing, and it is recorded in `sub_band_watch` rather than made a rule.
 
 The hypothesis worth testing is that t0 is not one room but two: t0 subjects inside the
-audience's working path (a CLI being sunset, an agent format, a coding benchmark) hold 138–449 (163–236 before the 09-16 and 09-21 rescrapes), while a t0 subject outside it has no floor at all. If a second post lands under
+audience's working path (a CLI being sunset, an agent format, a coding benchmark) hold 138–451 (163–236 before the 09-16 and 09-21 rescrapes), while a t0 subject outside it has no floor at all. If a second post lands under
 150 on a subject the audience does not operate, this becomes a sub-band and t0 gains a
 "does the audience touch this category at all" gate. Until then it is one data point.
 
@@ -510,7 +511,7 @@ bot should be three days late` is the same shape at 34,287, so the shape is not 
 And 100,618 is an outlier that a single algorithmic pickup could explain, which would make
 the ratio meaningless; the failover post performed like an ordinary good post, not like a
 failure. What survives both objections is that the second post did not inherit the first
-one's room, and nothing in the pipeline expected that: `post-ideator` dedups on *angle*, and
+one's room, and nothing in the pipeline expected that: `news-ideator` dedups on *angle*, and
 these two angles are genuinely different. The subject was not.
 
 **A reused frame may take a similar discount, on one data point.** The 07-23 OpenAI
@@ -522,7 +523,7 @@ window generalizes from subject to shape.
 
 **One t0 subject cleared its band (874), and the reason is a trap.** The 08-17
 merge-rate post built on Anthropic's self-reported 46% — a textbook t0 vendor metric —
-and landed at 874, ~1.9x above t0's 449 ceiling (3.7x above the 236 ceiling it was recorded against) and into the empty gap below t1's floor.
+and landed at 874, ~1.9x above t0's 451 ceiling (3.7x above the 236 ceiling it was recorded against) and into the empty gap below t1's floor.
 Its wedge reframed the "AI writes X% of our code" argument the audience is already
 having, so it rented a room the vendor number does not own alone. This is recorded as a
 `counter_post`, not a rule. It sits below the `t0_beat_above: 3000` trigger, so the tier
@@ -565,12 +566,12 @@ rather than the post's tier.
 
 `promotion_review` tracks that count: **eight scored prospectively, three held, three
 missed, two near-misses.** The eighth is the 09-25 DHH/Rails post: scored 2, landed at
-2638, in t1's band and over the `t2_miss_below` trigger, so a near-miss and not a
+2664, in t1's band and over the `t2_miss_below` trigger, so a near-miss and not a
 dispute. The threshold of 8 is reached and the page does not go to `high`: the bands
 held on all eight (every post landed inside a band, none between), but the procedure put
 only three of eight in the band it predicted. `high` needs the procedure to predict, not
 only the bands to describe. The third hold is the first pre-scored t0: scored 0,
-published at 224, rescraped to 449, inside the band both times. All three misses were
+published at 224, rescraped to 451, inside the band both times. All three misses were
 pre-scored t2 subjects that were t0, and all three were assignment errors rather than
 band errors. `confidence` stays `medium`, with two triggers down to `low`: the next
 pre-scored t2 that lands under 1000, or a third near-miss, which would mean the t2 label
@@ -610,7 +611,7 @@ Things this page cannot yet answer, which the next retros should settle:
   only the latter. A coreutils post arguing a behaviour change would settle it. The 09-25
   DHH/Rails post adds a third reading: a t2 name carrying one company's policy, where
   the argued thing is a live debate rather than an unfought property, landed in t1
-  (2638). One post each, so the gradation (unfought property lands t0, live debate lands
+  (2664). One post each, so the gradation (unfought property lands t0, live debate lands
   t1, the noun alone never buys t2) is a hypothesis to score against, not a rule.
 - Is t0 one room or two? See "Below the band" — one post landed at 78 against a floor of
   163, on a subject the audience does not operate. One more would make it a sub-band.

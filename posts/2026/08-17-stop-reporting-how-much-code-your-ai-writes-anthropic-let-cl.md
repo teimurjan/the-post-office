@@ -7,6 +7,7 @@ likes: 5
 comments: null
 shares: 2
 scraped_at: '2026-09-01T10:41:07.062Z'
+lane: news
 ---
 Stop reporting how much code your AI writes.
 

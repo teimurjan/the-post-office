@@ -1,4 +1,5 @@
 ---
+lane: news
 draft_file: drafts/2026-07-10-rewrite-it-in-rust-used-to-be-a-joke.md
 topic_family: other
 source_type: news

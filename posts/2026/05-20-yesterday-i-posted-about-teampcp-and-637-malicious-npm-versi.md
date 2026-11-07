@@ -7,6 +7,7 @@ likes: 3
 comments: null
 shares: null
 scraped_at: '2026-05-28T05:36:47.961Z'
+lane: news
 ---
 Yesterday I posted about TeamPCP and 637 malicious npm versions. Today the same group is claiming GitHub itself. Roughly 4000 internal repos, on sale for $50k.
 

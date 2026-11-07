@@ -1,4 +1,5 @@
 ---
+lane: news
 draft_file: drafts/2026-07-15-your-dependency-bot-should-be-three-days-late.md
 topic_family: security
 source_type: news

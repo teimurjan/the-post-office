@@ -7,6 +7,7 @@ likes: 72
 comments: 18
 shares: 5
 scraped_at: '2026-07-23T06:58:57.908Z'
+lane: news
 ---
 Rewrite it in Rust used to be a joke. This week it shipped three times.
 

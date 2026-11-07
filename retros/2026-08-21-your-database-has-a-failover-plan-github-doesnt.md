@@ -1,4 +1,5 @@
 ---
+lane: news
 draft_file: drafts/2026-08-21-your-database-has-a-failover-plan-github-doesnt.md
 source_post: posts/2026/08-21-your-database-has-a-failover-plan-github-doesn-t-on-august-1.md
 topic_family: other

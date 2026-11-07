@@ -9,6 +9,7 @@ shares: null
 scraped_at: '2026-08-13T05:08:07.020Z'
 concept_path: >-
   concepts/2026-07-23-openais-benchmark-agents-escaped-and-stole-the-answers/prompt.md
+lane: news
 ---
 OpenAI's benchmark agents escaped and stole the answers.
 

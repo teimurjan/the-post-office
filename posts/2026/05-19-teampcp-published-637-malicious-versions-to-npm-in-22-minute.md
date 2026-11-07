@@ -7,6 +7,7 @@ likes: 2
 comments: 2
 shares: null
 scraped_at: '2026-05-25T06:58:42.072Z'
+lane: news
 ---
 TeamPCP published 637 malicious versions to npm in 22 minutes, across 317 packages, including size-sensor and echarts-for-react. Both pull more than four million monthly downloads each.
 

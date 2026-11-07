@@ -1,4 +1,5 @@
 ---
+lane: news
 draft_file: drafts/2026-08-17-stop-reporting-how-much-code-your-ai-writes.md
 source_post: posts/2026/08-17-stop-reporting-how-much-code-your-ai-writes-anthropic-let-cl.md
 topic_family: agents

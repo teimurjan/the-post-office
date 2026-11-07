@@ -7,6 +7,7 @@ likes: 2
 comments: 1
 shares: null
 scraped_at: '2026-05-29T07:48:24.969Z'
+lane: news
 ---
 Alibaba launched Qwen 3.7 Max yesterday and called it "The Agent Frontier."
 

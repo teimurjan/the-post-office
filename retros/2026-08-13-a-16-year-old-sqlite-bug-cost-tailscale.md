@@ -1,4 +1,5 @@
 ---
+lane: news
 draft_file: drafts/2026-08-13-a-16-year-old-sqlite-bug-cost-tailscale.md
 source_post: posts/2026/08-13-a-16-year-old-sqlite-bug-cost-tailscale-19-corrupted-databas.md
 topic_family: other

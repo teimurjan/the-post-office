@@ -7,6 +7,7 @@ likes: 3
 comments: null
 shares: null
 scraped_at: '2026-07-03T09:17:49.039Z'
+lane: news
 ---
 Curl is closing its security inbox for all of July.
 

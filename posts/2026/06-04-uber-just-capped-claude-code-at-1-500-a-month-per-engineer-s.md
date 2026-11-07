@@ -8,6 +8,7 @@ comments: null
 shares: null
 scraped_at: '2026-06-16T05:41:28.301Z'
 concept_path: concepts/2026-06-04-uber-just-capped-claude-code-at-1500-a-month/prompt.md
+lane: news
 ---
 Uber just capped Claude Code at $1,500 a month per engineer.
 

@@ -1,16 +1,19 @@
-A content-generation pipeline for LinkedIn, built on top of a personal post archive.
+A content pipeline for two platforms, LinkedIn and X, built on top of a personal LinkedIn
+post archive.
 
-Two halves. A **loop** that turns either current news or a thought the owner typed into a
-drafted, critiqued, illustrated post with the owner in the loop, and a **wiki** that
-accumulates what the archive has actually taught, so the loop stops rediscovering it on
-every run.
+Two **directions**, written separately and sharing nothing but the voice:
 
-The loop runs in two **lanes**. `news` posts react to an external event and go through a
-briefing and an ideator. `experience` posts are about the owner's own operation (apps,
-numbers, functions built instead of hired, lessons from the sell side) and start from a
-sentence the owner wrote. The lanes are analyzed separately — `--lane news|experience` on
-every report — and the brand wiki in `.vendor/teimurjan-llm-wiki/` defines the second lane and the voice
-of both, read with `bun run --silent --cwd .vendor/teimurjan-llm-wiki wiki view post-writing`.
+- **LinkedIn** — posts about the owner's own operation (apps, numbers, functions built
+  instead of hired, lessons from the sell side). A **loop** takes a draft the owner wrote
+  through an edit pass, a critic, and a real screenshot, and a **wiki** accumulates what
+  the archive has taught, so the loop stops rediscovering it on every run.
+- **X** — build in public: the week's work while it is still moving.
+
+News posts (reactions to external events) left on 2026-11-02. The fetchers, briefings,
+and the ideator live in [`news/`](news/), a self-contained folder meant to run from a
+personal agent. The brand wiki in `.vendor/teimurjan-llm-wiki/` defines the positioning of
+both platforms, read with `bun run --silent --cwd .vendor/teimurjan-llm-wiki wiki view post-writing`.
+`.vendor/teimurjan-agent-config/` holds the owner's voice (`MY-VOICE.md`) and facts (`MY-BRAIN.md`).
 
 https://github.com/user-attachments/assets/f478ba31-8091-411e-b672-80c22c7735ee
 
@@ -18,7 +21,7 @@ https://github.com/user-attachments/assets/f478ba31-8091-411e-b672-80c22c7735ee
 
 ```sh
 bun install
-git submodule update --init      # brand wiki (private repo, .vendor/)
+git submodule update --init      # brand wiki and agent config (private repos, .vendor/)
 ```
 
 CloakBrowser (stealth Chromium under Playwright) downloads on first scrape (~200 MB, cached).
@@ -32,7 +35,7 @@ sit between the sources and the consumer. Three layers:
 
 | Layer | Contents | Who writes it |
 |---|---|---|
-| Raw sources | `posts/`, `briefings/`, `concepts/` | scraper and fetchers, immutable afterward |
+| Raw sources | `posts/`, `concepts/` | scraper, immutable afterward |
 | Derived counts | `bun run post-patterns --lane <lane>`, `bun run top-posts --lane <lane>` | recomputed every run, never stored |
 | The wiki | `wiki/` | `wiki-curator` skill, nothing else |
 | The brand context | `.vendor/teimurjan-llm-wiki/` (`wiki view post-writing`) | a pinned submodule; read here, never copied |
@@ -52,8 +55,8 @@ Rules, all enforced by `bun run wiki lint`:
   post is `anecdote`. An `anecdote` may not be cited.
 - Every number in a page body needs a frontmatter twin, or it drifts unnoticed.
 - Pages cross-link with `[[slug]]`. A page nothing links to is flagged.
-- Lanes stay apart: `audience` holds news-lane evidence, `experience` (created on the
-  first experience-lane ingest) holds the other lane's. A page that mixes them has a
+- Lanes stay apart: `audience` holds the old news posts' evidence and is closed;
+  `experience` holds every new lesson. A page that mixes them has a
   number nobody can recompute.
 - `wiki/log.md` is append-only, `## [YYYY-MM-DD] <op> | <title>`, and every entry states
   what it contradicted even when the answer is `none`.
@@ -63,14 +66,14 @@ bun run wiki lint     # check every page against the corpus, non-zero exit on er
 bun run wiki index    # regenerate the catalog table in wiki/brand/index.md
 ```
 
-Lessons reach the wiki through a queue, not a direct write. `post-retro` and
-`posts-postmortem` emit `wiki_candidate` with `wiki_ingested: false`; `wiki-curator`
+Lessons reach the wiki through a queue, not a direct write. `linkedin-post-retro` and
+`linkedin-posts-postmortem` emit `wiki_candidate` with `wiki_ingested: false`; `wiki-curator`
 absorbs them one at a time, reconciles each against the existing pages, and appends to the
 log. Writing from the retro skills would race the postmortem sweep, which produces several
 files per run.
 
-Current pages: `audience.md` (the news-lane standing-audience tier model), plus `index.md`
-and `log.md`.
+Current pages: `experience.md` (LinkedIn), `audience.md` (the news posts' standing-audience
+tier model, closed), plus `index.md` and `log.md`.
 
 ## Reading the numbers honestly
 
@@ -108,7 +111,7 @@ An experience post judged against the news median is being judged in the wrong r
 
 **What separates reach in the news lane is subject recognizability.** Hand-labelling the
 unambiguous top and bottom 24 posts gives three non-overlapping bands, which is what
-`wiki/audience.md` encodes and what grounds the ideator's `reach_ceiling` score:
+`wiki/audience.md` encodes and what `news/skills/news-ideator` scores `reach_ceiling` from:
 
 | Tier | Subject | n | Median | Range |
 |---|---|---|---|---|
@@ -129,49 +132,45 @@ comments 17/50, shares 7/50, missing values counting as zero), which makes any
 
 ## Content pipeline
 
-Runs inside Claude Code or Codex as a set of skills. Each skill runs standalone and hands
-off through files; `experience-post-cycle` is the only thing that chains them, and `post-ideator` refreshes the briefing itself. The pipeline is a
-draft engine, not a publish engine: the writer stops for the owner's hook pick and their
-own firsthand layer, and the image step stops for the owner's pick of three variants.
+Runs inside Claude Code or Codex as a set of skills in `.agents/skills/`. Each skill runs
+standalone and hands off through files; only the two cycles chain them. The pipeline is an
+edit engine, not a draft engine and not a publish engine: the owner writes every post, and
+each enhancer stops for the owner's first-line pick, the one missing specific in their own
+words, and a change list they veto line by line.
 
-| # | Skill / command | What it does | Writes |
-|---|---|---|---|
-| 1 | `topics-briefing` | News lane. Merges HackerNews, Lobsters, RSS newsletters, and an Exa fresh-news pass into one feed. Drops RSS items older than 7 days; buckets every section by recency (Today / Last 3 days / Earlier this week). | `briefings/YYYY-MM-DD.md` |
-| 2 | `bun run post-patterns --lane <lane>` | Required context report, stdout only. Lane table, full-corpus family distribution with sample sizes, impressions by scrape-age cohort, validated and discredited anti-patterns, top-quartile length and hook ranges, cooling streaks, retro and postmortem conclusions — all scoped to one lane. | nothing |
-| 3 | `post-ideator` | News lane. Reads the newest briefing, the patterns report, `wiki/audience.md`, and the dossier. Scores each angle 0-2 on `heat`, `specificity`, `differentiation`, `builder_fit`, `reach_ceiling`, `discussion_potential`. Pitches only `>= 8/12`, each with a one-line plain-language `gist` the owner sees first when picking. `reach_ceiling` is looked up in the wiki, not guessed. Ends at the ledger. | `ideas/YYYY-MM-DD.md` |
-| 4 | `post-writer` | Both lanes. Drafts from one approved brief (news) or one raw thought (experience), grounded in the dossier, `tone-samples/`, the lane's patterns report, and recent posts of the same lane. Stops twice for the owner: pick one of three hooks, then supply the firsthand layer in their own words. Never drafts without them. Tags experience drafts with a `pillar`; moves body links to a `Comment link:` line. | `drafts/YYYY-MM-DD-<slug>.md` |
-| 5 | `post-critic` | Both lanes. Reads the lane first, then the brief (the idea for news, the draft's own frontmatter plus the dossier for experience), `top-posts` and `post-patterns` for that lane, the draft, and the concept. Scores hook, specificity, novelty, readability, builder relevance, discussion potential, visual fit. Approves at `>= 10/14` with no zero category. Five hard-zero rules; an experience post with no number is a zero on specificity. | verdict (gate) |
-| 6 | `post-image` | One style, a black sketch on white. Builds three metaphor variants and the owner picks one from the metaphor sentences, before any render; `select-variant` promotes it to `prompt.md` and deletes the rest, then that one prompt is rendered via OpenAI `gpt-image-2.5-sunburst` when `OPENAI_API_KEY` is set and shrunk with `pngquant`. `post-carousel` and `post-flowchart` cover the other two formats, same style, single render. | `concepts/<date>-<slug>/`, `images/<date>-<slug>/` |
-| 7 | `post-retro` | Run 72h after publishing. Requires one metric, `impressions`, read from the scraped post; compares against the lane's scrape-age cohort and emits the lesson as one falsifiable `wiki_candidate` claim routed to the lane's page. | `retros/YYYY-MM-DD-<slug>.md` |
-| 8 | `wiki-curator` | Absorbs unabsorbed `wiki_candidate` lessons into wiki pages one at a time (`ingest`), keeps the lanes on separate pages, answers questions against the wiki (`query`), and health-checks it (`lint`). | `wiki/` |
-
-`posts-postmortem` runs the same analysis over the bottom performers of one lane, writing
-`retros/postmortems/`, so the writer and critic learn from misses and not only wins.
+| Skill | What it does | Writes |
+|---|---|---|
+| `linkedin-post-cycle` | LinkedIn conductor: retro sweep, experience-lane context, enhancer, critic, image. | — |
+| `linkedin-post-enhancer` | Edits the owner's LinkedIn draft without writing a sentence of it. Tags a `pillar`; moves body links to a `Comment link:` line. | `drafts/YYYY-MM-DD-<slug>.md` |
+| `linkedin-post-critic` | Scores seven categories against the experience-lane report. Approves at `>= 10/14` with no zero; five hard-zero rules. | verdict |
+| `linkedin-post-retro` | 72h after publishing: compares against the experience scrape-age cohort, emits one falsifiable `wiki_candidate`. | `retros/YYYY-MM-DD-<slug>.md` |
+| `linkedin-posts-postmortem` | The same analysis over the lane's bottom performers. | `retros/postmortems/` |
+| `linkedin-post-comments` | Drafts replies to comments on a published post. | — |
+| `wiki-curator` | Absorbs `wiki_candidate` lessons one at a time, answers questions, health-checks. | `wiki/` |
+| `x-post-cycle` | X conductor: enhancer, critic, image. | — |
+| `x-post-enhancer` | Edits the owner's build-in-public post to 400–600 characters with a setup, a turn, and an outcome. Refuses news takes and anything shared with LinkedIn. | `channels/x/YYYY-MM-DD-<slug>.md` |
+| `x-post-critic` | Scores six categories on brand rules and craft (no X cohort yet). Approves at `>= 9/12` with no zero. | verdict |
+| `post-image` | Both platforms: one to four real screenshots or photos the owner supplies, leak-checked, with alt text. Nothing is generated. | `images/` + `concepts/` (LinkedIn), `channels/x/` (X) |
 
 ```sh
-/experience-post-cycle "one paying user on Wait Professor, 14 months in"
-/post-ideator                                          # briefing (if missing) → scored ideas
-/post-writer "two days fighting a tokio panic that was a logging macro"
-/post-image drafts/YYYY-MM-DD-<slug>.md
-/post-critic
-/wiki-curator ingest                                   # step 8
+/linkedin-post-cycle "one paying user on Wait Professor, 14 months in"
+/x-post-cycle "shipped offline mode in Printyard tonight, 212 lines"
+/wiki-curator ingest
 ```
-
-Weekly is the default cadence for the briefing. Switch to daily if your sources move faster.
 
 ## Engagement analyzer
 
 ```sh
 bun run top-posts                        # markdown report, whole archive
-bun run top-posts --n 20 --lane news     # bigger N, one lane
+bun run top-posts --n 20 --lane experience  # bigger N, one lane
 bun run top-posts --json                 # programmatic
 bun run post-patterns --lane experience  # archive pattern report, one lane
 bun run post-patterns --json             # includes laneStats and postIndex, one row per post
-bun run post-lane <post> <lane>          # stamp a lane on a post published without a draft
+bun run post-lane <post> <lane>          # correct a post's lane by hand
 ```
 
 `top-posts` reports raw winners and losers. `post-patterns` adds the classification layer
-used by ideation, drafting, critique, and retros. Both take `--lane news|experience`; the
+used by the LinkedIn enhancer, critic, and retros. Both take `--lane news|experience`; the
 unscoped patterns report prints a `## Lanes` table so the split stays visible. Its `--json`
 output carries `postIndex` (with each post's `lane`), which is what lets `wiki lint`
 recompute a page's cited statistics instead of trusting them.
@@ -225,23 +224,24 @@ change, update `src/scraper/selectors.ts` against a fresh dump.
 ## Output layout
 
 ```
-posts/YYYY/MM-DD-<slug>.md         # scraped corpus, immutable
-briefings/YYYY-MM-DD.md            # current-news context for the ideator
+posts/YYYY/MM-DD-<slug>.md         # scraped LinkedIn corpus, immutable
 wiki/                              # accumulated judgment, written only by wiki-curator
 wiki/brand/index.md                      # catalog, table regenerated by `bun run wiki index`
 wiki/log.md                        # append-only change record
 wiki/audience.md                   # standing-audience tiers behind reach_ceiling
-ideas/YYYY-MM-DD.md                # shortlisted idea briefs (gitignored)
-drafts/YYYY-MM-DD-<slug>.md        # local working drafts (gitignored)
-concepts/YYYY-MM-DD-<slug>/        # image prompts per draft: variant-N.md until the pick, then prompt.md alone
-images/YYYY-MM-DD-<slug>/          # rendered PNGs, mirrors concepts/ 1:1 (gitignored)
+drafts/YYYY-MM-DD-<slug>.md        # LinkedIn working drafts (gitignored)
+concepts/YYYY-MM-DD-<slug>/        # prompt.md: the LinkedIn draft's artifact list and alt text
+images/YYYY-MM-DD-<slug>/          # the owner's screenshots, mirrors concepts/ 1:1 (gitignored)
+channels/x/                        # X posts and their images (gitignored)
+news/                              # portable news folder: skills, briefing CLI, briefings, ideas
 .vendor/teimurjan-llm-wiki/        # git submodule: the private brand wiki, pinned to a commit
+.vendor/teimurjan-agent-config/    # git submodule: the owner's voice and facts, pinned to a commit
 retros/YYYY-MM-DD-<slug>.md        # 72-hour reviews
 retros/postmortems/                # same shape for the worst performers, kind: postmortem
 ```
 
-Tracked: `posts/`, `briefings/`, `concepts/`, `wiki/`, `retros/`, `src/`. Working files
-(`drafts/`, `ideas/`, `images/`, `tone-samples/`) stay local.
+Tracked: `posts/`, `concepts/`, `wiki/`, `retros/`, `src/`, `news/` (except `news/ideas/`).
+Working files (`drafts/`, `images/`, `channels/`) stay local.
 
 Each post file has YAML frontmatter (`urn`, `url`, `posted_at`, `impressions`, `likes`,
 `comments`, `shares`, `scraped_at`, `lane`, and `concept_path` when a concept was matched)

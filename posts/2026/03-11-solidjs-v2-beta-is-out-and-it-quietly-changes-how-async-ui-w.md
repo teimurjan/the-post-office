@@ -7,6 +7,7 @@ likes: 11
 comments: null
 shares: null
 scraped_at: '2026-05-13T11:10:17.691Z'
+lane: news
 ---
 SolidJS v2 beta is out.
 

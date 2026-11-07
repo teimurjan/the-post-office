@@ -1,4 +1,5 @@
 ---
+lane: news
 kind: postmortem
 source_post: posts/2026/05-28-four-linkedin-posts-lost-in-a-row-same-shape-every-time-toda.md
 topic_family: other

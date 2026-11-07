@@ -2,3 +2,7 @@
 	path = .vendor/teimurjan-llm-wiki
 	url = git@github.com:teimurjan/llm-wiki.git
 	branch = main
+[submodule ".vendor/teimurjan-agent-config"]
+	path = .vendor/teimurjan-agent-config
+	url = git@github.com:teimurjan/agent-config.git
+	branch = main

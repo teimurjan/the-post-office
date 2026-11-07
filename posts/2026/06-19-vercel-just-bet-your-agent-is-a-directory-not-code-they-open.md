@@ -7,6 +7,7 @@ likes: null
 comments: null
 shares: null
 scraped_at: '2026-07-10T10:39:39.359Z'
+lane: news
 ---
 Vercel just bet your agent is a directory, not code.
 

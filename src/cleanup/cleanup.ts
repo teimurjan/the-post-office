@@ -5,11 +5,10 @@ export type EntryKind = "file" | "dir";
 
 /**
  * The directories the post cycle fills with dated, regenerable artifacts.
- * `briefings/`, `posts/`, `concepts/`, `retros/` and `wiki/` are durable and
+ * `posts/`, `concepts/`, `retros/` and `wiki/` are durable and
  * never listed here.
  */
 export const CLEANUP_DIRS: readonly { dir: string; kind: EntryKind }[] = [
-  { dir: "ideas", kind: "file" },
   { dir: "drafts", kind: "file" },
   { dir: "images", kind: "dir" },
 ];
@@ -72,7 +71,7 @@ export async function collectDatedEntries(root: string): Promise<DatedEntry[]> {
 }
 
 /**
- * Drafts of published posts that still have no retro. post-retro reads
+ * Drafts of published posts that still have no retro. linkedin-post-retro reads
  * the draft, so pruning one by age would strand that post's 72h review.
  */
 export async function findRetroPendingDrafts(

@@ -7,6 +7,7 @@ likes: 267
 comments: 8
 shares: 13
 scraped_at: '2026-06-09T09:36:24.343Z'
+lane: news
 ---
 Linus Torvalds spent the week telling people to stop sending AI patches.
 

@@ -7,6 +7,7 @@ likes: 126
 comments: 43
 shares: 70
 scraped_at: '2026-11-01T17:49:17.550Z'
+lane: news
 ---
 Introducing Simba 3.5. Every language has its own way of saying "I love you."
 

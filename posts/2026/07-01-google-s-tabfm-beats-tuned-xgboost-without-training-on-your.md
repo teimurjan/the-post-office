@@ -7,6 +7,7 @@ likes: 403
 comments: 20
 shares: 18
 scraped_at: '2026-07-13T05:42:35.856Z'
+lane: news
 ---
 Google's TabFM beats tuned XGBoost without training on your data.
 

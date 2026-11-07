@@ -1,4 +1,5 @@
 ---
+lane: news
 draft_file: drafts/2026-07-07-top-tier-realtime-voice-is-not-a-premium-feature.md
 topic_family: ai
 source_type: news

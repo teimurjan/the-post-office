@@ -1,4 +1,5 @@
 ---
+lane: news
 draft_file: drafts/2026-06-19-vercel-just-bet-your-agent-is-a-directory.md
 topic_family: agents
 source_type: news

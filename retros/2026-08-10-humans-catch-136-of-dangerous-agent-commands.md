@@ -1,4 +1,5 @@
 ---
+lane: news
 draft_file: drafts/2026-08-10-humans-catch-136-of-dangerous-agent-commands.md
 source_post: posts/2026/08-10-humans-catch-13-6-of-dangerous-agent-commands-a-classifier-c.md
 topic_family: agents

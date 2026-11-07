@@ -1,4 +1,5 @@
 ---
+lane: news
 draft_file: drafts/2026-05-22-google-is-sunsetting-gemini-cli-and-gemini-code-assist.md
 topic_family: agents
 source_type: opinion

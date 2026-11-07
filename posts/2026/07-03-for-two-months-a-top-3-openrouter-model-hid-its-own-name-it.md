@@ -7,6 +7,7 @@ likes: null
 comments: null
 shares: null
 scraped_at: '2026-07-21T08:34:24.460Z'
+lane: news
 ---
 For two months, a top-3 OpenRouter model hid its own name.
 

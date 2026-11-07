@@ -1,4 +1,5 @@
 ---
+lane: news
 kind: postmortem
 source_post: posts/2026/04-29-it-only-knows-the-world-up-to-1930-no-internet-no-wwii-no-mo.md
 topic_family: other

@@ -7,6 +7,7 @@ likes: 5
 comments: null
 shares: null
 scraped_at: '2026-06-18T06:06:33.667Z'
+lane: news
 ---
 You haven't forgotten how to code. You've forgotten how to be stuck.
 

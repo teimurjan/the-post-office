@@ -7,6 +7,7 @@ likes: null
 comments: null
 shares: null
 scraped_at: '2026-09-01T10:41:22.382Z'
+lane: news
 ---
 Humans catch 13.6% of dangerous agent commands. A classifier catches 89%.
 

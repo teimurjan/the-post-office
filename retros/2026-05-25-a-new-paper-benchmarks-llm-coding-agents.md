@@ -1,4 +1,5 @@
 ---
+lane: news
 draft_file: drafts/2026-05-25-a-new-paper-benchmarks-llm-coding-agents.md
 topic_family: agents
 source_type: paper

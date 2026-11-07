@@ -1,4 +1,5 @@
 ---
+lane: news
 draft_file: drafts/2026-08-06-eleven-of-my-last-twenty-commits-say-chore-uptodate.md
 topic_family: agents
 source_type: launch

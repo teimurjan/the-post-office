@@ -1,4 +1,5 @@
 ---
+lane: news
 kind: postmortem
 source_post: posts/2026/05-21-alibaba-launched-qwen-3-7-max-yesterday-and-called-it-the-ag.md
 topic_family: agents

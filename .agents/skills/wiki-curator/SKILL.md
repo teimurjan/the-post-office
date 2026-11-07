@@ -1,6 +1,6 @@
 ---
 name: wiki-curator
-description: Maintain the wiki/ knowledge layer — absorb retro and postmortem lessons into wiki pages, answer questions against the wiki and file good answers back as pages, and health-check the whole thing. Use when the user says "ingest the retros", "update the wiki", "wiki lint", "what does the wiki say about X", "curate the wiki", or after post-retro or posts-postmortem has written new lessons.
+description: Maintain the wiki/ knowledge layer — absorb retro and postmortem lessons into wiki pages, answer questions against the wiki and file good answers back as pages, and health-check the whole thing. Use when the user says "ingest the retros", "update the wiki", "wiki lint", "what does the wiki say about X", "curate the wiki", or after linkedin-post-retro or linkedin-posts-postmortem has written new lessons.
 ---
 
 # wiki-curator
@@ -11,7 +11,7 @@ The user curates sources and asks questions; you do the summarizing, cross-refer
 
 ## The layers
 
-1. **Raw sources — immutable.** `posts/` (scrape output), `briefings/`, `concepts/`. Read them, never write them.
+1. **Raw sources — immutable.** `posts/` (scrape output), `concepts/`. Read them, never write them.
 2. **Derived truth — recomputed, never stored.** `bun run post-patterns` and `bun run top-posts`. The CLI owns counts and is never stale.
 3. **The wiki — yours.** `wiki/` holds the conclusions those counts support.
 
@@ -55,7 +55,7 @@ For each one, in order:
 
 1. **Read the retro in full**, including the body. The body is the only place the reasoning lives — no tool reads it, which is why this step exists.
 2. **State the claim** in one falsifiable sentence. "Vendor early-access tools have no standing audience" is a claim. "This post underperformed" is not.
-3. **Find the pages it bears on.** For a `lane: news` retro, usually [[audience]]. For a `lane: experience` retro, the page is `experience` — a lane-scoped sibling of [[audience]] (same `kind: audience` contract, its own evidence, its own cohort numbers). [[audience]] was calibrated on news posts, so an experience lesson never goes there, and an experience post never enters its `evidence_posts` or `counter_posts`. If `experience` does not exist yet, create it on the first experience ingest: `confidence` bounded by what that one retro supports (an `anecdote` until there are two), a body that states what the lane is (the owner's own operation under the Headcount Zero positioning, owned by the brand wiki in `.vendor/teimurjan-llm-wiki/`) and what it cannot yet say, and a [[log]] entry. Link it from [[index]] and from [[audience]] so neither page is orphaned.
+3. **Find the pages it bears on.** LinkedIn runs only experience posts now, so a new lesson goes to [[experience]], a lane-scoped sibling of [[audience]] (same `kind: audience` contract, its own evidence, its own cohort numbers). [[audience]] holds the archive's old news posts and is closed to new evidence: an experience lesson never goes there, and an experience post never enters its `evidence_posts` or `counter_posts`. A leftover `lane: news` retro still goes to [[audience]].
 4. **Check it against what those pages already say.** Three outcomes, and you must pick one out loud:
    - **Reinforces** — add the post to `evidence_posts`, recompute the affected `observed_*` numbers, and bump `evidence_n`.
    - **Contradicts** — do not overwrite. Add the post to `counter_posts`, lower `confidence` if the contradiction is real, and describe the tension in the body. A page that records its own counter-evidence is more useful than one that looks clean.
@@ -106,7 +106,7 @@ Append to [[log]]. Newest at the bottom, `## [YYYY-MM-DD] <op> | <title>` so it 
 
 ## Hard rules
 
-- Never write to `posts/`, `briefings/`, or `concepts/`.
+- Never write to `posts/` or `concepts/`.
 - Never edit a retro except to flip `wiki_ingested`.
 - Never raise `confidence` without adding evidence, and never delete `counter_posts` to make a page look stronger.
 - Never cite a flag from the `## Tested and discredited` section of `bun run post-patterns` as a cause. Those have been checked against the corpus and do not mark weaker posts.

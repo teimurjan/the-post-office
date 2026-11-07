@@ -7,6 +7,7 @@ likes: null
 comments: null
 shares: null
 scraped_at: '2026-06-01T05:44:01.173Z'
+lane: news
 ---
 Google is sunsetting Gemini CLI and Gemini Code Assist on June 18, and the replacement is being tested in the feedback loop.
 

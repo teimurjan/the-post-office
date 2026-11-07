@@ -7,6 +7,7 @@ likes: 12
 comments: 4
 shares: 1
 scraped_at: '2026-05-25T06:58:42.010Z'
+lane: news
 ---
 Vercel Labs dropped a new systems language called Zero. The pitch: “the programming language for agents.”
 

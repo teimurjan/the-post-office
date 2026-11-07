@@ -1,4 +1,5 @@
 ---
+lane: news
 draft_file: drafts/2026-06-01-everyone-read-4b-params-i-read-093.md
 topic_family: other
 source_type: launch

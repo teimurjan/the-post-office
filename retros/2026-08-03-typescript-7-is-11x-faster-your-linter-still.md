@@ -1,4 +1,5 @@
 ---
+lane: news
 draft_file: drafts/2026-08-03-typescript-7-is-11x-faster-your-linter-still.md
 topic_family: security
 source_type: news

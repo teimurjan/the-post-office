@@ -7,6 +7,7 @@ likes: null
 comments: null
 shares: null
 scraped_at: '2026-05-13T11:19:05.576Z'
+lane: news
 ---
 I'm attending React Day Berlin 2024 - get your free remote ticket and join me there with 5k other engineers and 45+ great speakers
 https://lnkd.in/ecJvRmYw

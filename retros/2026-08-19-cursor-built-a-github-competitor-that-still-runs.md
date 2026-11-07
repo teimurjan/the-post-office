@@ -1,4 +1,5 @@
 ---
+lane: news
 draft_file: drafts/2026-08-19-cursor-built-a-github-competitor-that-still-runs.md
 source_post: posts/2026/08-19-cursor-built-a-github-competitor-that-still-runs-on-github.md
 topic_family: agents

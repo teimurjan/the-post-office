@@ -338,3 +338,34 @@ what it contradicted. The `contradicted:` line is required even when the answer 
   - wiki/index.md — experience row n=9 -> n=10
 - claim added: none as a claim. The retro's lesson, that a breakout post does not lift the owner's next post, is n=1 and confounded (the follow-up was text-only and on a narrower subject), so it is recorded as an open question with its twin, not in the body as a finding. The post reinforces the receipt signal (a receipt is necessary, not sufficient) a fifth time
 - contradicted: none. The post is not a ledger and landed above the ledger floor, which is consistent with the floor claim without testing it
+
+## [2026-11-02] lint-fix | audience t1/t0 bands after the 2026-11-01 rescrape; skill renames
+
+- corpus: 73 posts, median 412 (news lane n=47, median 443)
+- trigger: `bun run wiki lint` errors on wiki/audience.md: t1 `observed_median: 2638` but the cited exemplars give 2664 (the 09-25 DHH/Rails post rescraped 2638 -> 2664), and t0 `observed_max: 449` but the cited exemplars give 451 (the 09-21 Jev post rescraped 449 -> 451)
+- changed:
+  - wiki/audience.md: t1 observed_median 2638 -> 2664 and t0 observed_max 449 -> 451, with the DHH and Jev exemplars refreshed and earlier readings kept as comments; the tier table and every body reading of either post updated; `post-ideator` -> `news-ideator`. Fingerprint left at 66/425, because the page is closed to new evidence and was not re-reviewed
+  - wiki/experience.md: `experience-post-cycle`, `post-critic`, `post-retro` -> their `linkedin-` names
+  - wiki/index.md: `post-critic` -> `linkedin-post-critic`
+- claim added: none
+- contradicted: none. Both tiers are still separate (t0 max 451 is under the t1 min of 1380), and t1's median stays inside its range
+
+## [2026-11-05] lint-fix | voice reference moved to agent-config
+
+- corpus: 73 posts, median 412
+- trigger: `tone-samples/` deleted; the owner's voice now lives in the `.vendor/teimurjan-agent-config` submodule
+- changed:
+  - wiki/index.md: the voice reference `tone-samples/` -> `.vendor/teimurjan-agent-config/MY-VOICE.md`
+- claim added: none
+- contradicted: none. Still no `voice.md` page, for the same reason
+- note: wiki/experience.md was revised later the same day, see the ingest entry below
+
+## [2026-11-05] ingest | retro 2026-10-30 app-store-conversion
+
+- corpus: 73 posts, median 412 (experience lane n=25, median 324)
+- trigger: retros/2026-10-30-my-app-store-conversion-went-from-1.md (decision: modify)
+- changed:
+  - wiki/experience.md: counter_posts +1 (10-30 conversion post, 173 at 53h), evidence_n stays 10; new section "A non-ledger inside the floor"; `observed` gains the post; `pillars_observed.didnt-teach-me` n=4 -> 5; `receipt_bearing_low` swaps the 10-15 post (rescraped 284 -> 324, now the lane median and no longer under it) for the 10-30 post, n stays 5; `bottom_five` swaps the 08-28 post (179) for the 10-30 post; rescrapes refreshed in every twin and in the body (09-28 172 -> 176, 10-13 73129 -> 73296, 10-15 284 -> 324); lane_stats recomputed from the 2026-11-05 report (n=25, median 324, p25 181, p75 733, max 73296, top removed 303, 2-to-7-day cohort median 282, 1-to-4-week cohort n=14 median 226); open questions on the ledger shape and on breakout carry-over rewritten; fingerprint 69/415 -> 73/412. The floor sentence "eight from the bottom and one from the top" corrected to seven and two, since the 1,271 launch was never a bottom post
+  - wiki/index.md: experience row 69 posts / 2026-10-21 -> 73 / 2026-11-05
+- claim added: leaving the ledger shape is not enough to leave the floor, and the owner's words, a measured result and a real cover do not lift a post on their own. Subject size is left standing as a hypothesis from one post
+- contradicted: the page's reading of the 10-13 post, that the ledger floor is a floor of the shape and not the subject. Recorded rather than overwritten. `confidence` held at `low`: the post was scraped at 53h against 117h and 166h for its cohort peers, no analytics panel was supplied, and `anecdote` would misstate a page with ten posts behind it
